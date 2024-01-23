@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:msan/screens/login_screen/login_providers/login_provider.dart';
 import 'package:msan/screens/login_screen/login_screen.dart';
+import 'package:provider/provider.dart';
 
 import '/helpers/styles/custom_themes.dart';
 
@@ -26,7 +28,10 @@ class MyApp extends StatelessWidget {
         Locale('en'),
       ],
       theme: CustomThemes.mainTheme,
-      home: const LoginScreen(),
+      home: ChangeNotifierProvider(
+        create: (context) => LoginProvider(),
+        child: const LoginScreen(),
+      ),
     );
   }
 }

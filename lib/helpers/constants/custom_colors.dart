@@ -34,6 +34,7 @@ class CustomColors {
       700: Color(0xff3F3F46),
       800: Color(0xff27272A),
       900: Color(0xff18181B),
+      950: Color(0xff14161A),
     },
   );
 

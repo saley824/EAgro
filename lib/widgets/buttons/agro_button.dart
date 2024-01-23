@@ -3,9 +3,11 @@ import 'package:msan/helpers/constants/custom_colors.dart';
 
 class AgroButton extends StatelessWidget {
   final String text;
+  final bool disabled;
   const AgroButton({
     super.key,
     required this.text,
+    this.disabled = false,
   });
 
   @override
@@ -20,7 +22,9 @@ class AgroButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          backgroundColor: CustomColors.gray[100],
+          backgroundColor: disabled
+              ? CustomColors.gray[100]!.withOpacity(0.5)
+              : CustomColors.gray[100],
           foregroundColor: Colors.black,
           textStyle: textTheme.bodyLarge!.copyWith(
             color: Colors.black,

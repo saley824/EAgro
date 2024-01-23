@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:msan/helpers/helper_functions.dart';
-import 'package:msan/screens/register_screen/register_screen.dart';
-import 'package:msan/widgets/buttons/agro_button.dart';
-import 'package:msan/widgets/input_fields/agro_input_field.dart';
+import 'package:msan/screens/login_screen/login_providers/login_provider.dart';
+import 'package:msan/screens/register_screen/register_providers/register_provider.dart';
+import 'package:provider/provider.dart';
+
+import '/helpers/helper_functions.dart';
+import '/screens/register_screen/register_screen.dart';
+import '/widgets/buttons/agro_button.dart';
+import '/widgets/input_fields/agro_input_field.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -11,6 +15,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final globalAppNavigator = Navigator.of(context);
+    final loginProvider = Provider.of<LoginProvider>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -26,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Welcome to",
+                      "Welcome too",
                       style: textTheme.headlineMedium!
                           .copyWith(color: Colors.black),
                     ),
@@ -36,26 +41,33 @@ class LoginScreen extends StatelessWidget {
                           .copyWith(color: Colors.black),
                     ),
                     const SizedBox(height: 120),
-                    const AgroInputField(
+                    AgroInputField(
+                      onInputChanged: loginProvider.enableButton,
                       height: 48,
                       hintText: "Username",
                       labelVisible: true,
+                      textEditingController: loginProvider.usernameController,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    const AgroInputField(
+                    AgroInputField(
+                      onInputChanged: loginProvider.enableButton,
                       height: 48,
                       hintText: "Password",
                       labelVisible: true,
                       passwordField: true,
+                      textEditingController: loginProvider.passwordController,
                     ),
                     const SizedBox(height: 4),
                     const SizedBox(
                       height: 20,
                     ),
-                    const AgroButton(
-                      text: "Login",
+                    Consumer<LoginProvider>(
+                      builder: (_, __, ___) => AgroButton(
+                        disabled: !loginProvider.isButtonEnabled,
+                        text: "Login",
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Row(
@@ -81,7 +93,10 @@ class LoginScreen extends StatelessWidget {
                           onPressed: () {
                             globalAppNavigator.push(
                               MaterialPageRoute(
-                                builder: (context) => const RegisterScreen(),
+                                builder: (context) => ChangeNotifierProvider(
+                                  create: (context) => RegisterProvider(),
+                                  child: const RegisterScreen(),
+                                ),
                               ),
                             );
                           },

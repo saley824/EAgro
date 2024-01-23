@@ -3,23 +3,7 @@ import 'package:flutter/material.dart';
 import '/helpers/constants/custom_colors.dart';
 import '/helpers/styles/custom_themes.dart';
 
-//TO-DO Move this to the ecomm_input_fields directory after old widgets are replaced
-
 class AgroInputField extends StatefulWidget {
-  ///Global Ecomm text input field widget
-  ///
-  ///Default params [labelVisible] = false, [hasError] = false, [disabled] = false, [passwordField] = false,\
-  ///
-  ///[showBorder] param has _true_ value by default, and it's used to show/hide the gray border around the input field
-  ///[enableFocusBorder] param has _true_ value by default, and it's used to show/hide the teal border around the input field gray border
-  ///
-  /// When [passwordField] is seat to _true_ the [TextField] param [obscureText] will be set to true by default, and
-  /// the "hide/show" suffix "eye" button will appear
-  ///
-  /// ***
-  /// This widget may be changed in the future to mach new app requirements
-  /// Figma link: _Input field_ https://www.figma.com/file/EiH3DQ6Cw6uwJhdQGD36CV/eCommerce?type=design&node-id=3679-15684&mode=design&t=ZvGqSc3wE4t4Na5i-0
-  /// ***
   const AgroInputField({
     super.key,
     this.hintText,
@@ -39,6 +23,7 @@ class AgroInputField extends StatefulWidget {
     this.bgColor,
     this.fontSize,
     this.onInputChanged,
+    this.deleteText = true,
   });
 
   final bool labelVisible;
@@ -58,6 +43,7 @@ class AgroInputField extends StatefulWidget {
   final bool numberInputType;
   final bool enableFocusBorder;
   final bool showBorder;
+  final bool deleteText;
 
   @override
   State<AgroInputField> createState() => _AgroInputFieldState();
@@ -153,7 +139,7 @@ class _AgroInputFieldState extends State<AgroInputField> {
                           ownTheme(context).inputFieldHintStyle?.copyWith(
                                 letterSpacing: -0.18,
                                 color: widget.disabled
-                                    ? CustomColors.gray[950]!.withOpacity(0.12)
+                                    ? CustomColors.gray[900]!.withOpacity(0.12)
                                     : null,
                                 fontSize: widget.fontSize,
                                 height: 2,
@@ -167,14 +153,21 @@ class _AgroInputFieldState extends State<AgroInputField> {
                       height: 36,
                       child: Center(
                         child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                hideText = !hideText;
-                              });
-                            },
-                            child: hideText
-                                ? const Icon(Icons.visibility_outlined)
-                                : const Icon(Icons.visibility_off_outlined)),
+                          onTap: () {
+                            setState(() {
+                              hideText = !hideText;
+                            });
+                          },
+                          child: hideText
+                              ? Icon(
+                                  Icons.visibility_off_outlined,
+                                  color: CustomColors.gray[500],
+                                )
+                              : Icon(
+                                  Icons.visibility_outlined,
+                                  color: CustomColors.gray[500],
+                                ),
+                        ),
                       )),
                 if (!widget.passwordField && widget.suffixIcon != null)
                   Padding(
@@ -182,7 +175,30 @@ class _AgroInputFieldState extends State<AgroInputField> {
                       left: 4,
                     ),
                     child: widget.suffixIcon!,
-                  )
+                  ),
+                if (!widget.passwordField && widget.deleteText)
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 4,
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          widget.textEditingController!.text = "";
+                          if (widget.onInputChanged != null) {
+                            widget.onInputChanged!();
+                          }
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Icon(
+                          Icons.close,
+                          color: CustomColors.gray[500],
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),
