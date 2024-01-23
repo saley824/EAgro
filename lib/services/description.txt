@@ -1,0 +1,3 @@
+Services directory contains all common services etc. 
+Class which is responsible for generating local notifications will be used across the application
+that class will be stored in the services directory

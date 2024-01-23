@@ -1,0 +1,3 @@
+Widgets directory contains all shared widgets etc. Input Fields, Buttons ...
+If one widget category contains several variations, it should be placed in a common directory,
+etc. If the application has 2 or more different button variants the path to each variant should be widgets/buttons/variant_name.dart

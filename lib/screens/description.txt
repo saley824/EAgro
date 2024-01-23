@@ -1,0 +1,10 @@
+The screens directory contains all application screens grouped by the scope of the application
+Etc. Login, Registration, and password recovery screens belong to the same scope (Let's call it Auth scope)
+so the path to the any of mentioned screens will be screens/auth/screen_name.dart
+
+Each screen will be placed in its own directory etc. login screen path will be 
+screens/auth/login/screen_name.dart
+The screen folder root file will be main screen file, in this case, login.dart
+If the screen requires its own widgets, services, providers, or something else it should be placed in its own
+directory.
+etc. path to the private login widgets will be screens/auth/login/login_widgets/widget.dart

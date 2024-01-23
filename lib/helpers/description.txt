@@ -1,0 +1,3 @@
+Helpers directory contains all common helpers classes with static methods etc. token helper class with static token decode method
+As well as configuration, themes, and constants classes grouped in their own directories
+etc. colors class path will be helpers/constants/colors.dart

@@ -1,0 +1,1 @@
+Models directory contains all common models etc. user model
