@@ -5,7 +5,23 @@ class CustomColors {
   static const hintColor = Color(0xff676E79); //gray950
   static const textColor = Color(0xff14161A); //grey950
   static const darkGrey = Color(0xff22272F); //grey900
+  static const forestGreen = Color(0xff00E079);
 
+  static const MaterialColor jadeGreen = MaterialColor(
+    0xff009688,
+    {
+      50: Color(0xffE0F2F1),
+      100: Color(0xffB2DFDB),
+      200: Color(0xff80cbc4),
+      300: Color(0xff4DB6AC),
+      400: Color(0xff26A69A),
+      500: Color(0xff009688),
+      600: Color(0xff00897B),
+      700: Color(0xff00796B),
+      800: Color(0xff00695C),
+      900: Color(0xff004D40),
+    },
+  );
   static const MaterialColor red = MaterialColor(
     0xffE9142C,
     {

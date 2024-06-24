@@ -71,7 +71,7 @@ class _AgroInputFieldState extends State<AgroInputField> {
 
   Border _getBorder() {
     if (widget.enableFocusBorder && fn.hasFocus && !widget.hasError) {
-      return Border.all(color: CustomColors.green[700]!, width: 3);
+      return Border.all(color: CustomColors.jadeGreen[700]!, width: 3);
     }
 
     return Border.all(

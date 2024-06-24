@@ -4,10 +4,14 @@ import 'package:msan/helpers/constants/custom_colors.dart';
 class AgroButton extends StatelessWidget {
   final String text;
   final bool disabled;
+  final Color? color;
+  final Color? textColor;
   const AgroButton({
     super.key,
     required this.text,
     this.disabled = false,
+    this.color,
+    this.textColor,
   });
 
   @override
@@ -23,11 +27,13 @@ class AgroButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           backgroundColor: disabled
-              ? CustomColors.gray[100]!.withOpacity(0.5)
-              : CustomColors.gray[100],
-          foregroundColor: Colors.black,
+              ? color != null
+                  ? color!.withOpacity(0.5)
+                  : CustomColors.gray[100]!.withOpacity(0.5)
+              : color ?? CustomColors.gray[100],
+          foregroundColor: textColor ?? Colors.black,
           textStyle: textTheme.bodyLarge!.copyWith(
-            color: Colors.black,
+            color: textColor ?? Colors.black,
           ),
         ),
         child: Text(text),

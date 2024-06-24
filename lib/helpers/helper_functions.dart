@@ -7,9 +7,9 @@ class HelperFunctions {
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        CustomColors.green[100]!,
-        CustomColors.green[600]!,
-        CustomColors.green[100]!,
+        CustomColors.jadeGreen[300]!,
+        CustomColors.jadeGreen[200]!,
+        CustomColors.jadeGreen[100]!,
       ],
     );
   }

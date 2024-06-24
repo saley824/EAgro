@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:msan/screens/login_screen/login_providers/login_provider.dart';
 import 'package:msan/screens/register_screen/register_providers/register_provider.dart';
-import 'package:msan/screens/test_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../helpers/constants/custom_colors.dart';
 import '/helpers/helper_functions.dart';
 import '/screens/register_screen/register_screen.dart';
 import '/widgets/buttons/agro_button.dart';
 import '/widgets/input_fields/agro_input_field.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class TestScreen extends StatelessWidget {
+  const TestScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,8 @@ class LoginScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
+          color: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          decoration: BoxDecoration(
-            gradient: HelperFunctions.getBackGroundGradient(),
-          ),
           child: Stack(
             children: [
               Align(
@@ -66,6 +64,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                     Consumer<LoginProvider>(
                       builder: (_, __, ___) => AgroButton(
+                        color: CustomColors.jadeGreen[500],
+                        textColor: Colors.white,
                         disabled: !loginProvider.isButtonEnabled,
                         text: "Login",
                       ),
@@ -107,23 +107,7 @@ class LoginScreen extends StatelessWidget {
                           child: const Text("Create account"),
                         ),
                       ],
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        globalAppNavigator.push(
-                          MaterialPageRoute(
-                            builder: (context) => ChangeNotifierProvider(
-                              create: (context) => LoginProvider(),
-                              child: const TestScreen(),
-                            ),
-                          ),
-                        );
-                      },
-                      style: TextButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          padding: const EdgeInsets.all(4)),
-                      child: const Text("Create account"),
-                    ),
+                    )
                   ],
                 ),
               ),
