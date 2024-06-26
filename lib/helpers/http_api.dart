@@ -107,7 +107,6 @@ class HttpAPI {
       }
 
       var decodedRes = jsonDecode(res.body);
-      log(decodedRes.toString());
 
       ///This has to be changed according to the back-end response
       if (decodedRes['success']) {

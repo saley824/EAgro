@@ -1,15 +1,17 @@
 import 'dart:developer';
 
+import 'package:msan/models/api_response.dart';
+
 import '../../../helpers/http_api.dart';
 
 class LoginService {
-  static Future<bool> login({
+  static Future<ApiResponse?> login({
     required String username,
     required String password,
   }) async {
-    bool success = false;
+    ApiResponse? apiResponse;
     try {
-      final res = await HttpAPI.makeAPIcall(
+      apiResponse = await HttpAPI.makeAPIcall(
         ApiMethod.post,
         'users/login',
         body: {
@@ -17,10 +19,9 @@ class LoginService {
           "password": password,
         },
       );
-      success = res.success;
     } catch (e) {
       log("EXCEPTION loginTAG : $e");
     }
-    return success;
+    return apiResponse;
   }
 }
