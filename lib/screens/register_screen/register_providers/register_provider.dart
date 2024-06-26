@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msan/screens/register_screen/register_providers/register_service.dart';
 
 class RegisterProvider extends ChangeNotifier {
   final firstNameController = TextEditingController(text: "");
@@ -26,6 +27,17 @@ class RegisterProvider extends ChangeNotifier {
 
   bool arePasswordMatched() {
     return passwordController.text == confirmPasswordController.text;
+  }
+
+  Future<bool> signUp() async {
+    return await RegisterService.signUp(
+      name: firstNameController.text,
+      lastName: lastNameController.text,
+      userName: usernameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+      confirmPassword: confirmPasswordController.text,
+    );
   }
   // bool isValidEmail(String email) {
   //   // Define a regular expression for a valid email address

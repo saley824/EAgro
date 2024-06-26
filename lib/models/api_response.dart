@@ -1,8 +1,7 @@
-
 class ApiResponse {
   final bool success;
   final int statusCode;
-  final String? errorMessage;
+  final String? message;
   final dynamic responseData;
 
   ///The class responsible of handling back-end API responses
@@ -15,7 +14,7 @@ class ApiResponse {
   ApiResponse({
     required this.statusCode,
     required this.success,
-    this.errorMessage,
+    this.message,
     this.responseData,
   });
 }

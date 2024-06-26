@@ -6,12 +6,15 @@ class AgroButton extends StatelessWidget {
   final bool disabled;
   final Color? color;
   final Color? textColor;
+  final VoidCallback? onTap;
+
   const AgroButton({
     super.key,
     required this.text,
     this.disabled = false,
     this.color,
     this.textColor,
+    this.onTap,
   });
 
   @override
@@ -21,7 +24,7 @@ class AgroButton extends StatelessWidget {
       width: double.infinity,
       height: 48,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onTap,
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),

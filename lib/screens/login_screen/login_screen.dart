@@ -4,6 +4,7 @@ import 'package:msan/screens/register_screen/register_providers/register_provide
 import 'package:msan/screens/test_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../../helpers/snack_bar_messages.dart';
 import '/helpers/helper_functions.dart';
 import '/screens/register_screen/register_screen.dart';
 import '/widgets/buttons/agro_button.dart';
@@ -68,6 +69,29 @@ class LoginScreen extends StatelessWidget {
                       builder: (_, __, ___) => AgroButton(
                         disabled: !loginProvider.isButtonEnabled,
                         text: "Login",
+                        onTap: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          bool success = false;
+                          HelperFunctions.callMethodWithLoadingDialog(
+                              context: context,
+                              callback: () async {
+                                success = await loginProvider.login();
+                              },
+                              onFinished: () {
+                                if (success) {
+                                  SnackBarMessage.showMessage(
+                                      context: context,
+                                      text: "Successfully login",
+                                      isError: false);
+                                  return;
+                                }
+                                SnackBarMessage.showMessage(
+                                    context: context,
+                                    text: "Invalid username or password",
+                                    isError: true);
+                                return;
+                              });
+                        },
                       ),
                     ),
                     const SizedBox(height: 8),

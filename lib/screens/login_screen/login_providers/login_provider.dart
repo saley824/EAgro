@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'login_service.dart';
+
 class LoginProvider extends ChangeNotifier {
   final usernameController = TextEditingController(text: "");
   final passwordController = TextEditingController(text: "");
@@ -15,5 +17,12 @@ class LoginProvider extends ChangeNotifier {
     }
     isButtonEnabled = false;
     notifyListeners();
+  }
+
+  Future<bool> login() async {
+    return await LoginService.login(
+      username: usernameController.text,
+      password: passwordController.text,
+    );
   }
 }

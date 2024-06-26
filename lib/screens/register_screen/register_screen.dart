@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '/screens/login_screen/login_providers/login_provider.dart';
-import '/screens/login_screen/login_screen.dart';
-import '/screens/register_screen/register_providers/register_provider.dart';
+import 'package:msan/helpers/snack_bar_messages.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/helper_functions.dart';
+import '/screens/login_screen/login_providers/login_provider.dart';
+import '/screens/login_screen/login_screen.dart';
+import '/screens/register_screen/register_providers/register_provider.dart';
 import '/widgets/buttons/agro_button.dart';
 import '/widgets/input_fields/agro_input_field.dart';
 
@@ -101,7 +102,30 @@ class RegisterScreen extends StatelessWidget {
                   Consumer<RegisterProvider>(
                     builder: (_, __, ___) => AgroButton(
                         text: "Create account",
-                        disabled: !registerProvider.isButtonEnabled),
+                        disabled: !registerProvider.isButtonEnabled,
+                        onTap: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          bool success = false;
+                          HelperFunctions.callMethodWithLoadingDialog(
+                              context: context,
+                              callback: () async {
+                                success = await registerProvider.signUp();
+                              },
+                              onFinished: () {
+                                if (success) {
+                                  SnackBarMessage.showMessage(
+                                      context: context,
+                                      text: "Successfully registered",
+                                      isError: false);
+                                  return;
+                                }
+                                SnackBarMessage.showMessage(
+                                    context: context,
+                                    text: "Errorcina",
+                                    isError: true);
+                                return;
+                              });
+                        }),
                   ),
                   const SizedBox(height: 8),
                   Row(

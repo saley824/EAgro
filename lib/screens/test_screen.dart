@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:msan/screens/login_screen/login_providers/login_provider.dart';
-import 'package:msan/screens/register_screen/register_providers/register_provider.dart';
+import '/screens/login_screen/login_providers/login_provider.dart';
+import '/screens/register_screen/register_providers/register_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../helpers/constants/custom_colors.dart';
-import '/helpers/helper_functions.dart';
 import '/screens/register_screen/register_screen.dart';
 import '/widgets/buttons/agro_button.dart';
 import '/widgets/input_fields/agro_input_field.dart';

@@ -19,7 +19,7 @@ enum ApiMethod {
 
 class HttpAPI {
   static late BuildContext? _context;
-  static var isRefreshingTokenInProgress = false;
+  // static var isRefreshingTokenInProgress = false;
 
   /// The method [makeAPIcall] receives two mandatory params which are:
   ///
@@ -46,8 +46,8 @@ class HttpAPI {
     Object? body,
     String? contentType,
     Map<String, String>? initHeaders,
-    required bool authTokenRequired,
-    bool retryCall = true,
+    bool authTokenRequired = false,
+    // bool retryCall = true,
   }) async {
     try {
       var currentDateTime = DateTime.now().toLocal();
@@ -107,6 +107,7 @@ class HttpAPI {
       }
 
       var decodedRes = jsonDecode(res.body);
+      log(decodedRes.toString());
 
       ///This has to be changed according to the back-end response
       if (decodedRes['success']) {
@@ -129,7 +130,7 @@ class HttpAPI {
       return ApiResponse(
         statusCode: res.statusCode,
         success: false,
-        errorMessage: decodedRes['message'],
+        message: decodedRes['message'],
       );
     } catch (e) {
       log(
@@ -141,7 +142,7 @@ class HttpAPI {
       return ApiResponse(
         statusCode: 0,
         success: false,
-        errorMessage: e.toString(),
+        message: e.toString(),
       );
     }
   }
