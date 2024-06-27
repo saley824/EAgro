@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tuple/tuple.dart';
 
 import '../../../helpers/http_api.dart';
 import '/models/api_response.dart';
@@ -27,8 +28,9 @@ class LoginService {
     return apiResponse;
   }
 
-  static Future<bool> autoLogin() async {
+  static Future<Tuple2<bool, String?>> autoLogin() async {
     bool isAccessActive = false;
+    String? token;
 
     final sharedPrefs = await SharedPreferences.getInstance();
     var accessToken = sharedPrefs.getString("access_token");
@@ -38,9 +40,9 @@ class LoginService {
 
     if (accessToken != null && !JwtDecoder.isExpired(accessToken)) {
       isAccessActive = true;
+      token = accessToken;
     }
-    await Future.delayed(const Duration(milliseconds: 3000));
 
-    return isAccessActive;
+    return Tuple2(isAccessActive, token);
   }
 }

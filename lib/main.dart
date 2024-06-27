@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:msan/screens/welcome/welcome_screen.dart';
+import '/screens/welcome/welcome_provider.dart';
+import '/screens/welcome/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/styles/custom_themes.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'MSAN',
+        debugShowCheckedModeBanner: false,
+        title: 'EAGRO',
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -33,9 +35,12 @@ class MyApp extends StatelessWidget {
           Locale('en'),
         ],
         theme: CustomThemes.mainTheme,
-        home: const Scaffold(
+        home: Scaffold(
           resizeToAvoidBottomInset: false,
-          body: WelcomeScreen(),
+          body: ChangeNotifierProvider(
+            create: (context) => WelcomeProvider(),
+            child: const WelcomeScreen(),
+          ),
         ));
   }
 }

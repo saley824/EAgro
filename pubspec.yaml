@@ -46,6 +46,7 @@ dependencies:
   gap: ^3.0.1
   json_annotation: ^4.9.0
   jwt_decoder: ^2.0.1
+  tuple: ^2.0.2
 
 dev_dependencies:
   flutter_test:
