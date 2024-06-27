@@ -1,8 +1,10 @@
 import 'dart:developer';
 
-import 'package:msan/models/api_response.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../helpers/http_api.dart';
+import '/models/api_response.dart';
 
 class LoginService {
   static Future<ApiResponse?> login({
@@ -23,5 +25,22 @@ class LoginService {
       log("EXCEPTION loginTAG : $e");
     }
     return apiResponse;
+  }
+
+  static Future<bool> autoLogin() async {
+    bool isAccessActive = false;
+
+    final sharedPrefs = await SharedPreferences.getInstance();
+    var accessToken = sharedPrefs.getString("access_token");
+    if (accessToken == null) {
+      isAccessActive = false;
+    }
+
+    if (accessToken != null && !JwtDecoder.isExpired(accessToken)) {
+      isAccessActive = true;
+    }
+    await Future.delayed(const Duration(milliseconds: 3000));
+
+    return isAccessActive;
   }
 }

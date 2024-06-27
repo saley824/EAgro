@@ -63,7 +63,7 @@ class HttpAPI {
         HttpHeaders.contentTypeHeader: contentType ?? 'application/json',
         if (authTokenRequired)
           HttpHeaders.authorizationHeader:
-              'Basic ${sharedPrefs.getString(SharedPrefsKeys.token)}',
+              '${sharedPrefs.getString(SharedPrefsKeys.token)}',
         if (initHeaders != null) ...initHeaders
       };
       http.Response res;
