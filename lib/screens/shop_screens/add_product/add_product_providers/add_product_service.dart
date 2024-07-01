@@ -1,0 +1,36 @@
+import 'dart:developer';
+
+import '../../../../helpers/http_api.dart';
+
+class AddProductService {
+  static Future<bool> addProduct({
+    required String categoryId,
+    required String name,
+    required String description,
+    required double price,
+    required int totalAmount,
+    required int quantity,
+    required String unit,
+  }) async {
+    bool success = false;
+    try {
+      final res = await HttpAPI.makeAPIcall(
+        ApiMethod.post,
+        'products/',
+        body: {
+          "name": name,
+          "categoryId": categoryId,
+          "description": description,
+          "price": price,
+          "totalAmount": totalAmount,
+          "unit": unit,
+          "quantity": quantity,
+        },
+      );
+      success = res.success;
+    } catch (e) {
+      log("EXCEPTION addProductTAG : $e");
+    }
+    return success;
+  }
+}

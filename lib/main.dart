@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import '/screens/welcome/welcome_provider.dart';
-import '/screens/welcome/welcome_screen.dart';
+import '/screens/shop_screens/add_product/add_product_providers/add_product_provider.dart';
+import '/screens/shop_screens/add_product/add_product_screen.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/styles/custom_themes.dart';
@@ -37,9 +37,13 @@ class MyApp extends StatelessWidget {
         theme: CustomThemes.mainTheme,
         home: Scaffold(
           resizeToAvoidBottomInset: false,
+          // body: ChangeNotifierProvider(
+          //   create: (context) => WelcomeProvider(),
+          //   child: const WelcomeScreen(),
+          // ),
           body: ChangeNotifierProvider(
-            create: (context) => WelcomeProvider(),
-            child: const WelcomeScreen(),
+            create: (context) => AddProductProvider(),
+            child: const AddProductScreen(),
           ),
         ));
   }

@@ -77,7 +77,7 @@ class _AgroInputFieldState extends State<AgroInputField> {
     return Border.all(
       color: widget.hasError && !widget.disabled
           ? CustomColors.red.shade500
-          : (CustomColors.gray[950] ?? CustomColors.gray),
+          : (CustomColors.gray[950]!.withOpacity(0.12)),
       width: widget.hasError ? 1.5 : 1,
     );
   }
