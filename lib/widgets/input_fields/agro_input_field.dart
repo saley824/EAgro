@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '/helpers/constants/custom_colors.dart';
 import '/helpers/styles/custom_themes.dart';
@@ -87,6 +89,7 @@ class _AgroInputFieldState extends State<AgroInputField> {
     return Opacity(
       opacity: widget.disabled ? 0.4 : 1,
       child: Container(
+        width: widget.width,
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
         decoration: BoxDecoration(
           color: _getBackgroundColor(),

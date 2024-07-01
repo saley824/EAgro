@@ -11,7 +11,7 @@ class CategoryService {
         ApiMethod.get,
         'categories/superCategories/all',
       );
-      for (var element in (res.responseData.toList())) {
+      for (var element in (res.responseData["categories"])) {
         superCategories.add(CategoryModel.fromJson(element));
       }
     } catch (e) {
@@ -29,7 +29,7 @@ class CategoryService {
         ApiMethod.get,
         'categories/$categoryId/subCategories',
       );
-      for (var element in (res.responseData.toList())) {
+      for (var element in (res.responseData["categories"])) {
         subCategories.add(CategoryModel.fromJson(element));
       }
     } catch (e) {

@@ -9,7 +9,7 @@ class AddProductService {
     required String description,
     required double price,
     required int totalAmount,
-    required int quantity,
+    required double quantity,
     required String unit,
   }) async {
     bool success = false;
@@ -31,6 +31,8 @@ class AddProductService {
     } catch (e) {
       log("EXCEPTION addProductTAG : $e");
     }
+
+    log(success.toString());
     return success;
   }
 }

@@ -1,10 +1,10 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:msan/screens/shop_screens/add_product/add_product_providers/add_product_service.dart';
 
 import '../../../../widgets/drop_down/drop_down_model/agro_dropdown_model.dart';
 import '/models/category_model/category_model.dart';
+import '/screens/shop_screens/add_product/add_product_providers/add_product_service.dart';
 import '/services/category_service.dart';
 
 enum UnitType {
@@ -20,6 +20,10 @@ class AddProductProvider extends ChangeNotifier {
         id: "2", text: UnitType.LITER.name, value: UnitType.LITER),
     AgroDropdownModel(id: "3", text: UnitType.PIECE.name, value: UnitType.PIECE)
   ];
+
+  Future<void> getInitData() async {
+    await getSuperCategories();
+  }
 
   final nameController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -46,6 +50,8 @@ class AddProductProvider extends ChangeNotifier {
   setSuperCategory(value) {
     selectedSuperCategory = value;
     getSubCategories(selectedSuperCategory!.id);
+    selectedSubCategory = null;
+
     notifyListeners();
   }
 
@@ -81,7 +87,7 @@ class AddProductProvider extends ChangeNotifier {
       description: descriptionController.text,
       price: double.parse(priceController.text),
       totalAmount: int.parse(totalAmountController.text),
-      quantity: int.parse(quantityController.text),
+      quantity: double.parse(quantityController.text),
       unit: selectedUnit!.text,
     );
   }
