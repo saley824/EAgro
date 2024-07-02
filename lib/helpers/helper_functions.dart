@@ -1,9 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../widgets/cart_icon.dart';
 import '/helpers/constants/custom_colors.dart';
 
 class HelperFunctions {
+  static getAppBar(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    return AppBar(
+      title: Text(
+        "EAgro",
+        style: textTheme.headlineLarge!.copyWith(color: Colors.white),
+      ),
+      backgroundColor: CustomColors.jadeGreen[600],
+      leading: const Icon(
+        Icons.favorite,
+        color: Colors.white,
+        size: 32,
+      ),
+      actions: const [
+        CartIcon(),
+        Padding(
+            padding: EdgeInsets.only(
+              right: 8,
+            ),
+            child: Icon(
+              Icons.menu,
+              color: Colors.white,
+              size: 36,
+            )),
+        // Icon(Icons.local_grocery_store, color: Colors.white),
+      ],
+    );
+  }
+
   static getBackGroundGradient() {
     return LinearGradient(
       begin: Alignment.topLeft,

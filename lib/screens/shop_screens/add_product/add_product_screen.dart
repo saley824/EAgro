@@ -1,17 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/screens/shop_screens/add_discount.dart/add_discount_bottom_sheet.dart';
-import 'package:msan/screens/shop_screens/add_discount.dart/add_discount_providers/add_discount_provider.dart';
-import 'package:msan/widgets/bottom_sheet/agro_bottom_sheet.dart';
 import 'package:msan/widgets/loading_indicator/agro_loading_indicator.dart';
 import 'package:provider/provider.dart';
 
 import '../../../helpers/helper_functions.dart';
 import '../../../helpers/snack_bar_messages.dart';
-import '../../../widgets/buttons/agro_add_button.dart';
-import '../../../widgets/select_date/agro_select_date.dart';
+import '../../../widgets/app_bar/app_bar.dart';
 import '/helpers/constants/custom_colors.dart';
 import '/screens/shop_screens/add_product/add_product_providers/add_product_provider.dart';
 import '/widgets/buttons/agro_button.dart';
@@ -26,6 +21,7 @@ class AddProductScreen extends StatelessWidget {
     final addProductProvider = context.read<AddProductProvider>();
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      appBar: HelperFunctions.getAppBar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -143,18 +139,6 @@ class AddProductScreen extends StatelessWidget {
                                     });
                               }),
                           const Gap(20),
-                          AgroAddButton(
-                            text: "Add discount",
-                            onTap: () {
-                              AgroBottomSheet.showBottomSheet(
-                                title: "Add discount",
-                                context: context,
-                                child: ChangeNotifierProvider(
-                                    create: (context) => AddDiscountProvider(),
-                                    child: const AddDiscountBottomSheet()),
-                              );
-                            },
-                          )
                         ],
                       ),
                     ),
