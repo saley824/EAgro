@@ -7,6 +7,8 @@ class CustomColors {
   static const darkGrey = Color(0xff22272F); //grey900
   static const forestGreen = Color(0xff00E079);
 
+  static const productPreviewBgColor = Color(0xffF1F1F1);
+
   static const MaterialColor jadeGreen = MaterialColor(
     0xff009688,
     {

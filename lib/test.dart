@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:msan/widgets/products/product_preview/product_preview.dart';
 
-import 'widgets/drop_down/agro_dropdown.dart';
-import 'widgets/drop_down/drop_down_model/agro_dropdown_model.dart';
+import 'helpers/helper_functions.dart';
 
 class Test extends StatelessWidget {
   const Test({super.key});
@@ -9,32 +9,18 @@ class Test extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: AgroDropdown(
-          hintText: "Label",
-          // isExpanded: true,
-          onSelect: (selected) {},
-          dropDownElements: [
-            AgroDropdownModel(
-              id: "1",
-              value: 1,
-              text: "Test1",
+      appBar: HelperFunctions.getAppBar(context),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 50),
+        child: Wrap(
+          spacing: 16,
+          runSpacing: 8,
+          children: [
+            ProductPreview(
+              hasDiscount: true,
             ),
-            AgroDropdownModel(
-              id: "2",
-              value: 2,
-              text: "Test2",
-            ),
-            AgroDropdownModel(
-              id: "3",
-              value: 3,
-              text: "Test3",
-            ),
-            AgroDropdownModel(
-              id: "4",
-              value: 4,
-              text: "Test4",
-            ),
+            ProductPreview(),
+            ProductPreview(),
           ],
         ),
       ),

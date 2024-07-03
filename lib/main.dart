@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:msan/test.dart';
 import '/screens/shop_screens/add_product/add_product_providers/add_product_provider.dart';
 import '/screens/shop_screens/add_product/add_product_screen.dart';
 import 'package:provider/provider.dart';
@@ -35,16 +36,17 @@ class MyApp extends StatelessWidget {
           Locale('en'),
         ],
         theme: CustomThemes.mainTheme,
-        home: Scaffold(
-          resizeToAvoidBottomInset: false,
-          // body: ChangeNotifierProvider(
-          //   create: (context) => WelcomeProvider(),
-          //   child: const WelcomeScreen(),
-          // ),
-          body: ChangeNotifierProvider(
-            create: (context) => AddProductProvider(),
-            child: const AddProductScreen(),
-          ),
-        ));
+        home: const Scaffold(
+            resizeToAvoidBottomInset: false,
+            // body: ChangeNotifierProvider(
+            //   create: (context) => WelcomeProvider(),
+            //   child: const WelcomeScreen(),
+            // ),
+            body: Test()
+            // body: ChangeNotifierProvider(
+            //   create: (context) => AddProductProvider(),
+            //   child: const AddProductScreen(),
+            // ),
+            ));
   }
 }
