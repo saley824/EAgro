@@ -39,7 +39,7 @@ class CartIcon extends StatelessWidget {
       child: Text(
         textAlign: TextAlign.center,
         "3",
-        style: textTheme.bodyMedium!.copyWith(
+        style: textTheme.bodySmall!.copyWith(
           color: CustomColors.jadeGreen[900]!,
         ),
       ),

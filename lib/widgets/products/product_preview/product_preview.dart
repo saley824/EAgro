@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
+import 'package:msan/widgets/products/discount_badge.dart';
 
-import '../../../helpers/constants/custom_colors.dart';
+import '/helpers/constants/custom_colors.dart';
 
 class ProductPreview extends StatelessWidget {
   final bool hasDiscount;
+  final int? discountPercentage;
   const ProductPreview({
     super.key,
     this.hasDiscount = false,
+    this.discountPercentage,
   });
 
   @override
@@ -19,19 +23,37 @@ class ProductPreview extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
+            padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
             decoration: BoxDecoration(
               color: CustomColors.productPreviewBgColor.withOpacity(0.6),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              child: Image.network(
-                height: 120,
-                width: 120,
-                "https://firebasestorage.googleapis.com/v0/b/diplomski-fc1d8.appspot.com/o/images%2Ftatum.jpg?alt=media&token=1711d5da-9eac-4d98-a576-693958a84d0a",
-                fit: BoxFit.fill,
-              ),
+            child: Column(
+              children: [
+                if (hasDiscount) ...[
+                  const Gap(4),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      DiscountBadge(),
+                    ],
+                  ),
+                  const Gap(4)
+                ] else
+                  const Gap(32),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 8, 32),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    child: Image.network(
+                      height: 120,
+                      width: 120,
+                      "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           const Gap(4),
@@ -41,7 +63,7 @@ class ProductPreview extends StatelessWidget {
               Flexible(
                 child: Text("AirPods",
                     style: textTheme.bodyMedium!
-                        .copyWith(color: CustomColors.gray[400])),
+                        .copyWith(color: CustomColors.gray[500])),
               ),
               Flexible(
                 child: Row(

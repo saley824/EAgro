@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:msan/test.dart';
-import '/screens/shop_screens/add_product/add_product_providers/add_product_provider.dart';
-import '/screens/shop_screens/add_product/add_product_screen.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/styles/custom_themes.dart';
 import 'providers/main_provider.dart';
+import 'screens/welcome/welcome_provider.dart';
+import 'screens/welcome/welcome_screen.dart';
 
 void main() {
   runApp(
@@ -36,17 +35,17 @@ class MyApp extends StatelessWidget {
           Locale('en'),
         ],
         theme: CustomThemes.mainTheme,
-        home: const Scaffold(
-            resizeToAvoidBottomInset: false,
-            // body: ChangeNotifierProvider(
-            //   create: (context) => WelcomeProvider(),
-            //   child: const WelcomeScreen(),
-            // ),
-            body: Test()
-            // body: ChangeNotifierProvider(
-            //   create: (context) => AddProductProvider(),
-            //   child: const AddProductScreen(),
-            // ),
-            ));
+        home: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: ChangeNotifierProvider(
+            create: (context) => WelcomeProvider(),
+            child: const WelcomeScreen(),
+          ),
+          // body: Test()
+          // body: ChangeNotifierProvider(
+          //   create: (context) => AddProductProvider(),
+          //   child: const AddProductScreen(),
+          // ),
+        ));
   }
 }
