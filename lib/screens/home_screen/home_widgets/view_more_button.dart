@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:msan/screens/products_list_screen/products_list_providers/products_list_provider.dart';
 import 'package:msan/screens/products_list_screen/products_list_screen.dart';
+import 'package:provider/provider.dart';
 
 import '/helpers/constants/custom_colors.dart';
 
@@ -13,7 +15,10 @@ class ViewMoreButton extends StatelessWidget {
     return InkWell(
       onTap: () {
         globalAppNavigator.push(MaterialPageRoute(
-          builder: (context) => const ProductsListScreen(),
+          builder: (context) => ChangeNotifierProvider(
+            create: (context) => ProductsListProvider(),
+            child: const ProductsListScreen(),
+          ),
         ));
       },
       child: Container(
