@@ -3,13 +3,16 @@ import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:msan/widgets/products/discount_badge.dart';
 
+import '../../../models/products_model/product_list_model.dart';
 import '/helpers/constants/custom_colors.dart';
 
 class ProductPreview extends StatelessWidget {
   final bool hasDiscount;
   final int? discountPercentage;
+  final ProductListModel product;
   const ProductPreview({
     super.key,
+    required this.product,
     this.hasDiscount = false,
     this.discountPercentage,
   });
@@ -30,12 +33,14 @@ class ProductPreview extends StatelessWidget {
             ),
             child: Column(
               children: [
-                if (hasDiscount) ...[
+                if (product.productDiscount != null) ...[
                   const Gap(4),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      DiscountBadge(),
+                      DiscountBadge(
+                        percentage: product.productDiscount!.percentage,
+                      ),
                     ],
                   ),
                   const Gap(4)
@@ -59,15 +64,17 @@ class ProductPreview extends StatelessWidget {
           const Gap(4),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
-                child: Text("AirPods",
+                child: Text(product.name,
                     style: textTheme.bodyMedium!
                         .copyWith(color: CustomColors.gray[500])),
               ),
               Flexible(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(
                       Icons.star,
@@ -75,15 +82,33 @@ class ProductPreview extends StatelessWidget {
                       color: CustomColors.yellow[500],
                     ),
                     const Gap(2),
-                    Flexible(child: Text("4.9", style: textTheme.bodyLarge!)),
+                    Flexible(
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "${product.avgReview ?? "0.0"} ",
+                              style: textTheme.bodyLarge,
+                            ),
+                            TextSpan(
+                              text: "(${product.countReview.round()})",
+                              style: textTheme.bodyLarge!.copyWith(
+                                color: CustomColors.gray[500],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
           const Gap(4),
-          !hasDiscount
-              ? Text("132.00 KM",
+          product.productDiscount == null
+              ? Text("${product.price} KM",
                   style: textTheme.bodyLarge!.copyWith(
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
@@ -91,13 +116,13 @@ class ProductPreview extends StatelessWidget {
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("99.99 KM",
+                    Text("${product.discountedPrice} KM",
                         style: textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.w500,
                           fontSize: 18,
                           color: CustomColors.red[600],
                         )),
-                    Text("132.00 KM",
+                    Text("${product.price} KM",
                         style: textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.w500,
                           fontSize: 14,

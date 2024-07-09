@@ -20,36 +20,36 @@ class Test extends StatelessWidget {
                 spacing: 16,
                 runSpacing: 8,
                 children: [
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                ],
-              ),
-              HomeProductHorizontal(
-                title: "Products",
-                productsList: [
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
+                  //     ProductPreview(
+                  //       hasDiscount: true,
+                  //     ),
+                  //     ProductPreview(),
+                  //     ProductPreview(),
+                  //   ],
+                  // ),
+                  // HomeProductHorizontal(
+                  //   title: "Products",
+                  //   productsList: [
+                  //     ProductPreview(
+                  //       hasDiscount: true,
+                  //     ),
+                  //     ProductPreview(),
+                  //     ProductPreview(),
+                  //     ProductPreview(
+                  //       hasDiscount: true,
+                  //     ),
+                  //     ProductPreview(),
+                  //     ProductPreview(),
+                  //     ProductPreview(
+                  //       hasDiscount: true,
+                  //     ),
+                  //     ProductPreview(),
+                  //     ProductPreview(),
+                  //     ProductPreview(
+                  //       hasDiscount: true,
+                  //     ),
+                  //     ProductPreview(),
+                  //     ProductPreview(),
                 ],
               )
             ],

@@ -1,12 +1,45 @@
 import 'package:flutter/material.dart';
 
-import '../../../../models/category_model/category_model.dart';
-import '../../../../services/category_service.dart';
-import '../../../../widgets/drop_down/drop_down_model/agro_dropdown_model.dart';
+import '/models/category_model/category_model.dart';
+import '/models/products_model/product_filter_model.dart';
+import '/services/category_service.dart';
+import '/widgets/drop_down/drop_down_model/agro_dropdown_model.dart';
 
 class FilterProvider extends ChangeNotifier {
+  final ProductFilterModel productFilter;
+
+  FilterProvider({
+    required this.productFilter,
+  }) {
+    fromPriceController.text = productFilter.fromPrice.toString();
+    toPriceController.text = productFilter.toPrice.toString();
+    hasDiscount = productFilter.hasDiscount;
+
+    if (productFilter.superCategory != null) {
+      selectedSuperCategory = AgroDropdownModel(
+        id: productFilter.superCategory!.id,
+        text: productFilter.superCategory!.name,
+        value: productFilter.superCategory,
+      );
+      getSubCategories(productFilter.superCategory!.id);
+    }
+    if (productFilter.category != null) {
+      selectedSubCategory = AgroDropdownModel(
+        id: productFilter.category!.id,
+        text: productFilter.category!.name,
+        value: productFilter.category,
+      );
+    }
+  }
+
   final fromPriceController = TextEditingController();
   final toPriceController = TextEditingController();
+
+  bool hasDiscount = false;
+
+  setHasDiscount(value) {
+    hasDiscount = value;
+  }
 
   bool isButtonEnabled = false;
 
@@ -55,6 +88,19 @@ class FilterProvider extends ChangeNotifier {
             ))
         .toList();
     notifyListeners();
+  }
+
+  setFilter() {
+    productFilter.category = selectedSubCategory?.value;
+    productFilter.superCategory = selectedSuperCategory?.value;
+    productFilter.fromPrice = fromPriceController.text.isNotEmpty
+        ? double.parse(fromPriceController.text)
+        : null;
+    productFilter.toPrice = toPriceController.text.isNotEmpty
+        ? double.parse(toPriceController.text)
+        : null;
+
+    productFilter.hasDiscount = hasDiscount;
   }
 
   enableButton() {}

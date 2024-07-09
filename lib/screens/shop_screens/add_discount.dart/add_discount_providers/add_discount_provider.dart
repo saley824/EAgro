@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '/models/products_model/product_discount.dart';
 import 'add_discount_service.dart';
 
 class AddDiscountProvider extends ChangeNotifier {
@@ -19,10 +20,17 @@ class AddDiscountProvider extends ChangeNotifier {
 
   Future<bool> updateDiscount() {
     return DiscountService.updateDiscount(
-        productUuid: "6ac41b51-12b8-4d90-91ea-66aace421a0d",
-        from: from!,
-        to: to!,
-        percentage: int.parse(percentageController.text));
+      productUuid: "6ac41b51-12b8-4d90-91ea-66aace421a0d",
+      productDiscount: ProductDiscountModel(
+          percentage: int.parse(percentageController.text),
+          from: from!,
+          to: to!),
+    );
+  }
+
+//TODO ADD ID
+  Future<bool> deleteDiscount() {
+    return DiscountService.deleteDiscount("sss");
   }
 
   enableButton() {

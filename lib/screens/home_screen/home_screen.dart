@@ -22,78 +22,7 @@ class HomeScreen extends StatelessWidget {
               Text("HomeScreen"),
               HomeProductHorizontal(
                 title: "Products",
-                productsList: [
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                ],
-              ),
-              HomeProductHorizontal(
-                title: "Products",
-                productsList: [
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                ],
-              ),
-              HomeProductHorizontal(
-                title: "Products",
-                productsList: [
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                  ProductPreview(
-                    hasDiscount: true,
-                  ),
-                  ProductPreview(),
-                  ProductPreview(),
-                ],
+                productsList: [],
               ),
             ],
           ),

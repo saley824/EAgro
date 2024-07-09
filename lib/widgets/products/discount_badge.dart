@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../helpers/constants/custom_colors.dart';
 
 class DiscountBadge extends StatelessWidget {
-  const DiscountBadge({super.key});
+  final int percentage;
+  const DiscountBadge({super.key, required this.percentage});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class DiscountBadge extends StatelessWidget {
       child: Center(
         child: Text(
           textAlign: TextAlign.center,
-          "30%",
+          "${percentage.toString()}%",
           style: textTheme.labelSmall!.copyWith(color: Colors.white),
         ),
       ),

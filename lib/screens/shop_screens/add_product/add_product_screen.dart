@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/widgets/loading_indicator/agro_loading_indicator.dart';
 import 'package:provider/provider.dart';
 
 import '../../../helpers/helper_functions.dart';
 import '../../../helpers/snack_bar_messages.dart';
-import '../../../widgets/app_bar/app_bar.dart';
 import '/helpers/constants/custom_colors.dart';
 import '/screens/shop_screens/add_product/add_product_providers/add_product_provider.dart';
 import '/widgets/buttons/agro_button.dart';
 import '/widgets/drop_down/agro_dropdown.dart';
 import '/widgets/input_fields/agro_input_field.dart';
+import '/widgets/loading_indicator/agro_loading_indicator.dart';
 
 class AddProductScreen extends StatelessWidget {
   const AddProductScreen({super.key});
