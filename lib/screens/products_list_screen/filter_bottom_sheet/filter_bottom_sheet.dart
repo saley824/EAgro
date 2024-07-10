@@ -45,7 +45,11 @@ class FilterBottomSheet extends StatelessWidget {
                                 style: textTheme.labelLarge,
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  filterProvider.resetFilter();
+                                  // onSelect(filterProvider.productFilter);
+                                  // globalAppNavigator.pop();
+                                },
                                 style: TextButton.styleFrom(
                                   foregroundColor: CustomColors.jadeGreen[600],
                                 ),
@@ -56,6 +60,7 @@ class FilterBottomSheet extends StatelessWidget {
                           const Gap(16),
                           AgroDropdown(
                             initValue: filterProvider.selectedSuperCategory,
+                            key: UniqueKey(),
                             hintText: "Select super category",
                             dropDownElements: filterProvider.superCategories,
                             onSelect: (selected) {
@@ -119,6 +124,7 @@ class FilterBottomSheet extends StatelessWidget {
                           ),
                           const Gap(16),
                           AgroCheckbox(
+                            key: UniqueKey(),
                             isChecked: filterProvider.hasDiscount,
                             onChanged: (s) {
                               filterProvider.setHasDiscount(s);

@@ -9,7 +9,10 @@ import '/screens/products_list_screen/products_list_providers/products_list_prov
 import '/screens/products_list_screen/products_list_screen.dart';
 
 class ViewMoreButton extends StatelessWidget {
-  const ViewMoreButton({super.key});
+  final SortModel sortModel;
+  final ProductFilterModel productFilterModel;
+  const ViewMoreButton(
+      {super.key, required this.sortModel, required this.productFilterModel});
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +23,8 @@ class ViewMoreButton extends StatelessWidget {
         globalAppNavigator.push(MaterialPageRoute(
           builder: (context) => ChangeNotifierProvider(
             create: (context) => ProductsListProvider(
-              productFilter: ProductFilterModel(
-                  fromPrice: 10,
-                  toPrice: 1000,
-                  hasDiscount: true,
-                  superCategory: CategoryModel(
-                      id: "be2597cb-f543-4bea-bd35-a95baa01b6b1",
-                      name: "Kategorija1"),
-                  category: CategoryModel(
-                      id: "fc418cb3-fa3d-4507-882b-a20c93784fbb",
-                      name: "Kategorija22")),
-              sortModel: SortModel(sortBy: "createdAt", orderBy: "desc"),
+              productFilter: productFilterModel,
+              sortModel: sortModel,
             ),
             child: const ProductsListScreen(),
           ),

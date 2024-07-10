@@ -10,7 +10,7 @@ import '/services/product_service.dart';
 
 class ProductsListProvider extends ChangeNotifier {
   ProductFilterModel productFilter;
-  final SortModel sortModel;
+  SortModel sortModel;
   ProductsListProvider({
     required this.productFilter,
     required this.sortModel,
@@ -19,8 +19,12 @@ class ProductsListProvider extends ChangeNotifier {
   List<ProductListModel> products = [];
 
   setProductFilter(ProductFilterModel value) {
-    log('DEV LOG------------------------------------------------------------------');
     productFilter = value;
+    notifyListeners();
+  }
+
+  setSort(SortModel value) {
+    sortModel = value;
     notifyListeners();
   }
 

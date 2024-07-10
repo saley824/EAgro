@@ -5,12 +5,14 @@ import '../../helpers/constants/custom_colors.dart';
 import 'radio_button_model.dart';
 
 class RadioButtonGroup extends StatefulWidget {
-  final RadioButtonModel? initValue;
+  final dynamic initValue;
   final List<RadioButtonModel> radioButtons;
+  final Function(RadioButtonModel) onChange;
   const RadioButtonGroup({
     super.key,
     required this.radioButtons,
     this.initValue,
+    required this.onChange,
   });
 
   @override
@@ -22,7 +24,12 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
 
   @override
   void initState() {
-    selectedValue = widget.initValue;
+    for (var radioButton in widget.radioButtons) {
+      if (radioButton.value == widget.initValue) {
+        selectedValue = radioButton;
+        return;
+      }
+    }
     super.initState();
   }
 
@@ -50,6 +57,7 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
                     value: data,
                     groupValue: selectedValue,
                     onChanged: (RadioButtonModel? value) {
+                      widget.onChange(value!);
                       setState(() {
                         selectedValue = value;
                       });

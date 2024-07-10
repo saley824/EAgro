@@ -1,24 +1,35 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:gap/gap.dart';
-import 'package:msan/widgets/buttons/agro_button.dart';
+import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+
+import '../../../models/products_model/product_list_model.dart';
+import '/models/products_model/product_filter_model.dart';
+import '/screens/products_list_screen/products_list_models/sort_model.dart';
+import '/widgets/products/product_preview/product_preview.dart';
 import 'view_more_button.dart';
 
 class HomeProductHorizontal extends StatelessWidget {
+  final SortModel sortModel;
+  final ProductFilterModel productFilterModel;
+
   /// section of more items from the shop of the current listing
   const HomeProductHorizontal({
     super.key,
     required this.title,
     required this.productsList,
+    required this.sortModel,
+    required this.productFilterModel,
     // this.onViewAll,
   });
   final String title;
-  final List<Widget> productsList;
+  final List<ProductListModel> productsList;
   // final VoidCallback? onViewAll;
 
   @override
   Widget build(BuildContext context) {
+    log('DEV LOG------------------------------------------------------------------');
+    log(productsList.length.toString());
     final textTheme = Theme.of(context).textTheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,10 +51,13 @@ class HomeProductHorizontal extends StatelessWidget {
                 ),
               ],
             ),
-            const Row(
+            Row(
               children: [
-                ViewMoreButton(),
-                Gap(12),
+                ViewMoreButton(
+                  productFilterModel: productFilterModel,
+                  sortModel: sortModel,
+                ),
+                const Gap(12),
               ],
             ),
           ],
@@ -55,7 +69,9 @@ class HomeProductHorizontal extends StatelessWidget {
               ...productsList.map((e) {
                 return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: e);
+                    child: ProductPreview(
+                      product: e,
+                    ));
               })
             ]
                 // productsList

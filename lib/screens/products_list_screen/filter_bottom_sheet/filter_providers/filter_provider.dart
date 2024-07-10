@@ -11,8 +11,11 @@ class FilterProvider extends ChangeNotifier {
   FilterProvider({
     required this.productFilter,
   }) {
-    fromPriceController.text = productFilter.fromPrice.toString();
-    toPriceController.text = productFilter.toPrice.toString();
+    fromPriceController.text = productFilter.fromPrice != null
+        ? productFilter.fromPrice.toString()
+        : "";
+    toPriceController.text =
+        productFilter.toPrice != null ? productFilter.toPrice.toString() : "";
     hasDiscount = productFilter.hasDiscount;
 
     if (productFilter.superCategory != null) {
@@ -101,6 +104,16 @@ class FilterProvider extends ChangeNotifier {
         : null;
 
     productFilter.hasDiscount = hasDiscount;
+  }
+
+  resetFilter() {
+    fromPriceController.text = "";
+    toPriceController.text = "";
+    hasDiscount = false;
+    selectedSuperCategory = null;
+    selectedSubCategory = null;
+    subCategories = [];
+    notifyListeners();
   }
 
   enableButton() {}

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/widgets/loading_indicator/agro_loading_indicator.dart';
+import 'package:msan/widgets/radio_button_group/radio_button_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../helpers/constants/custom_icons.dart';
 import '../../helpers/helper_functions.dart';
-import '/models/products_model/product_filter_model.dart';
 import '/screens/products_list_screen/filter_bottom_sheet/filter_bottom_sheet.dart';
 import '/screens/products_list_screen/filter_bottom_sheet/filter_providers/filter_provider.dart';
 import '/screens/products_list_screen/products_list_providers/products_list_provider.dart';
 import '/widgets/bottom_sheet/agro_bottom_sheet.dart';
 import '/widgets/input_fields/agro_input_field.dart';
+import '/widgets/loading_indicator/agro_loading_indicator.dart';
 import '/widgets/products/product_preview/product_preview.dart';
 import '/widgets/radio_button_group/radio_button_group.dart';
 
@@ -21,6 +21,8 @@ class ProductsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productsListProvider = context.read<ProductsListProvider>();
+    final globalAppNavigator = Navigator.of(context);
+
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: HelperFunctions.getAppBar(context),
@@ -54,8 +56,16 @@ class ProductsListScreen extends StatelessWidget {
                                       AgroBottomSheet.showBottomSheet(
                                         context: context,
                                         child: RadioButtonGroup(
-                                            radioButtons:
-                                                productsListProvider.sorts),
+                                          initValue:
+                                              productsListProvider.sortModel,
+                                          radioButtons:
+                                              productsListProvider.sorts,
+                                          onChange: (selected) {
+                                            productsListProvider
+                                                .setSort(selected.value);
+                                            globalAppNavigator.pop();
+                                          },
+                                        ),
                                       );
                                     },
                                     child: Row(
