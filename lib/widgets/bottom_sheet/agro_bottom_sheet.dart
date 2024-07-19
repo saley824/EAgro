@@ -59,7 +59,7 @@ class AgroBottomSheet {
                           child: Text(
                             title,
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.labelLarge,
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ),
                         // if (enableCloseButton)

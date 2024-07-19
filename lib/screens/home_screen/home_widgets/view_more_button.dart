@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:msan/models/category_model/category_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/products_model/product_filter_model.dart';

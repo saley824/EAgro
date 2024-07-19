@@ -1,25 +1,24 @@
 import 'dart:developer';
 
 import '../helpers/http_api.dart';
-import '../models/products_model/product_list_model.dart';
+import '../models/saved_products_model/saved_product_model.dart';
 
 class SavedProductsService {
-  static Future<List<ProductListModel>> getSavedProducts(
+  static Future<List<SavedProductModel>> getSavedProducts(
       final String userUuid) async {
-    List<ProductListModel> products = [];
+    List<SavedProductModel> savedProducts = [];
     try {
       final res = await HttpAPI.makeAPIcall(
-        ApiMethod.get,
-        'saved_products/$userUuid',
-      );
+          ApiMethod.get, 'saved_products/$userUuid',
+          authTokenRequired: true);
 
       for (var element in (res.responseData["savedProducts"])) {
-        products.add(ProductListModel.fromJson(element));
+        savedProducts.add(SavedProductModel.fromJson(element));
       }
     } catch (e) {
       log('EXCEPTION: $e  getSavedProductsTAG');
     }
-    return products;
+    return savedProducts;
   }
 
   static Future<bool> deleteSavedProductById({

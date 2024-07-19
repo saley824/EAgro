@@ -1,12 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
+import '/models/products_model/product_list_model.dart';
+import '/services/product_service.dart';
 import '../../../models/products_model/product_filter_model.dart';
 import '../../../widgets/radio_button_group/radio_button_model.dart';
 import '../products_list_models/sort_model.dart';
-import '/models/products_model/product_list_model.dart';
-import '/services/product_service.dart';
 
 class ProductsListProvider extends ChangeNotifier {
   ProductFilterModel productFilter;

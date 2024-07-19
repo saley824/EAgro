@@ -16,7 +16,7 @@ class ProductListModel {
   final String? image;
   final ProductDiscountModel? productDiscount;
   final double? avgReview;
-  final double countReview;
+  final int countReview;
   final double? discountedPrice;
 
   ProductListModel({

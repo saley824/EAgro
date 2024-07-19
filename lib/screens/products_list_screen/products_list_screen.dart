@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/widgets/radio_button_group/radio_button_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../helpers/constants/custom_icons.dart';

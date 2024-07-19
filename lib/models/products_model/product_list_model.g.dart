@@ -21,7 +21,7 @@ ProductListModel _$ProductListModelFromJson(Map<String, dynamic> json) =>
           : ProductDiscountModel.fromJson(
               json['productDiscount'] as Map<String, dynamic>),
       avgReview: (json['avgReview'] as num?)?.toDouble(),
-      countReview: (json['countReview'] as num).toDouble(),
+      countReview: (json['countReview'] as num).toInt(),
       discountedPrice: (json['discountedPrice'] as num?)?.toDouble(),
     );
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../home_screen/home_screen_providers/home_screen_provider.dart';
 import '../login_screen/login_providers/login_provider.dart';
 import '../login_screen/login_screen.dart';
 import '/screens/home_screen/home_screen.dart';
@@ -21,7 +22,10 @@ class WelcomeScreen extends StatelessWidget {
           snapshot.connectionState == ConnectionState.waiting
               ? const InitSplashScreen()
               : snapshot.data
-                  ? const HomeScreen()
+                  ? ChangeNotifierProvider(
+                      create: (context) => HomeScreenProvider(),
+                      child: const HomeScreen(),
+                    )
                   : ChangeNotifierProvider(
                       create: (BuildContext context) => LoginProvider(),
                       child: const LoginScreen(),

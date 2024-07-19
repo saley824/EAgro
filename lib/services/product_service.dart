@@ -52,12 +52,12 @@ class ProductService {
     return products;
   }
 
-  static Future<ProductModel?> getProductById() async {
+  static Future<ProductModel?> getProductById(String id) async {
     ProductModel? product;
     try {
       final res = await HttpAPI.makeAPIcall(
         ApiMethod.get,
-        'products/product/',
+        'products/product/$id',
       );
 
       product = ProductModel.fromJson(res.responseData["product"]);

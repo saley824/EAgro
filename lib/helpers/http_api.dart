@@ -52,18 +52,20 @@ class HttpAPI {
     try {
       var currentDateTime = DateTime.now().toLocal();
       var apiUri = Uri.parse("${RestConfig.ApiURL}$apiPath");
+
       log(
         "*****\nAPI-REQUEST: ${RestConfig.ApiURL}$apiPath\nREQUEST TIME: ${currentDateTime.hour.toString().padLeft(2, "0")}:${currentDateTime.minute.toString().padLeft(2, "0")}:${currentDateTime.second.toString().padLeft(2, "0")}\n*****",
         name: "HTTP API CALL",
       );
       var sharedPrefs = await SharedPreferences.getInstance();
+      log(sharedPrefs.getString(SharedPrefsKeys.token)!);
       const timeout = Duration(seconds: 15);
 
       Map<String, String> headers = {
         HttpHeaders.contentTypeHeader: contentType ?? 'application/json',
         if (authTokenRequired)
           HttpHeaders.authorizationHeader:
-              '${sharedPrefs.getString(SharedPrefsKeys.token)}',
+              'Bearer ${sharedPrefs.getString(SharedPrefsKeys.token)}',
         if (initHeaders != null) ...initHeaders
       };
       http.Response res;

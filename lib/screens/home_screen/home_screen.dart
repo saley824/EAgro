@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/helpers/helper_functions.dart';
-import 'package:msan/models/products_model/product_filter_model.dart';
-import 'package:msan/widgets/loading_indicator/agro_loading_indicator.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/main_provider.dart';
+import '/helpers/helper_functions.dart';
+import '/models/products_model/product_filter_model.dart';
+import '/widgets/loading_indicator/agro_loading_indicator.dart';
 import 'home_screen_providers/home_screen_provider.dart';
 import 'home_widgets/home_products_horizontal.dart';
 

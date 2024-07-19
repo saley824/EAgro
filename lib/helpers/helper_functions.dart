@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:msan/screens/saved_products/saved_products_provider/saved_products_provider.dart';
+import 'package:provider/provider.dart';
 
+import '../screens/saved_products/saved_products_screen.dart';
 import '../widgets/cart_icon.dart';
 import '/helpers/constants/custom_colors.dart';
 
@@ -13,10 +16,20 @@ class HelperFunctions {
         style: textTheme.headlineLarge!.copyWith(color: Colors.white),
       ),
       backgroundColor: CustomColors.jadeGreen[600],
-      leading: const Icon(
-        Icons.favorite,
-        color: Colors.white,
-        size: 32,
+      leading: InkWell(
+        onTap: () {
+          final globalAppNavigator = Navigator.of(context);
+          globalAppNavigator.push(MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider(
+                    create: (context) => SavedProductsProvider(),
+                    child: const SavedProductsScreen(),
+                  )));
+        },
+        child: const Icon(
+          Icons.favorite,
+          color: Colors.white,
+          size: 32,
+        ),
       ),
       actions: const [
         CartIcon(),

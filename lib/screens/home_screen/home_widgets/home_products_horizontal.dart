@@ -28,7 +28,6 @@ class HomeProductHorizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('DEV LOG------------------------------------------------------------------');
     log(productsList.length.toString());
     final textTheme = Theme.of(context).textTheme;
     return Column(
