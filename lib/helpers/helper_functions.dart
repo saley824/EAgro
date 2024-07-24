@@ -47,6 +47,26 @@ class HelperFunctions {
     );
   }
 
+  static getSubAppBar(BuildContext context, String title) {
+    final textTheme = Theme.of(context).textTheme;
+    return AppBar(
+      title: Text(
+        title,
+        style: textTheme.headlineLarge!.copyWith(color: Colors.white),
+      ),
+      backgroundColor: CustomColors.jadeGreen[600],
+      leading: InkWell(
+          onTap: () {
+            final globalAppNavigator = Navigator.of(context);
+          },
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 32,
+          )),
+    );
+  }
+
   static getBackGroundGradient() {
     return LinearGradient(
       begin: Alignment.topLeft,

@@ -11,6 +11,7 @@ class CartItemModel {
   final double price;
   final double? discountedPrice;
   final double cartItemTotalPrice;
+  final int? percentage;
 
   CartItemModel({
     required this.name,
@@ -20,6 +21,7 @@ class CartItemModel {
     required this.price,
     required this.discountedPrice,
     required this.cartItemTotalPrice,
+    required this.percentage,
   });
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) =>

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:msan/models/cart_model/cart_item_model.dart';
-import 'package:msan/models/products_model/product_model.dart';
 
-class CartProvider extends ChangeNotifier {
+import '../../../models/cart_model/cart_item_model.dart';
+
+class OrderItemsProvider extends ChangeNotifier {
   CartItemModel cartItem = CartItemModel(
     name: "XBOX",
     productId: "aaa",

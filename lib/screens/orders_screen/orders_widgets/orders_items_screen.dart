@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:msan/screens/orders_screen/orders_providers/order_items_provider.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/helper_functions.dart';
-import '/screens/cart_screen/cart_widgets/cart_item.dart';
-import '/widgets/buttons/agro_button.dart';
 import '/widgets/divider/divider.dart';
-import 'cart_providers/cart_provider.dart';
+import 'order_item.dart';
 
-class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
+class OrdersScreen extends StatelessWidget {
+  const OrdersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    final ordersProvider =
+        Provider.of<OrderItemsProvider>(context, listen: false);
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: HelperFunctions.getSubAppBar(context, "Cart"),
+      appBar: HelperFunctions.getSubAppBar(context, "Order"),
       body: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 8,
@@ -29,15 +29,14 @@ class CartScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Gap(8),
-                    CartItem(),
-                    Gap(12),
-                    CartItem(),
-                    CartItem(),
-                    CartItem(),
-                    CartItem(),
-                    CartItem(),
-                    CartItem(),
-                    CartItem(),
+                    OrderItem(),
+                    OrderItem(),
+                    OrderItem(),
+                    OrderItem(),
+                    OrderItem(),
+                    OrderItem(),
+                    OrderItem(),
+                    OrderItem(),
                   ],
                 ),
               ),
@@ -71,11 +70,6 @@ class CartScreen extends StatelessWidget {
               ],
             ),
             const AgroDivider(margin: EdgeInsets.symmetric(vertical: 16)),
-            AgroButton(
-              text: "Finish",
-              onTap: () {},
-              buttonColor: ButtonColor.jadeGreen,
-            )
           ],
         ),
       ),
