@@ -8,7 +8,7 @@ class UserModel {
   final String name;
   final String lastName;
   final String username;
-  final bool isShop;
+  final bool? isShop;
   final String email;
 
   UserModel({
@@ -16,7 +16,7 @@ class UserModel {
     required this.name,
     required this.lastName,
     required this.username,
-    required this.isShop,
+     this.isShop,
     required this.email,
   });
 

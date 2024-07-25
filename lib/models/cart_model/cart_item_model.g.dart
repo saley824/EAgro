@@ -16,6 +16,7 @@ CartItemModel _$CartItemModelFromJson(Map<String, dynamic> json) =>
       discountedPrice: (json['discountedPrice'] as num?)?.toDouble(),
       cartItemTotalPrice: (json['cartItemTotalPrice'] as num).toDouble(),
       percentage: (json['percentage'] as num?)?.toInt(),
+      image: json['image'] as String?,
     );
 
 Map<String, dynamic> _$CartItemModelToJson(CartItemModel instance) =>
@@ -28,4 +29,5 @@ Map<String, dynamic> _$CartItemModelToJson(CartItemModel instance) =>
       'discountedPrice': instance.discountedPrice,
       'cartItemTotalPrice': instance.cartItemTotalPrice,
       'percentage': instance.percentage,
+      'image': instance.image,
     };

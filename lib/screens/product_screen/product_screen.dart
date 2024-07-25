@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gap/gap.dart';
+import 'package:msan/widgets/buttons/agro_button.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/snack_bar_messages.dart';
@@ -308,6 +309,17 @@ class ProductScreen extends StatelessWidget {
                                   style: textTheme.bodyMedium!.copyWith(),
                                 ),
                               ],
+                            ),
+                          ),
+                          const Gap(12),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                            ),
+                            child: AgroButton(
+                              text: "Add to cart",
+                              buttonColor: ButtonColor.jadeGreen,
+                              onTap: () {},
                             ),
                           ),
                           AgroAddButton(

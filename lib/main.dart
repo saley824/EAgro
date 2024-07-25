@@ -42,21 +42,16 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
           resizeToAvoidBottomInset: false,
           //---------------------------------Corect version---------------------------------
-          // body: ChangeNotifierProvider(
-          //   create: (context) => WelcomeProvider(),
-          //   child: const WelcomeScreen(),
-          // ),
+          body: ChangeNotifierProvider(
+            create: (context) => WelcomeProvider(),
+            child: const WelcomeScreen(),
+          ),
           //---------------------------------Corect version---------------------------------
 
           // body: ChangeNotifierProvider(
           //   create: (context) => CartProvider(),
           //   child: const CartScreen(),
           // ),
-
-          body: ChangeNotifierProvider(
-            create: (context) => OrderItemsProvider(),
-            child: const OrdersScreen(),
-          ),
 
           // body: ChangeNotifierProvider(
           //   create: (context) => HomeScreenProvider(),

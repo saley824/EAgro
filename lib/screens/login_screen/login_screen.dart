@@ -84,6 +84,7 @@ class LoginScreen extends StatelessWidget {
                                       text: "Successfully login",
                                       isError: false);
                                   return;
+                                  //TODO NAVIGATE TO HOME SCREEN
                                 }
                                 SnackBarMessage.showMessage(
                                     context: context,

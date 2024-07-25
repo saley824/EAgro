@@ -12,5 +12,6 @@ class OrderItemsProvider extends ChangeNotifier {
     discountedPrice: 10.00,
     cartItemTotalPrice: 30,
     percentage: 15,
+    image: null,
   );
 }

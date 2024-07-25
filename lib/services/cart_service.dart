@@ -15,6 +15,7 @@ class CartService {
         ApiMethod.get,
         'cart/$userUuid',
       );
+
       cartModel = CartModel.fromJson(res.responseData);
     } catch (e) {
       log('EXCEPTION: $e  getCartTAG');

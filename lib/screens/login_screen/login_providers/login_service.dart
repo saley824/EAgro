@@ -34,6 +34,11 @@ class LoginService {
 
     final sharedPrefs = await SharedPreferences.getInstance();
     var accessToken = sharedPrefs.getString("access_token");
+
+    if (accessToken == "") {
+      return Tuple2(false, token);
+    }
+
     if (accessToken == null) {
       isAccessActive = false;
     }
@@ -44,5 +49,25 @@ class LoginService {
     }
 
     return Tuple2(isAccessActive, token);
+  }
+
+  static Future<ApiResponse?> logOut({
+    required String username,
+    required String password,
+  }) async {
+    ApiResponse? apiResponse;
+    try {
+      apiResponse = await HttpAPI.makeAPIcall(
+        ApiMethod.post,
+        'users/login',
+        body: {
+          "username": username,
+          "password": password,
+        },
+      );
+    } catch (e) {
+      log("EXCEPTION loginTAG : $e");
+    }
+    return apiResponse;
   }
 }

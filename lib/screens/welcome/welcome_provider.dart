@@ -16,6 +16,9 @@ class WelcomeProvider extends ChangeNotifier {
     bool isAccessActive = pair.item1;
     String? token = pair.item2;
 
+    if (token == "") {
+      return false;
+    }
     if (isAccessActive && token != null) {
       var decodedToken = JwtDecoder.decode(token);
       UserModel? userModel =
