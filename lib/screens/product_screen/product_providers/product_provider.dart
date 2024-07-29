@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msan/services/cart_service.dart';
 
 import '../../../services/saved_products_service.dart';
 import '/models/products_model/product_model.dart';
@@ -77,6 +78,22 @@ class ProductProvider extends ChangeNotifier {
     success = await SavedProductsService.saveProduct(
         productUuid: product!.id, userUuid: userId);
     notifyListeners();
+    return success;
+  }
+
+  //---------------------------------Cart handler---------------------------------
+
+  Future<bool> addToCart() async {
+    bool success =
+        await CartService.addToCart(productUuid: product!.id, userUuid: userId);
+
+    return success;
+  }
+
+  Future<bool> removeFromCart() async {
+    bool success = await CartService.removeCartItem(
+        productUuid: product!.id, userUuid: userId);
+
     return success;
   }
 }

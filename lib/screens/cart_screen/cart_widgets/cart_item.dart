@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:msan/helpers/helper_functions.dart';
 import 'package:provider/provider.dart';
 
 import '/models/cart_model/cart_item_model.dart';
@@ -11,15 +12,17 @@ import '../../../widgets/products/discount_badge.dart';
 
 class CartItem extends StatelessWidget {
   final bool isOrder;
+  final CartItemModel cartItemModel;
   const CartItem({
     super.key,
     this.isOrder = true,
+    required this.cartItemModel,
   });
 
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
-    CartItemModel cartItemModel = cartProvider.cartItem;
+
     final textTheme = Theme.of(context).textTheme;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +85,15 @@ class CartItem extends StatelessWidget {
                       ],
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        HelperFunctions.callMethodWithLoadingDialog(
+                            context: context,
+                            callback: () async {
+                              cartProvider.removeCartItem(
+                                productUuid: cartItemModel.productId,
+                              );
+                            });
+                      },
                       icon: Icon(
                         Icons.close,
                         color: CustomColors.gray[400],
@@ -121,16 +132,34 @@ class CartItem extends StatelessWidget {
                     Row(
                       children: [
                         MinusItem(
-                          onTap: () {},
+                          onTap: () {
+                            HelperFunctions.callMethodWithLoadingDialog(
+                                context: context,
+                                callback: () async {
+                                  cartProvider.increment(
+                                    productUuid: cartItemModel.productId,
+                                    isIncrement: "false",
+                                  );
+                                });
+                          },
                         ),
                         const Gap(8),
                         Text(
-                          "1",
+                          cartItemModel.quantity.toString(),
                           style: textTheme.bodyLarge,
                         ),
                         const Gap(8),
                         PlusItem(
-                          onTap: () {},
+                          onTap: () {
+                            HelperFunctions.callMethodWithLoadingDialog(
+                                context: context,
+                                callback: () async {
+                                  cartProvider.increment(
+                                    productUuid: cartItemModel.productId,
+                                    isIncrement: "true",
+                                  );
+                                });
+                          },
                         ),
                         const Gap(8)
                       ],
@@ -146,7 +175,7 @@ class CartItem extends StatelessWidget {
                       style: textTheme.bodySmall,
                     ),
                     Text(
-                      "279,99KM",
+                      cartItemModel.cartItemTotalPrice.toString(),
                       style: textTheme.titleSmall,
                     ),
                   ],

@@ -74,7 +74,7 @@ class CartService {
     try {
       final res = await HttpAPI.makeAPIcall(
         ApiMethod.delete,
-        'saved_products/$userUuid/$productUuid',
+        'cart/$userUuid/$productUuid',
       );
       success = res.success;
     } catch (e) {

@@ -319,7 +319,19 @@ class ProductScreen extends StatelessWidget {
                             child: AgroButton(
                               text: "Add to cart",
                               buttonColor: ButtonColor.jadeGreen,
-                              onTap: () {},
+                              onTap: () {
+                                HelperFunctions.callMethodWithLoadingDialog(
+                                    context: context,
+                                    callback: () async {
+                                      await productProvider.addToCart();
+                                    },
+                                    onFinished: () {
+                                      SnackBarMessage.showMessage(
+                                          context: context,
+                                          text: "Product is added to cart!",
+                                          isError: false);
+                                    });
+                              },
                             ),
                           ),
                           AgroAddButton(
@@ -329,8 +341,9 @@ class ProductScreen extends StatelessWidget {
                                 title: "Add discount",
                                 context: context,
                                 child: ChangeNotifierProvider(
-                                    create: (context) => AddDiscountProvider(),
-                                    child: const AddDiscountBottomSheet()),
+                                  create: (context) => AddDiscountProvider(),
+                                  child: const AddDiscountBottomSheet(),
+                                ),
                               );
                             },
                           )

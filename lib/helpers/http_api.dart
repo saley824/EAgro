@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:msan/helpers/constants/shared_preferences_keys.dart';
+import 'package:msan/helpers/helper_functions.dart';
+import 'package:msan/helpers/snack_bar_messages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/models/api_response.dart';
@@ -18,7 +20,10 @@ enum ApiMethod {
 }
 
 class HttpAPI {
-  static late BuildContext? _context;
+  static BuildContext? _context;
+
+  static set context(BuildContext value) => _context = _context ?? value;
+
   // static var isRefreshingTokenInProgress = false;
 
   /// The method [makeAPIcall] receives two mandatory params which are:
@@ -117,6 +122,11 @@ class HttpAPI {
           success: true,
           responseData: decodedRes['data'],
         );
+      }
+
+      if (!decodedRes['success']) {
+        SnackBarMessage.showMessage(
+            context: _context!, text: decodedRes["message"], isError: true);
       }
 
       ///Add refresh token logic here...

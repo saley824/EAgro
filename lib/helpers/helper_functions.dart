@@ -57,7 +57,7 @@ class HelperFunctions {
       backgroundColor: CustomColors.jadeGreen[600],
       leading: InkWell(
           onTap: () {
-            final globalAppNavigator = Navigator.of(context);
+            Navigator.of(context).pop();
           },
           child: const Icon(
             Icons.arrow_back,

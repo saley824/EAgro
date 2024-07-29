@@ -8,6 +8,7 @@ import 'package:msan/screens/orders_screen/orders_widgets/orders_items_screen.da
 import 'package:provider/provider.dart';
 
 import '/helpers/styles/custom_themes.dart';
+import 'helpers/http_api.dart';
 import 'providers/main_provider.dart';
 import 'screens/welcome/welcome_provider.dart';
 import 'screens/welcome/welcome_screen.dart';
@@ -69,6 +70,10 @@ class MyApp extends StatelessWidget {
           //   create: (context) => AddProductProvider(),
           //   child: const AddProductScreen(),
           // ),
-        ));
+        ),
+        builder: (context, home) {
+          HttpAPI.context = context;
+          return home!;
+        });
   }
 }

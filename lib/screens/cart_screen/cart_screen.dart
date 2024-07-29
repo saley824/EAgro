@@ -18,70 +18,86 @@ class CartScreen extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: HelperFunctions.getSubAppBar(context, "Cart"),
-      body: FutureBuilder(
-        future: cartProvider.fetchCart(),
-        builder: (context, snapshot) =>
-            snapshot.connectionState == ConnectionState.waiting
+      body: SafeArea(
+        child: Consumer<CartProvider>(
+          builder: (_, __, ___) => FutureBuilder(
+            future: cartProvider.fetchCart(),
+            builder: (context, snapshot) => snapshot.connectionState ==
+                    ConnectionState.waiting
                 ? const AgroLoadingIndicator()
                 : cartProvider.cart != null &&
                         cartProvider.cart!.cartItemsDetails.isEmpty
                     ? const Text("Cart is empty")
-                    : Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                        ),
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    ...cartProvider.cart!.cartItemsDetails.map(
-                                      (e) => const CartItem(),
-                                    )
-                                  ],
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                          ),
+                          color: Colors.white,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      ...cartProvider.cart!.cartItemsDetails
+                                          .map(
+                                        (e) => Padding(
+                                          padding: const EdgeInsets.all(8),
+                                          child: CartItem(
+                                            cartItemModel: e,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            const Gap(8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Total price:",
-                                  style: textTheme.bodyMedium,
-                                ),
-                                Text(
-                                  "279,99KM",
-                                  style: textTheme.titleMedium,
-                                ),
-                              ],
-                            ),
-                            const Gap(8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Number of items:",
-                                  style: textTheme.bodyMedium,
-                                ),
-                                Text(
-                                  "10",
-                                  style: textTheme.titleMedium,
-                                ),
-                              ],
-                            ),
-                            const AgroDivider(
-                                margin: EdgeInsets.symmetric(vertical: 16)),
-                            AgroButton(
-                              text: "Finish",
-                              onTap: () {},
-                              buttonColor: ButtonColor.jadeGreen,
-                            )
-                          ],
+                              const Gap(8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Total price:",
+                                    style: textTheme.bodyMedium,
+                                  ),
+                                  Text(
+                                    cartProvider.cart?.totalPrice.toString() ??
+                                        "0.0",
+                                    style: textTheme.titleMedium,
+                                  ),
+                                ],
+                              ),
+                              const Gap(8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Number of items:",
+                                    style: textTheme.bodyMedium,
+                                  ),
+                                  Text(
+                                    cartProvider.cart?.count.toString() ?? "0",
+                                    style: textTheme.titleMedium,
+                                  ),
+                                ],
+                              ),
+                              const AgroDivider(
+                                  margin: EdgeInsets.symmetric(vertical: 16)),
+                              AgroButton(
+                                text: "Finish",
+                                onTap: () {},
+                                buttonColor: ButtonColor.jadeGreen,
+                              )
+                            ],
+                          ),
                         ),
                       ),
+          ),
+        ),
       ),
     );
   }
