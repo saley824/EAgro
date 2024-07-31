@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:msan/screens/cart_screen/cart_providers/cart_provider.dart';
-import 'package:msan/screens/cart_screen/cart_screen.dart';
-import 'package:msan/screens/orders_screen/orders_providers/order_items_provider.dart';
-import 'package:msan/screens/orders_screen/orders_widgets/orders_items_screen.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/styles/custom_themes.dart';

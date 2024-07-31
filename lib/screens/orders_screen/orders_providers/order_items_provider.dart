@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:msan/screens/orders_screen/orders_providers/orders_service.dart';
 
 import '../../../models/cart_model/cart_item_model.dart';
+import '../orders_models/order_item_model.dart';
 
 class OrderItemsProvider extends ChangeNotifier {
+  List<OrderItemModel> orderItems = [];
+  Future<void> getOrderItems(String orderId) async {
+    orderItems = await OrderService.getOrderItems(orderId);
+  }
+
   CartItemModel cartItem = CartItemModel(
     name: "XBOX",
     productId: "aaa",

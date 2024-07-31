@@ -15,9 +15,7 @@ class Header extends StatelessWidget {
       ),
       backgroundColor: CustomColors.jadeGreen[600],
       leading: InkWell(
-          onTap: () {
-            final globalAppNavigator = Navigator.of(context);
-          },
+          onTap: () {},
           child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:msan/screens/orders_screen/orders_providers/orders_service.dart';
 
-import '/models/cart_model/cart_item_model.dart';
 import '/models/cart_model/cart_model.dart';
 import '/services/cart_service.dart';
 
@@ -33,15 +33,13 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  CartItemModel cartItem = CartItemModel(
-    name: "XBOX",
-    productId: "aaa",
-    quantity: 3,
-    totalAmount: 22,
-    price: 11.99,
-    discountedPrice: 10.00,
-    cartItemTotalPrice: 30,
-    percentage: 15,
-    image: null,
-  );
+  Future<bool> createOrder() async {
+    bool success = await OrderService.createOrder(userId: userUuid);
+    return success;
+  }
+
+  void clear() async {
+    cart?.cartItemsDetails.clear();
+    notifyListeners();
+  }
 }

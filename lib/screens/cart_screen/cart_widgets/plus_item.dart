@@ -12,7 +12,6 @@ class PlusItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return InkWell(
         onTap: onTap,
         child: Container(

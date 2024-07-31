@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:msan/models/products_model/product_model.dart';
 import 'package:msan/models/saved_products_model/saved_product_model.dart';

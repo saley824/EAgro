@@ -4,9 +4,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:msan/helpers/constants/shared_preferences_keys.dart';
-import 'package:msan/helpers/helper_functions.dart';
-import 'package:msan/helpers/snack_bar_messages.dart';
+import '/helpers/constants/shared_preferences_keys.dart';
+import '/helpers/snack_bar_messages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/models/api_response.dart';

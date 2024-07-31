@@ -14,11 +14,13 @@ class ProductPreview extends StatelessWidget {
   final bool hasDiscount;
   final int? discountPercentage;
   final ProductListModel product;
+  final bool pushAndPop;
   const ProductPreview({
     super.key,
     required this.product,
     this.hasDiscount = false,
     this.discountPercentage,
+    this.pushAndPop = false,
   });
 
   @override
@@ -29,13 +31,21 @@ class ProductPreview extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        globalAppNavigator.push(MaterialPageRoute(
-          builder: (context) => ChangeNotifierProvider(
-            create: (context) =>
-                ProductProvider(product.id, mainProvider.user!.id),
-            child: const ProductScreen(),
-          ),
-        ));
+        pushAndPop
+            ? globalAppNavigator.pushReplacement(MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider(
+                  create: (context) =>
+                      ProductProvider(product.id, mainProvider.user!.id),
+                  child: const ProductScreen(),
+                ),
+              ))
+            : globalAppNavigator.push(MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider(
+                  create: (context) =>
+                      ProductProvider(product.id, mainProvider.user!.id),
+                  child: const ProductScreen(),
+                ),
+              ));
       },
       child: SizedBox(
         width: 152,
@@ -84,14 +94,17 @@ class ProductPreview extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Flexible(
-                  child: Text(product.name,
-                      style: textTheme.bodyMedium!
-                          .copyWith(color: CustomColors.gray[500])),
+                  child: Text(
+                    product.name,
+                    style: textTheme.bodyMedium!
+                        .copyWith(color: CustomColors.gray[500]),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Flexible(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.star,

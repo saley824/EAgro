@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:msan/helpers/snack_bar_messages.dart';
 import 'package:msan/widgets/loading_indicator/agro_loading_indicator.dart';
 import 'package:provider/provider.dart';
 
+import '../../widgets/no_results.dart';
 import '/helpers/helper_functions.dart';
 import '/screens/cart_screen/cart_widgets/cart_item.dart';
 import '/widgets/buttons/agro_button.dart';
@@ -27,7 +29,9 @@ class CartScreen extends StatelessWidget {
                 ? const AgroLoadingIndicator()
                 : cartProvider.cart != null &&
                         cartProvider.cart!.cartItemsDetails.isEmpty
-                    ? const Text("Cart is empty")
+                    ? const NoResults(
+                        text: "Cart is empty",
+                      )
                     : Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Container(
@@ -89,7 +93,25 @@ class CartScreen extends StatelessWidget {
                                   margin: EdgeInsets.symmetric(vertical: 16)),
                               AgroButton(
                                 text: "Finish",
-                                onTap: () {},
+                                onTap: () {
+                                  bool success = false;
+                                  HelperFunctions.callMethodWithLoadingDialog(
+                                      context: context,
+                                      callback: () async {
+                                        success =
+                                            await cartProvider.createOrder();
+                                      },
+                                      onFinished: () {
+                                        if (success) {
+                                          cartProvider.clear();
+                                          SnackBarMessage.showMessage(
+                                            context: context,
+                                            text: "Order is created!",
+                                            isError: false,
+                                          );
+                                        }
+                                      });
+                                },
                                 buttonColor: ButtonColor.jadeGreen,
                               )
                             ],

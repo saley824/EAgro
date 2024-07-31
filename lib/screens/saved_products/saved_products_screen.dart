@@ -15,7 +15,6 @@ class SavedProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final savedProductsProvider = context.read<SavedProductsProvider>();
     final mainProvider = context.read<MainProvider>();
-    final globalAppNavigator = Navigator.of(context);
 
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(

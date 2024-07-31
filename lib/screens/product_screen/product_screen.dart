@@ -10,7 +10,6 @@ import '/widgets/loading_indicator/agro_loading_indicator.dart';
 import '/widgets/modals/agro_modal.dart';
 import '../../helpers/constants/custom_colors.dart';
 import '../../helpers/helper_functions.dart';
-import '../../providers/main_provider.dart';
 import '../../widgets/bottom_sheet/agro_bottom_sheet.dart';
 import '../../widgets/buttons/agro_add_button.dart';
 import '../shop_screens/add_discount.dart/add_discount_bottom_sheet.dart';
@@ -27,7 +26,6 @@ class ProductScreen extends StatelessWidget {
     final productProvider =
         Provider.of<ProductProvider>(context, listen: false);
     final textTheme = Theme.of(context).textTheme;
-    final mainProvider = Provider.of<MainProvider>(context, listen: false);
 
     return Scaffold(
       appBar: HelperFunctions.getAppBar(context),

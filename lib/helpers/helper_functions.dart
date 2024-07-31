@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:msan/providers/main_provider.dart';
 import 'package:msan/screens/saved_products/saved_products_provider/saved_products_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/orders_screen/orders_providers/order_provider.dart';
+import '../screens/orders_screen/orders_screen.dart';
 import '../screens/saved_products/saved_products_screen.dart';
 import '../widgets/cart_icon.dart';
 import '/helpers/constants/custom_colors.dart';
@@ -10,6 +13,7 @@ import '/helpers/constants/custom_colors.dart';
 class HelperFunctions {
   static getAppBar(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final mainProvider = context.read<MainProvider>();
     return AppBar(
       title: Text(
         "EAgro",
@@ -31,17 +35,30 @@ class HelperFunctions {
           size: 32,
         ),
       ),
-      actions: const [
-        CartIcon(),
-        Padding(
-            padding: EdgeInsets.only(
-              right: 8,
-            ),
-            child: Icon(
-              Icons.menu,
-              color: Colors.white,
-              size: 36,
-            )),
+      actions: [
+        const CartIcon(),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider(
+                  create: (context) =>
+                      OrdersProvider(userId: mainProvider.user!.id),
+                  child: const OrdersScreen(),
+                ),
+              ),
+            );
+          },
+          child: const Padding(
+              padding: EdgeInsets.only(
+                right: 8,
+              ),
+              child: Icon(
+                Icons.menu,
+                color: Colors.white,
+                size: 36,
+              )),
+        ),
         // Icon(Icons.local_grocery_store, color: Colors.white),
       ],
     );

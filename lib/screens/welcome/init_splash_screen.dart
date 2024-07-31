@@ -1,6 +1,3 @@
-import 'dart:async';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../../helpers/constants/custom_colors.dart';
@@ -15,7 +12,7 @@ class InitSplashScreen extends StatefulWidget {
 class _InitSplashScreenState extends State<InitSplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  bool _isScaled = false;
+  // bool _isScaled = false;
   bool doAnimation = true;
 
   @override
@@ -49,7 +46,7 @@ class _InitSplashScreenState extends State<InitSplashScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // startGame();
     });
-    final localization = AppLocalizations.of(context)!;
+    // final localization = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: CustomColors.jadeGreen,
       body: Center(

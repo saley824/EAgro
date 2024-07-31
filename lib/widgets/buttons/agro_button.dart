@@ -4,6 +4,9 @@ import 'package:msan/widgets/buttons/button_helper.dart';
 enum ButtonColor {
   white,
   jadeGreen,
+  red,
+  blue,
+  yellow,
 }
 
 class AgroButton extends StatelessWidget {

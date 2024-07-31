@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:msan/widgets/products/product_preview/product_preview.dart';
 
 import 'helpers/helper_functions.dart';
-import 'screens/home_screen/home_widgets/home_products_horizontal.dart';
 
 class Test extends StatelessWidget {
   const Test({super.key});

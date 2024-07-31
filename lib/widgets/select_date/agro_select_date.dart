@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
 
 import '../../helpers/constants/custom_colors.dart';
@@ -45,7 +44,6 @@ class _AgroSelectDateState extends State<AgroSelectDate> {
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context);
-    final localization = AppLocalizations.of(context)!;
     return InkWell(
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
