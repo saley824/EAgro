@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:msan/providers/main_provider.dart';
 import 'package:msan/screens/saved_products/saved_products_provider/saved_products_provider.dart';
+import 'package:msan/screens/user_info_screen.dart/user_info_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/orders_screen/orders_providers/order_provider.dart';
@@ -41,13 +42,18 @@ class HelperFunctions {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => ChangeNotifierProvider(
-                  create: (context) =>
-                      OrdersProvider(userId: mainProvider.user!.id),
-                  child: const OrdersScreen(),
-                ),
+                builder: (context) => const UserInfoScreen(),
               ),
             );
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => ChangeNotifierProvider(
+            //       create: (context) =>
+            //           OrdersProvider(userId: mainProvider.user!.id),
+            //       child: const OrdersScreen(),
+            //     ),
+            //   ),
+            // );
           },
           child: const Padding(
               padding: EdgeInsets.only(
