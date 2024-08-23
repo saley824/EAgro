@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:msan/providers/main_provider.dart';
-import 'package:msan/screens/saved_products/saved_products_provider/saved_products_provider.dart';
-import 'package:msan/screens/user_info_screen.dart/user_info_screen.dart';
+import 'package:msan/helpers/navigator_helper.dart';
+import 'package:msan/screens/user_info_screen.dart/user_info_providers/user_info_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/orders_screen/orders_providers/order_provider.dart';
 import '../screens/orders_screen/orders_screen.dart';
+import '/helpers/constants/custom_colors.dart';
+import '/providers/main_provider.dart';
+import '/screens/saved_products/saved_products_provider/saved_products_provider.dart';
+import '/screens/user_info_screen.dart/user_info_screen.dart';
 import '../screens/saved_products/saved_products_screen.dart';
 import '../widgets/cart_icon.dart';
-import '/helpers/constants/custom_colors.dart';
 
 class HelperFunctions {
   static getAppBar(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final mainProvider = context.read<MainProvider>();
     return AppBar(
-      title: Text(
-        "EAgro",
-        style: textTheme.headlineLarge!.copyWith(color: Colors.white),
+      title: InkWell(
+        onTap: () {
+          NavigatorHelper.navigateToHome(context);
+        },
+        child: Text(
+          "EAgro",
+          style: textTheme.headlineLarge!.copyWith(color: Colors.white),
+        ),
       ),
       backgroundColor: CustomColors.jadeGreen[600],
       leading: InkWell(
@@ -37,23 +44,19 @@ class HelperFunctions {
         ),
       ),
       actions: [
-        const CartIcon(),
         InkWell(
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const UserInfoScreen(),
+                builder: (context) => ChangeNotifierProvider(
+                    create: (context) => UserInfoProvider(
+                          context: context,
+                          isEdit: true,
+                          userId: mainProvider.user?.id ?? "",
+                        ),
+                    child: const UserInfoScreen()),
               ),
             );
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => ChangeNotifierProvider(
-            //       create: (context) =>
-            //           OrdersProvider(userId: mainProvider.user!.id),
-            //       child: const OrdersScreen(),
-            //     ),
-            //   ),
-            // );
           },
           child: const Padding(
               padding: EdgeInsets.only(
@@ -67,6 +70,58 @@ class HelperFunctions {
         ),
         // Icon(Icons.local_grocery_store, color: Colors.white),
       ],
+    );
+  }
+
+  static Widget getBottomBar(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final mainProvider = context.read<MainProvider>();
+
+    return Container(
+      padding: const EdgeInsets.all(4),
+      color: CustomColors.jadeGreen[600],
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider(
+                    create: (context) =>
+                        OrdersProvider(userId: mainProvider.user!.id),
+                    child: const OrdersScreen(),
+                  ),
+                ),
+              );
+            },
+            child: const Padding(
+                padding: EdgeInsets.only(
+                  right: 8,
+                ),
+                child: Icon(
+                  Icons.receipt_long,
+                  color: Colors.white,
+                  size: 36,
+                )),
+          ),
+          const CartIcon(),
+          InkWell(
+            onTap: () {
+              NavigatorHelper.navigateToProductsList(context);
+            },
+            child: const Padding(
+                padding: EdgeInsets.only(
+                  right: 8,
+                ),
+                child: Icon(
+                  Icons.shopping_bag,
+                  color: Colors.white,
+                  size: 36,
+                )),
+          ),
+        ],
+      ),
     );
   }
 

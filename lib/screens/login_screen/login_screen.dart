@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:msan/screens/login_screen/login_providers/login_provider.dart';
-import 'package:msan/screens/register_screen/register_providers/register_provider.dart';
-import 'package:msan/screens/test_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../../helpers/snack_bar_messages.dart';
 import '/helpers/helper_functions.dart';
+import '/helpers/navigator_helper.dart';
+import '/screens/login_screen/login_providers/login_provider.dart';
+import '/screens/register_screen/register_providers/register_provider.dart';
 import '/screens/register_screen/register_screen.dart';
+import '/screens/test_screen.dart';
 import '/widgets/buttons/agro_button.dart';
 import '/widgets/input_fields/agro_input_field.dart';
+import '../../helpers/snack_bar_messages.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -75,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                           HelperFunctions.callMethodWithLoadingDialog(
                               context: context,
                               callback: () async {
-                                success = await loginProvider.login();
+                                success = await loginProvider.login(context);
                               },
                               onFinished: () {
                                 if (success) {
@@ -83,6 +84,9 @@ class LoginScreen extends StatelessWidget {
                                       context: context,
                                       text: "Successfully login",
                                       isError: false);
+
+                                  NavigatorHelper.navigateToHome(context);
+
                                   return;
                                   //TODO NAVIGATE TO HOME SCREEN
                                 }

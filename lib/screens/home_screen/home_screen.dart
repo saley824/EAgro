@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
         Provider.of<HomeScreenProvider>(context, listen: false);
 
     return Scaffold(
+        bottomNavigationBar: HelperFunctions.getBottomBar(context),
         appBar: HelperFunctions.getAppBar(context),
         body: FutureBuilder(
           future: homeScreenProvider.getAll(),
@@ -29,7 +30,6 @@ class HomeScreen extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            const Text("HomeScreen"),
                             HomeProductHorizontal(
                               title: "Products on discount",
                               productsList: homeScreenProvider

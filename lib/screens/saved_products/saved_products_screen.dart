@@ -18,7 +18,7 @@ class SavedProductsScreen extends StatelessWidget {
 
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: HelperFunctions.getAppBar(context),
+      appBar: HelperFunctions.getSubAppBar(context, "Saved products"),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
@@ -34,7 +34,7 @@ class SavedProductsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Saved products",
+                            "Products that you saved",
                             style: textTheme.headlineSmall,
                           ),
                           const Gap(16),
