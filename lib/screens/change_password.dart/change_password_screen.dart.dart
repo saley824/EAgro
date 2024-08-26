@@ -15,7 +15,6 @@ class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final changePasswordProvider = context.read<ChangePasswordProvider>();
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: HelperFunctions.getSubAppBar(context, "Change password"),
       body: SafeArea(

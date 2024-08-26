@@ -59,6 +59,63 @@ class SingleOrder extends StatelessWidget {
         ),
         child: Column(
           children: [
+            if (isShop) ...[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Buyer name",
+                    style: textTheme.labelLarge,
+                  ),
+                  const Gap(8),
+                  Flexible(
+                    child: Text(
+                      "${order.user?.name ?? ""} ${order.user?.lastName ?? ""}",
+                      style: textTheme.bodyLarge,
+                    ),
+                  ),
+                ],
+              ),
+              const Gap(16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    textAlign: TextAlign.right,
+                    "Buyer address",
+                    style: textTheme.labelLarge,
+                  ),
+                  const Gap(60),
+                  Flexible(
+                    child: Text(
+                      order.user?.address.toString() ?? "",
+                      style: textTheme.bodyLarge,
+                    ),
+                  ),
+                ],
+              ),
+              const Gap(16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Buyer email",
+                    style: textTheme.labelLarge,
+                  ),
+                  const Gap(8),
+                  Flexible(
+                    child: Text(
+                      order.user?.email.toString() ?? "",
+                      style: textTheme.bodyLarge,
+                    ),
+                  ),
+                ],
+              ),
+              const Gap(16),
+            ],
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -66,6 +123,7 @@ class SingleOrder extends StatelessWidget {
                   "Total price",
                   style: textTheme.labelLarge,
                 ),
+                const Gap(8),
                 Text(
                   order.totalPrice.toString(),
                   style: textTheme.bodyLarge,
@@ -80,6 +138,7 @@ class SingleOrder extends StatelessWidget {
                   _getDesc(order),
                   style: textTheme.labelLarge,
                 ),
+                const Gap(8),
                 Text(
                   DateTimeParser.toClassicDate(_getDate(order)),
                   style: textTheme.bodyLarge,

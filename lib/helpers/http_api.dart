@@ -16,6 +16,7 @@ enum ApiMethod {
   post,
   put,
   delete,
+  patch,
 }
 
 class HttpAPI {
@@ -95,6 +96,15 @@ class HttpAPI {
         case ApiMethod.put:
           res = await http
               .put(
+                apiUri,
+                headers: headers,
+                body: body == null ? null : jsonEncode(body),
+              )
+              .timeout(timeout);
+          break;
+        case ApiMethod.patch:
+          res = await http
+              .patch(
                 apiUri,
                 headers: headers,
                 body: body == null ? null : jsonEncode(body),

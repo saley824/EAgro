@@ -5,12 +5,16 @@ import '../orders_models/order_model.dart';
 
 class OrdersProvider extends ChangeNotifier {
   final String userId;
+  final bool isShop;
   List<OrderModel> orders = [];
 
-  OrdersProvider({required this.userId});
+  OrdersProvider({
+    required this.userId,
+    required this.isShop,
+  });
 
   Future<void> getOrders() async {
-    orders = await OrderService.getOrders(userId);
+    orders = await OrderService.getOrders(userId, isShop);
   }
 
   Future<bool> changeOrderStatus(String orderStatus, String orderId) async {

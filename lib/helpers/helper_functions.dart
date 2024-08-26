@@ -88,8 +88,10 @@ class HelperFunctions {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider(
-                    create: (context) =>
-                        OrdersProvider(userId: mainProvider.user!.id),
+                    create: (context) => OrdersProvider(
+                      userId: mainProvider.getId(),
+                      isShop: mainProvider.isShop(),
+                    ),
                     child: const OrdersScreen(),
                   ),
                 ),

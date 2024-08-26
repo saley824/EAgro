@@ -152,7 +152,30 @@ class UserService {
         },
       );
     } catch (e) {
-      log("EXCEPTION changePasswordTAG : $e");
+      log("EXCEPTION forgotPasswordTAG : $e");
+    }
+
+    return res?.success ?? false;
+  }
+
+  static Future<bool> resetPassword({
+    required String token,
+    required String password,
+    required String confirmPassword,
+  }) async {
+    ApiResponse? res;
+    try {
+      res = await HttpAPI.makeAPIcall(
+        ApiMethod.patch,
+        'users/resetPassword',
+        body: {
+          "token": token,
+          "password": password,
+          "confirmPassword": confirmPassword
+        },
+      );
+    } catch (e) {
+      log("EXCEPTION resetPasswordTAG : $e");
     }
 
     return res?.success ?? false;

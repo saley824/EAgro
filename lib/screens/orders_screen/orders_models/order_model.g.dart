@@ -23,6 +23,9 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
       rejectedTime: json['rejectedTime'] == null
           ? null
           : DateTime.parse(json['rejectedTime'] as String),
+      user: json['user'] == null
+          ? null
+          : UserModel.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
@@ -35,4 +38,5 @@ Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
       'sentTime': instance.sentTime?.toIso8601String(),
       'finishedTime': instance.finishedTime?.toIso8601String(),
       'rejectedTime': instance.rejectedTime?.toIso8601String(),
+      'user': instance.user,
     };

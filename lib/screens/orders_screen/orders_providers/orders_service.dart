@@ -6,13 +6,18 @@ import '../../../helpers/http_api.dart';
 import '../orders_models/order_model.dart';
 
 class OrderService {
-  static Future<List<OrderModel>> getOrders(String userId) async {
+  static Future<List<OrderModel>> getOrders(String userId, bool isShop) async {
     List<OrderModel> orders = [];
     try {
-      final res = await HttpAPI.makeAPIcall(
-        ApiMethod.get,
-        'orders/?userId=$userId',
-      );
+      final res = isShop
+          ? await HttpAPI.makeAPIcall(
+              ApiMethod.get,
+              'orders/',
+            )
+          : await HttpAPI.makeAPIcall(
+              ApiMethod.get,
+              'orders/?userId=$userId',
+            );
 
       if (res.success) {
         for (var element in (res.responseData["order"])) {

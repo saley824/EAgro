@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '/helpers/helper_functions.dart';
 import '/helpers/navigator_helper.dart';
+import '/screens/forgot_password/forgot_password_screen.dart';
 import '/screens/login_screen/login_providers/login_provider.dart';
 import '/screens/register_screen/register_providers/register_provider.dart';
 import '/screens/register_screen/register_screen.dart';
@@ -10,6 +11,7 @@ import '/screens/test_screen.dart';
 import '/widgets/buttons/agro_button.dart';
 import '/widgets/input_fields/agro_input_field.dart';
 import '../../helpers/snack_bar_messages.dart';
+import '../forgot_password/forgot_password_providers/forgot_password_provider.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -104,7 +106,13 @@ class LoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            NavigatorHelper.navigateToForgotPassword(context);
+                            ChangeNotifierProvider(
+                              create: (context) => ForgotPasswordProvider(),
+                              child: const ForgotPasswordScreen(),
+                            );
+                          },
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.black,
                           ),
@@ -136,22 +144,6 @@ class LoginScreen extends StatelessWidget {
                           child: const Text("Create account"),
                         ),
                       ],
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        globalAppNavigator.push(
-                          MaterialPageRoute(
-                            builder: (context) => ChangeNotifierProvider(
-                              create: (context) => LoginProvider(),
-                              child: const TestScreen(),
-                            ),
-                          ),
-                        );
-                      },
-                      style: TextButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          padding: const EdgeInsets.all(4)),
-                      child: const Text("Create account"),
                     ),
                   ],
                 ),

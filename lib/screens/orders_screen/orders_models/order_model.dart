@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:msan/models/user_model.dart';
 
 part 'order_model.g.dart';
 
@@ -12,6 +13,7 @@ class OrderModel {
   final DateTime? sentTime;
   final DateTime? finishedTime;
   final DateTime? rejectedTime;
+  final UserModel? user;
 
   OrderModel({
     required this.id,
@@ -22,6 +24,7 @@ class OrderModel {
     required this.sentTime,
     required this.finishedTime,
     required this.rejectedTime,
+    required this.user,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) =>
