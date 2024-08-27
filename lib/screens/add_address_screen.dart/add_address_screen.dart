@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/main_provider.dart';
 import '/widgets/buttons/agro_button.dart';
 import '/widgets/input_fields/agro_input_field.dart';
 import '../../../helpers/helper_functions.dart';
@@ -14,8 +15,12 @@ class AddAddressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userInfoProvider = context.read<UserInfoProvider>();
+    final mainProvider = context.read<MainProvider>();
+    final isEdit = mainProvider.user?.address != null;
     return Scaffold(
-      appBar: HelperFunctions.getSubAppBar(context, "Add address"),
+      resizeToAvoidBottomInset: false,
+      appBar: HelperFunctions.getSubAppBar(
+          context, isEdit ? "Edit address" : "Add address"),
       body: SafeArea(
         child: Container(
           color: Colors.white,
@@ -61,9 +66,7 @@ class AddAddressScreen extends StatelessWidget {
                 AgroButton(
                     buttonColor: ButtonColor.jadeGreen,
                     disabled: false,
-                    text: userInfoProvider.isEdit
-                        ? "Edit address"
-                        : "Add address",
+                    text: isEdit ? "Edit address" : "Add address",
                     onTap: () {
                       FocusManager.instance.primaryFocus?.unfocus();
                       bool success = false;

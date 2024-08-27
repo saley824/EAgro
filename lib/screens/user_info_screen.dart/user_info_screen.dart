@@ -41,7 +41,10 @@ class UserInfoScreen extends StatelessWidget {
               ColumnInfoField(property: "Email", value: user?.email ?? ""),
               const AgroDivider(margin: EdgeInsets.symmetric(vertical: 12)),
               ColumnInfoField(
-                  property: "Address", value: user?.address.toString() ?? ""),
+                  property: "Address",
+                  value: user?.address != null
+                      ? user?.address.toString() ?? ""
+                      : ""),
               const AgroDivider(margin: EdgeInsets.symmetric(vertical: 12)),
               const Gap(16),
               TextButton(
@@ -75,7 +78,8 @@ class UserInfoScreen extends StatelessWidget {
                 style: TextButton.styleFrom(
                     foregroundColor: CustomColors.jadeGreen[600],
                     padding: const EdgeInsets.fromLTRB(0, 8, 8, 8)),
-                child: const Text("Change address"),
+                child: Text(
+                    user?.address != null ? "Change address" : "Add address"),
               ),
               const Spacer(),
               InkWell(

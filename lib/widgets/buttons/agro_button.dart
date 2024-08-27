@@ -14,6 +14,7 @@ class AgroButton extends StatelessWidget {
   final bool disabled;
   final VoidCallback? onTap;
   final ButtonColor buttonColor;
+  final EdgeInsetsGeometry? padding;
 
   const AgroButton({
     super.key,
@@ -21,6 +22,7 @@ class AgroButton extends StatelessWidget {
     this.disabled = false,
     this.buttonColor = ButtonColor.white,
     this.onTap,
+    this.padding,
   });
 
   @override
@@ -28,19 +30,22 @@ class AgroButton extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     Color colorBtn = ButtonHelper.getButtonColor(buttonColor);
     Color textColor = ButtonHelper.getTextColor(buttonColor);
-    return SizedBox(
-      width: double.infinity,
-      height: 48,
-      child: ElevatedButton(
-        onPressed: onTap,
-        style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            backgroundColor: !disabled ? colorBtn : colorBtn.withOpacity(0.5),
-            foregroundColor: textColor,
-            textStyle: textTheme.bodyLarge!),
-        child: Text(text),
+    return Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: SizedBox(
+        width: double.infinity,
+        height: 48,
+        child: ElevatedButton(
+          onPressed: onTap,
+          style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              backgroundColor: !disabled ? colorBtn : colorBtn.withOpacity(0.5),
+              foregroundColor: textColor,
+              textStyle: textTheme.bodyLarge!),
+          child: Text(text),
+        ),
       ),
     );
   }
