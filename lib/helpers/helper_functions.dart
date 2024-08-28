@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:msan/helpers/navigator_helper.dart';
-import 'package:msan/screens/user_info_screen.dart/user_info_providers/user_info_provider.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/constants/custom_colors.dart';
+import '/helpers/navigator_helper.dart';
 import '/providers/main_provider.dart';
 import '/screens/saved_products/saved_products_provider/saved_products_provider.dart';
+import '/screens/user_info_screen.dart/user_info_providers/user_info_provider.dart';
 import '/screens/user_info_screen.dart/user_info_screen.dart';
 import '../screens/orders_screen/orders_providers/order_provider.dart';
 import '../screens/orders_screen/orders_screen.dart';
@@ -74,7 +74,6 @@ class HelperFunctions {
   }
 
   static Widget getBottomBar(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final mainProvider = context.read<MainProvider>();
 
     return Container(

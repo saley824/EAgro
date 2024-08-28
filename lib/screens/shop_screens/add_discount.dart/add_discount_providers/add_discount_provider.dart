@@ -28,6 +28,16 @@ class AddDiscountProvider extends ChangeNotifier {
     );
   }
 
+  Future<bool> addDiscount() {
+    return DiscountService.addDiscount(
+      productUuid: "6ac41b51-12b8-4d90-91ea-66aace421a0d",
+      productDiscount: ProductDiscountModel(
+          percentage: int.parse(percentageController.text),
+          from: from!,
+          to: to!),
+    );
+  }
+
 //TODO ADD ID
   Future<bool> deleteDiscount() {
     return DiscountService.deleteDiscount("sss");

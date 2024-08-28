@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -21,26 +23,44 @@ class ProductsListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsListProvider = context.read<ProductsListProvider>();
     final globalAppNavigator = Navigator.of(context);
+    final scrollController = ScrollController();
 
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+              scrollController.position.maxScrollExtent &&
+          productsListProvider.hasMoreProducts &&
+          !productsListProvider.isLoadingMoreProducts) {
+        log('DEV LOG------------------------------------------------------------------');
+        log('DEV LOG-----------------------------gasdfasdfasdf-------------------------------------');
+        log('DEV LOG------------------------------------------------------------------');
+        productsListProvider.getMoreProducts();
+      }
+    });
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: HelperFunctions.getAppBar(context),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-          child: Consumer<ProductsListProvider>(
-            builder: (_, __, ___) => FutureBuilder(
-              future: productsListProvider.getProducts(),
-              builder: (context, snapshot) => snapshot.connectionState ==
-                      ConnectionState.waiting
-                  ? const AgroLoadingIndicator()
-                  : SingleChildScrollView(
+          child: FutureBuilder(
+            future: productsListProvider.getInitProducts(),
+            builder: (context, snapshot) => snapshot.connectionState ==
+                    ConnectionState.waiting
+                ? const AgroLoadingIndicator()
+                : Consumer<ProductsListProvider>(
+                    builder: (_, __, ___) => SingleChildScrollView(
+                      controller: scrollController,
                       child: Center(
                         child: Column(
                           children: [
-                            const AgroInputField(
-                              prefixIcon: Icon(Icons.search),
+                            AgroInputField(
+                              textEditingController:
+                                  productsListProvider.searchController,
+                              prefixIcon: const Icon(Icons.search),
                               hintText: "Search",
+                              onInputChanged: () {
+                                productsListProvider.searchSellers();
+                              },
                             ),
                             const Gap(18),
                             Padding(
@@ -128,11 +148,20 @@ class ProductsListScreen extends StatelessWidget {
                                     (data) => ProductPreview(product: data))
                               ],
                             ),
+                            if (productsListProvider.isLoadingMoreProducts)
+                              const Positioned(
+                                bottom: 20,
+                                left: 0,
+                                right: 0,
+                                child: AgroLoadingIndicator(
+                                  size: Size.medium,
+                                ),
+                              ),
                           ],
                         ),
                       ),
                     ),
-            ),
+                  ),
           ),
         ),
       ),

@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import '../helpers/http_api.dart';
 import '/models/products_model/product_filter_model.dart';
-import '/models/products_model/product_list_model.dart';
 import '/models/products_model/product_model.dart';
 import '/screens/products_list_screen/products_list_models/sort_model.dart';
+import '../helpers/http_api.dart';
+import '../models/products_model/products_list_response_model.dart';
 
 makeFilterString(
   ProductFilterModel? productFilterModel,
@@ -33,23 +33,24 @@ makeFilterString(
 }
 
 class ProductService {
-  static Future<List<ProductListModel>> getProducts(
-      ProductFilterModel? productFilterModel, SortModel sortModel) async {
+  static Future<ProductsListResponseModel?> getProducts({
+    required ProductFilterModel? productFilterModel,
+    required SortModel sortModel,
+    String searchTerm = "",
+    int page = 1,
+  }) async {
     String filterString = makeFilterString(productFilterModel);
-    List<ProductListModel> products = [];
+    ProductsListResponseModel? productsResponse;
     try {
       final res = await HttpAPI.makeAPIcall(
         ApiMethod.get,
-        'products/?page=1&perPage=20&sortBy=${sortModel.sortBy}&orderBy=${sortModel.orderBy}$filterString',
+        'products/?page=$page&perPage=5&searchTerm=$searchTerm&sortBy=${sortModel.sortBy}&orderBy=${sortModel.orderBy}$filterString',
       );
-
-      for (var element in (res.responseData["products"])) {
-        products.add(ProductListModel.fromJson(element));
-      }
+      productsResponse = ProductsListResponseModel.fromJson(res.responseData);
     } catch (e) {
       log('EXCEPTION: $e  getProductsTAG');
     }
-    return products;
+    return productsResponse;
   }
 
   static Future<ProductModel?> getProductById(String id) async {

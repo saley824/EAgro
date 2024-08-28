@@ -89,7 +89,6 @@ class LoginScreen extends StatelessWidget {
                                   NavigatorHelper.navigateToHome(context);
 
                                   return;
-                                  //TODO NAVIGATE TO HOME SCREEN
                                 }
                                 SnackBarMessage.showMessage(
                                     context: context,

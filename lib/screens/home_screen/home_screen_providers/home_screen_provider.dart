@@ -32,23 +32,28 @@ class HomeScreenProvider extends ChangeNotifier {
   getByRandomCategory() async {
     superCategories = await CategoryService.getSuperCategories();
     selectedCategory = superCategories[0];
-    byRandomCategory = await ProductService.getProducts(
-      ProductFilterModel(superCategory: selectedCategory),
-      SortModel(sortBy: "createdAt", orderBy: "desc"),
+    final productsResponse = await ProductService.getProducts(
+      productFilterModel: ProductFilterModel(superCategory: selectedCategory),
+      sortModel: SortModel(sortBy: "createdAt", orderBy: "desc"),
     );
+    byRandomCategory = productsResponse?.products ?? [];
   }
 
   getLastAddedProducts() async {
-    lastAddedProducts = await ProductService.getProducts(
-        ProductFilterModel(), SortModel(sortBy: "createdAt", orderBy: "desc"));
+    final productsResponse = await ProductService.getProducts(
+        productFilterModel: ProductFilterModel(),
+        sortModel: SortModel(sortBy: "createdAt", orderBy: "desc"));
+
+    lastAddedProducts = productsResponse?.products ?? [];
   }
 
   getProductsWithBiggestDiscount() async {
-    productsWithBiggestDiscount = await ProductService.getProducts(
-      ProductFilterModel(
+    final productsResponse = await ProductService.getProducts(
+      productFilterModel: ProductFilterModel(
         hasDiscount: true,
       ),
-      SortModel(sortBy: "discount", orderBy: "desc"),
+      sortModel: SortModel(sortBy: "discount", orderBy: "desc"),
     );
+    productsWithBiggestDiscount = productsResponse?.products ?? [];
   }
 }

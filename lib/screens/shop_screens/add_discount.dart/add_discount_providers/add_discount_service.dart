@@ -28,6 +28,29 @@ class DiscountService {
     return success;
   }
 
+  static Future<bool> addDiscount({
+    required String productUuid,
+    required ProductDiscountModel productDiscount,
+  }) async {
+    bool success = false;
+    try {
+      final res = await HttpAPI.makeAPIcall(
+        ApiMethod.post,
+        'discount/updateDiscount/$productUuid',
+        body: {
+          "productId": productUuid,
+          "from": productDiscount.from,
+          "to": productDiscount.to,
+          "percentage": productDiscount.percentage,
+        },
+      );
+      success = res.success;
+    } catch (e) {
+      log("EXCEPTION addDiscountTAG : $e");
+    }
+    return success;
+  }
+
   static Future<bool> deleteDiscount(final String productUuid) async {
     bool success = false;
     try {
