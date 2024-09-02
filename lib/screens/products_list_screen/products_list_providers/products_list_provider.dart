@@ -36,9 +36,7 @@ class ProductsListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void searchSellers() async {
-    log('DEV LOG----------------------------aa--------------------------------------');
-    log('DEV LOG------------------------------------------------------------------');
+  void searchProducts() async {
     if (_searchDebounce?.isActive ?? false) _searchDebounce!.cancel();
     _searchDebounce = Timer(const Duration(milliseconds: 700), () async {
       clearData();

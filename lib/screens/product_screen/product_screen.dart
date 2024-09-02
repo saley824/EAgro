@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/screens/product_screen/product_screen_widgets/description.dart';
-import 'package:msan/screens/product_screen/product_screen_widgets/save_icon.dart';
-import 'package:msan/widgets/buttons/agro_button.dart';
 import 'package:provider/provider.dart';
 
+import '/screens/product_screen/product_screen_widgets/description.dart';
+import '/screens/product_screen/product_screen_widgets/save_icon.dart';
+import '/widgets/buttons/agro_button.dart';
+import '/widgets/delete_modal.dart';
 import '/widgets/loading_indicator/agro_loading_indicator.dart';
+import '/widgets/modals/agro_modal.dart';
 import '../../helpers/helper_functions.dart';
 import '../../providers/main_provider.dart';
 import '../../widgets/bottom_sheet/agro_bottom_sheet.dart';
@@ -146,13 +148,26 @@ class ProductScreen extends StatelessWidget {
                                 text: "Edit product",
                                 onTap: () {
                                   AgroBottomSheet.showBottomSheet(
-                                    title: "Add discount",
+                                    title: "Edit discount",
                                     context: context,
                                     child: ChangeNotifierProvider(
                                       create: (context) =>
                                           AddDiscountProvider(),
                                       child: const AddDiscountBottomSheet(),
                                     ),
+                                  );
+                                },
+                              ),
+                              TextIconButton(
+                                color: Colors.red[500],
+                                icon: Icons.delete,
+                                text: "Delete product",
+                                onTap: () {
+                                  AgroModal.showECommDialog(
+                                    child: DeleteModal(
+                                      product: productProvider.product,
+                                    ),
+                                    context: context,
                                   );
                                 },
                               )

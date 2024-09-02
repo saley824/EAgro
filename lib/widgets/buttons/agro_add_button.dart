@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/helpers/constants/custom_colors.dart';
+import '/helpers/constants/custom_colors.dart';
 
 class TextIconButton extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
   final IconData icon;
+  final Color? color;
 
   const TextIconButton({
     super.key,
     required this.text,
     this.onTap,
     required this.icon,
+    this.color,
   });
 
   @override
@@ -26,12 +28,12 @@ class TextIconButton extends StatelessWidget {
             Text(
               text,
               style: textTheme.labelLarge!
-                  .copyWith(color: CustomColors.jadeGreen[600]),
+                  .copyWith(color: color ?? CustomColors.jadeGreen[600]),
             ),
             const Gap(4),
             Container(
               decoration: BoxDecoration(
-                color: CustomColors.jadeGreen[500],
+                color: color ?? CustomColors.jadeGreen[500],
                 borderRadius: BorderRadius.circular(999),
               ),
               child: Icon(

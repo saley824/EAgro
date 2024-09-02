@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/screens/product_screen/product_screen.dart';
-import 'package:msan/widgets/products/discount_badge.dart';
 import 'package:provider/provider.dart';
 
+import '/helpers/constants/custom_colors.dart';
+import '/screens/product_screen/product_screen.dart';
+import '/widgets/products/discount_badge.dart';
 import '../../../models/products_model/product_list_model.dart';
 import '../../../providers/main_provider.dart';
 import '../../../screens/product_screen/product_providers/product_provider.dart';
-import '/helpers/constants/custom_colors.dart';
 
 class ProductPreview extends StatelessWidget {
   final bool hasDiscount;
   final int? discountPercentage;
   final ProductListModel product;
   final bool pushAndPop;
+  final Function()? refresh;
   const ProductPreview({
     super.key,
     required this.product,
     this.hasDiscount = false,
     this.discountPercentage,
     this.pushAndPop = false,
+    this.refresh,
   });
 
   @override
@@ -39,13 +40,21 @@ class ProductPreview extends StatelessWidget {
                   child: const ProductScreen(),
                 ),
               ))
-            : globalAppNavigator.push(MaterialPageRoute(
+            : globalAppNavigator
+                .push(MaterialPageRoute(
                 builder: (context) => ChangeNotifierProvider(
                   create: (context) =>
                       ProductProvider(product.id, mainProvider.user!.id),
                   child: const ProductScreen(),
                 ),
-              ));
+              ))
+                .then(
+                (value) {
+                  if (value && refresh != null) {
+                    refresh!();
+                  }
+                },
+              );
       },
       child: SizedBox(
         width: 152,

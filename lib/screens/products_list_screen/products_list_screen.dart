@@ -59,7 +59,7 @@ class ProductsListScreen extends StatelessWidget {
                               prefixIcon: const Icon(Icons.search),
                               hintText: "Search",
                               onInputChanged: () {
-                                productsListProvider.searchSellers();
+                                productsListProvider.searchProducts();
                               },
                             ),
                             const Gap(18),

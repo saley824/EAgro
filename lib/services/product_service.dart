@@ -73,7 +73,7 @@ class ProductService {
     try {
       final res = await HttpAPI.makeAPIcall(
         ApiMethod.delete,
-        'products/product/$productUuid',
+        'products/$productUuid',
       );
       success = res.success;
     } catch (e) {
