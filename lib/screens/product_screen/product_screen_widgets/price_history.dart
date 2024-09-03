@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:msan/helpers/datetime_parser.dart';
-import 'package:msan/widgets/divider/divider.dart';
+import 'package:gap/gap.dart';
 
+import '/helpers/datetime_parser.dart';
+import '/widgets/divider/divider.dart';
 import '../../../models/products_model/product_price_history.dart';
 
 class PriceHistory extends StatelessWidget {
@@ -19,6 +20,7 @@ class PriceHistory extends StatelessWidget {
             "History of price changes",
             style: textTheme.labelLarge,
           ),
+          const Gap(24),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -32,6 +34,7 @@ class PriceHistory extends StatelessWidget {
               ),
             ],
           ),
+          const Gap(12),
           const AgroDivider(margin: EdgeInsets.only(bottom: 12)),
           ...productPriceHistory!.map(
             (priceHistory) => Column(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msan/services/cart_service.dart';
+import '/services/cart_service.dart';
 
 import '../../../services/saved_products_service.dart';
 import '/models/products_model/product_model.dart';
@@ -95,5 +95,9 @@ class ProductProvider extends ChangeNotifier {
         productUuid: product!.id, userUuid: userId);
 
     return success;
+  }
+
+  void refresh() {
+    notifyListeners();
   }
 }

@@ -11,4 +11,8 @@ class MainProvider extends ChangeNotifier {
   String getId() {
     return user?.id ?? "";
   }
+
+  refresh() {
+    notifyListeners();
+  }
 }

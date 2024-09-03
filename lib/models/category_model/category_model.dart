@@ -6,11 +6,11 @@ part 'category_model.g.dart';
 class CategoryModel {
   final String id;
   final String name;
-  final String? superCategoryId;
+  final CategoryModel? superCategory;
   CategoryModel({
     required this.id,
     required this.name,
-    this.superCategoryId,
+    this.superCategory,
   });
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) =>

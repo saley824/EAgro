@@ -1,23 +1,25 @@
 import 'dart:developer';
 
-import '/models/products_model/product_discount.dart';
-
 import '/helpers/http_api.dart';
+import '/models/products_model/product_discount.dart';
 
 class DiscountService {
   static Future<bool> updateDiscount({
     required String productUuid,
     required ProductDiscountModel productDiscount,
   }) async {
+    log('DEV LOG------------------------------------------------------------------');
+    log(productDiscount.from.toString());
+    log('DEV LOG------------------------------------------------------------------');
     bool success = false;
     try {
       final res = await HttpAPI.makeAPIcall(
         ApiMethod.put,
-        'discount/updateDiscount/$productUuid',
+        'productDiscount/discount/updateDiscount/$productUuid',
         body: {
           "productId": productUuid,
-          "from": productDiscount.from,
-          "to": productDiscount.to,
+          "from": productDiscount.from.toString(),
+          "to": productDiscount.to.toString(),
           "percentage": productDiscount.percentage,
         },
       );
@@ -36,11 +38,11 @@ class DiscountService {
     try {
       final res = await HttpAPI.makeAPIcall(
         ApiMethod.post,
-        'discount/updateDiscount/$productUuid',
+        'productDiscount/discount/addDiscount',
         body: {
           "productId": productUuid,
-          "from": productDiscount.from,
-          "to": productDiscount.to,
+          "from": productDiscount.from.toString(),
+          "to": productDiscount.to.toString(),
           "percentage": productDiscount.percentage,
         },
       );
@@ -56,7 +58,7 @@ class DiscountService {
     try {
       final res = await HttpAPI.makeAPIcall(
         ApiMethod.delete,
-        'discount/deleteDiscount/$productUuid',
+        'productDiscount/discount/deleteDiscount/$productUuid',
       );
       success = res.success;
     } catch (e) {

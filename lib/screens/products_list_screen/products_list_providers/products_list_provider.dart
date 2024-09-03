@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import '../../../models/products_model/products_list_response_model.dart';
 import '/models/products_model/product_list_model.dart';
 import '/services/product_service.dart';
 import '../../../models/products_model/product_filter_model.dart';
+import '../../../models/products_model/products_list_response_model.dart';
 import '../../../widgets/radio_button_group/radio_button_model.dart';
 import '../products_list_models/sort_model.dart';
 
@@ -26,13 +25,15 @@ class ProductsListProvider extends ChangeNotifier {
 
   List<ProductListModel> products = [];
 
-  setProductFilter(ProductFilterModel value) {
+  setProductFilter(ProductFilterModel value) async {
     productFilter = value;
+    await getInitProducts();
     notifyListeners();
   }
 
-  setSort(SortModel value) {
+  setSort(SortModel value) async {
     sortModel = value;
+    await getInitProducts();
     notifyListeners();
   }
 
@@ -52,10 +53,12 @@ class ProductsListProvider extends ChangeNotifier {
     page = 0;
   }
 
-  Future<void> getInitProducts() async {
+  Future<void> getInitProducts({bool notify = false}) async {
+    products.clear();
     final productResponse = await getProductsResponse();
     products = productResponse?.products ?? [];
     hasMoreProducts = productResponse?.hasNext ?? false;
+    if (notify) notifyListeners();
   }
 
   Future<ProductsListResponseModel?> getProductsResponse() async {

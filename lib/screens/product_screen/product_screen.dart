@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/products_model/product_discount.dart';
+import '../shop_screens/add_product/add_product_providers/add_product_provider.dart';
+import '../shop_screens/add_product/add_product_screen.dart';
 import '/screens/product_screen/product_screen_widgets/description.dart';
 import '/screens/product_screen/product_screen_widgets/save_icon.dart';
 import '/widgets/buttons/agro_button.dart';
-import '/widgets/delete_modal.dart';
+import 'product_screen_widgets/delete_product_modal.dart';
 import '/widgets/loading_indicator/agro_loading_indicator.dart';
 import '/widgets/modals/agro_modal.dart';
 import '../../helpers/helper_functions.dart';
 import '../../providers/main_provider.dart';
 import '../../widgets/bottom_sheet/agro_bottom_sheet.dart';
-import '../../widgets/buttons/agro_add_button.dart';
+import '../../widgets/buttons/text_icon_button.dart';
 import '../shop_screens/add_discount.dart/add_discount_bottom_sheet.dart';
 import '../shop_screens/add_discount.dart/add_discount_providers/add_discount_provider.dart';
 import 'product_providers/product_provider.dart';
@@ -32,6 +35,7 @@ class ProductScreen extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
+      bottomNavigationBar: HelperFunctions.getBottomBar(context),
       appBar: HelperFunctions.getAppBar(context),
       body: SafeArea(
         child: Consumer<ProductProvider>(
@@ -127,44 +131,77 @@ class ProductScreen extends StatelessWidget {
                               const Gap(24)
                             ],
                             if (isShop) ...[
+                              const Gap(8),
                               TextIconButton(
                                 icon: Icons.add,
-                                text: "Add discount",
+                                text: _getDiscountButtonText(
+                                    productProvider.product?.productDiscount),
                                 onTap: () {
                                   AgroBottomSheet.showBottomSheet(
-                                    title: "Add discount",
-                                    context: context,
-                                    child: ChangeNotifierProvider(
-                                      create: (context) =>
-                                          AddDiscountProvider(),
-                                      child: const AddDiscountBottomSheet(),
-                                    ),
-                                  );
+                                      title: _getDiscountButtonText(
+                                          productProvider
+                                              .product?.productDiscount),
+                                      context: context,
+                                      child: MultiProvider(
+                                        providers: [
+                                          ChangeNotifierProvider(
+                                            create: (context) =>
+                                                AddDiscountProvider(
+                                              productProvider.product!,
+                                            ),
+                                            child:
+                                                const AddDiscountBottomSheet(),
+                                          ),
+                                          ChangeNotifierProvider.value(
+                                              value: productProvider)
+                                        ],
+                                        child: const AddDiscountBottomSheet(),
+                                      ));
                                 },
                               ),
-                              const Gap(8),
                               TextIconButton(
                                 icon: Icons.edit,
                                 text: "Edit product",
                                 onTap: () {
-                                  AgroBottomSheet.showBottomSheet(
-                                    title: "Edit discount",
-                                    context: context,
-                                    child: ChangeNotifierProvider(
-                                      create: (context) =>
-                                          AddDiscountProvider(),
-                                      child: const AddDiscountBottomSheet(),
+                                  Navigator.of(context)
+                                      .push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        ChangeNotifierProvider(
+                                      create: (context) => AddProductProvider(
+                                          productProvider.product),
+                                      child: const AddProductScreen(),
                                     ),
-                                  );
+                                  ))
+                                      .then((value) {
+                                    if (value) {
+                                      productProvider.refresh();
+                                    }
+                                  });
                                 },
                               ),
+                              // TextIconButton(
+                              //   icon: Icons.edit,
+                              //   text: "Edit product",
+                              //   onTap: () {
+                              //     AgroBottomSheet.showBottomSheet(
+                              //       title: "Edit discount",
+                              //       context: context,
+                              //       child: ChangeNotifierProvider(
+                              //         create: (context) => AddDiscountProvider(
+                              //           productProvider.product!,
+                              //         ),
+                              //         child: const AddDiscountBottomSheet(),
+                              //       ),
+                              //     );
+                              //   },
+                              // ),
                               TextIconButton(
                                 color: Colors.red[500],
                                 icon: Icons.delete,
                                 text: "Delete product",
                                 onTap: () {
                                   AgroModal.showECommDialog(
-                                    child: DeleteModal(
+                                    child: DeleteProductModal(
                                       product: productProvider.product,
                                     ),
                                     context: context,
@@ -181,5 +218,9 @@ class ProductScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _getDiscountButtonText(ProductDiscountModel? discount) {
+    return discount != null ? "Edit discount" : "Add discount";
   }
 }

@@ -56,4 +56,8 @@ class HomeScreenProvider extends ChangeNotifier {
     );
     productsWithBiggestDiscount = productsResponse?.products ?? [];
   }
+
+  void refresh() {
+    notifyListeners();
+  }
 }

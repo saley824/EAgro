@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:msan/providers/main_provider.dart';
+import 'package:msan/screens/product_screen/product_providers/product_provider.dart';
+import 'package:provider/provider.dart';
 
 import '/models/products_model/product_discount.dart';
+import '../../../../models/products_model/product_model.dart';
 import 'add_discount_service.dart';
 
 class AddDiscountProvider extends ChangeNotifier {
+  final ProductModel product;
+
+  AddDiscountProvider(
+    this.product,
+  ) {
+    from = product.productDiscount?.from;
+    to = product.productDiscount?.to;
+    percentageController.text =
+        product.productDiscount?.percentage.toString() ?? "";
+  }
   DateTime? from;
   DateTime? to;
   final percentageController = TextEditingController();
@@ -20,7 +34,7 @@ class AddDiscountProvider extends ChangeNotifier {
 
   Future<bool> updateDiscount() {
     return DiscountService.updateDiscount(
-      productUuid: "6ac41b51-12b8-4d90-91ea-66aace421a0d",
+      productUuid: product.id,
       productDiscount: ProductDiscountModel(
           percentage: int.parse(percentageController.text),
           from: from!,
@@ -28,24 +42,38 @@ class AddDiscountProvider extends ChangeNotifier {
     );
   }
 
-  Future<bool> addDiscount() {
-    return DiscountService.addDiscount(
-      productUuid: "6ac41b51-12b8-4d90-91ea-66aace421a0d",
+  Future<bool> addDiscount() async {
+    bool success = await DiscountService.addDiscount(
+      productUuid: product.id,
       productDiscount: ProductDiscountModel(
           percentage: int.parse(percentageController.text),
           from: from!,
           to: to!),
     );
+
+    if (success) {}
+    return success;
+  }
+
+  Future<bool> onActionDiscount() async {
+    return product.productDiscount != null
+        ? await updateDiscount()
+        : await addDiscount();
   }
 
 //TODO ADD ID
   Future<bool> deleteDiscount() {
-    return DiscountService.deleteDiscount("sss");
+    return DiscountService.deleteDiscount(product.id);
   }
 
   enableButton() {
     isButtonEnabled =
         from != null && to != null && percentageController.text.isNotEmpty;
     notifyListeners();
+  }
+
+  refreshData(BuildContext context) {
+    context.read<ProductProvider>().refresh();
+    context.read<MainProvider>().refresh();
   }
 }

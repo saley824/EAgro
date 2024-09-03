@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/helpers/navigator_helper.dart';
+import '/helpers/navigator_helper.dart';
 
 import '/helpers/helper_functions.dart';
 import '/services/product_service.dart';
 import '/widgets/buttons/agro_button.dart';
-import '../helpers/snack_bar_messages.dart';
-import '../models/products_model/product_model.dart';
+import '/helpers/snack_bar_messages.dart';
+import '/models/products_model/product_model.dart';
 
-class DeleteModal extends StatelessWidget {
+class DeleteProductModal extends StatelessWidget {
   final ProductModel? product;
-  const DeleteModal({super.key, this.product});
+  const DeleteProductModal({super.key, this.product});
 
   @override
   Widget build(BuildContext context) {

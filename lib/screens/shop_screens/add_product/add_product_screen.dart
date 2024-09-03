@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
-import '../../../helpers/helper_functions.dart';
-import '../../../helpers/snack_bar_messages.dart';
-import '/helpers/constants/custom_colors.dart';
 import '/screens/shop_screens/add_product/add_product_providers/add_product_provider.dart';
 import '/widgets/buttons/agro_button.dart';
 import '/widgets/drop_down/agro_dropdown.dart';
 import '/widgets/input_fields/agro_input_field.dart';
 import '/widgets/loading_indicator/agro_loading_indicator.dart';
+import '../../../helpers/helper_functions.dart';
+import '../../../helpers/snack_bar_messages.dart';
 
 class AddProductScreen extends StatelessWidget {
   const AddProductScreen({super.key});
@@ -17,9 +16,11 @@ class AddProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addProductProvider = context.read<AddProductProvider>();
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: HelperFunctions.getAppBar(context),
+      appBar: HelperFunctions.getSubAppBar(
+        context,
+        addProductProvider.product != null ? "Edit product" : "Add new product",
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -35,12 +36,6 @@ class AddProductScreen extends StatelessWidget {
                       builder: (_, __, ___) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Add new product",
-                            style: textTheme.headlineMedium!.copyWith(
-                              color: CustomColors.jadeGreen[800],
-                            ),
-                          ),
                           const Gap(24),
                           AgroInputField(
                             labelVisible: true,
@@ -57,15 +52,19 @@ class AddProductScreen extends StatelessWidget {
                           ),
                           const Gap(20),
                           AgroDropdown(
+                            initValue: addProductProvider.selectedSuperCategory,
+                            key: UniqueKey(),
                             hintText: "Select super category",
                             dropDownElements:
                                 addProductProvider.superCategories,
                             onSelect: (selected) {
-                              addProductProvider.setSuperCategory(selected);
+                              addProductProvider.setSuperCategory(
+                                  selected, true);
                             },
                           ),
                           const Gap(20),
                           AgroDropdown(
+                            initValue: addProductProvider.selectedSubCategory,
                             key: UniqueKey(),
                             hintText: "Select category",
                             dropDownElements: addProductProvider.subCategories,
@@ -77,6 +76,7 @@ class AddProductScreen extends StatelessWidget {
                           ),
                           const Gap(20),
                           AgroDropdown(
+                            initValue: addProductProvider.selectedUnit,
                             hintText: "Select unit",
                             dropDownElements: addProductProvider.unitTypes,
                             onSelect: (selected) {
@@ -111,21 +111,27 @@ class AddProductScreen extends StatelessWidget {
                           AgroButton(
                               buttonColor: ButtonColor.jadeGreen,
                               disabled: false,
-                              text: "Add new product",
+                              text: addProductProvider.product != null
+                                  ? "Edit product"
+                                  : "Add new product",
                               onTap: () {
                                 FocusManager.instance.primaryFocus?.unfocus();
                                 bool success = false;
                                 HelperFunctions.callMethodWithLoadingDialog(
                                     context: context,
                                     callback: () async {
-                                      success =
-                                          await addProductProvider.addProduct();
+                                      success = await addProductProvider
+                                          .onAddOrEdit();
                                     },
                                     onFinished: () {
                                       if (success) {
+                                        Navigator.of(context).pop(true);
                                         SnackBarMessage.showMessage(
                                             context: context,
-                                            text: "Successfully added product",
+                                            text: addProductProvider.product !=
+                                                    null
+                                                ? "Successfully edited product"
+                                                : "Successfully added product",
                                             isError: false);
                                         return;
                                       }
