@@ -28,14 +28,6 @@ class AddProductProvider extends ChangeNotifier {
       totalAmountController.text = product!.totalAmount.toString();
       quantityController.text = product!.quantity.toString();
     }
-
-    //    id: model.id,
-    // text: model.name,
-    // value: model,
-    // final descriptionController = TextEditingController();
-    // final priceController = TextEditingController();
-    // final totalAmountController = TextEditingController();
-    // final quantityController = TextEditingController();
   }
 
   List<AgroDropdownModel> unitTypes = [

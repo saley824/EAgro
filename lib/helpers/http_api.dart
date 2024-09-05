@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import '/helpers/constants/shared_preferences_keys.dart';
 import '/helpers/snack_bar_messages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -152,6 +153,86 @@ class HttpAPI {
         success: false,
         message: decodedRes['message'],
       );
+    } catch (e) {
+      log(
+        "****/$apiPath****",
+        error: e.toString(),
+        name: "HTTP API CALL CRASH",
+      );
+
+      return ApiResponse(
+        statusCode: 0,
+        success: false,
+        message: e.toString(),
+      );
+    }
+  }
+
+  static Future<ApiResponse> makeMultipartAPIcall(
+    ApiMethod method,
+    String apiPath, {
+    Object? body,
+    String? contentType,
+    Map<String, String>? initHeaders,
+    bool authTokenRequired = false,
+    List<File>? selectedFiles,
+    String? fileFieldName,
+    // bool retryCall = true,
+  }) async {
+    try {
+      var currentDateTime = DateTime.now().toLocal();
+      var apiUri = Uri.parse("${RestConfig.ApiURL}$apiPath");
+
+      log(
+        "*****\nAPI-REQUEST: ${RestConfig.ApiURL}$apiPath\nREQUEST TIME: ${currentDateTime.hour.toString().padLeft(2, "0")}:${currentDateTime.minute.toString().padLeft(2, "0")}:${currentDateTime.second.toString().padLeft(2, "0")}\n*****",
+        name: "HTTP API CALL",
+      );
+      var sharedPrefs = await SharedPreferences.getInstance();
+      log(sharedPrefs.getString(SharedPrefsKeys.token)!);
+      const timeout = Duration(seconds: 15);
+
+      Map<String, String> headers = {
+        HttpHeaders.contentTypeHeader: contentType ?? 'application/json',
+        if (authTokenRequired)
+          HttpHeaders.authorizationHeader:
+              'Bearer ${sharedPrefs.getString(SharedPrefsKeys.token)}',
+        if (initHeaders != null) ...initHeaders
+      };
+
+      var request = http.MultipartRequest(
+        method.name,
+        apiUri,
+      );
+
+      if (selectedFiles != null) {
+        for (var i = 0; i < selectedFiles.length; i++) {
+          request.files.add(
+            await MultipartFile.fromPath(
+                "$fileFieldName[$i]", selectedFiles[i].path),
+          );
+        }
+      }
+
+      request.headers.addAll(headers);
+
+      var res = await request.send();
+
+      if (res.statusCode == 200 ||
+          res.statusCode == 201 ||
+          res.statusCode == 202) {
+        return ApiResponse(
+          statusCode: res.statusCode,
+          success: true,
+        );
+      }
+      return await makeMultipartAPIcall(
+        method,
+        apiPath,
+        authTokenRequired: authTokenRequired,
+        fileFieldName: fileFieldName,
+        initHeaders: initHeaders,
+        selectedFiles: selectedFiles,
+      ).timeout(timeout);
     } catch (e) {
       log(
         "****/$apiPath****",

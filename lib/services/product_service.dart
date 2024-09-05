@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import '/models/products_model/product_filter_model.dart';
 import '/models/products_model/product_model.dart';
@@ -78,6 +79,22 @@ class ProductService {
       success = res.success;
     } catch (e) {
       log('EXCEPTION: $e  deleteProductByIdTAG');
+    }
+    return success;
+  }
+
+  static Future<bool> uploadProductImage(
+      final String productUuid, final File image) async {
+    bool success = false;
+    try {
+      final res = await HttpAPI.makeMultipartAPIcall(
+        ApiMethod.post,
+        'products/imagesUpload/$productUuid',
+        selectedFiles: [image],
+      );
+      success = res.success;
+    } catch (e) {
+      log('EXCEPTION: $e  uploadProductImageTAG');
     }
     return success;
   }

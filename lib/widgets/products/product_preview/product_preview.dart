@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '/helpers/constants/custom_colors.dart';
 import '/screens/product_screen/product_screen.dart';
 import '/widgets/products/discount_badge.dart';
-import '../../../models/products_model/product_list_model.dart';
+import '/models/products_model/product_list_model.dart';
 import '../../../providers/main_provider.dart';
 import '../../../screens/product_screen/product_providers/product_provider.dart';
 
@@ -89,6 +89,7 @@ class ProductPreview extends StatelessWidget {
                       child: Image.network(
                         height: 120,
                         width: 120,
+                        // product.image ?? "",
                         "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg",
                         fit: BoxFit.fill,
                       ),

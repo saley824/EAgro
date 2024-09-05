@@ -1,24 +1,28 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/products_model/product_discount.dart';
-import '../shop_screens/add_product/add_product_providers/add_product_provider.dart';
-import '../shop_screens/add_product/add_product_screen.dart';
 import '/screens/product_screen/product_screen_widgets/description.dart';
 import '/screens/product_screen/product_screen_widgets/save_icon.dart';
+import '/services/product_service.dart';
 import '/widgets/buttons/agro_button.dart';
-import 'product_screen_widgets/delete_product_modal.dart';
 import '/widgets/loading_indicator/agro_loading_indicator.dart';
 import '/widgets/modals/agro_modal.dart';
 import '../../helpers/helper_functions.dart';
+import '../../helpers/photo_helper.dart';
+import '../../models/products_model/product_discount.dart';
 import '../../providers/main_provider.dart';
 import '../../widgets/bottom_sheet/agro_bottom_sheet.dart';
 import '../../widgets/buttons/text_icon_button.dart';
 import '../shop_screens/add_discount.dart/add_discount_bottom_sheet.dart';
 import '../shop_screens/add_discount.dart/add_discount_providers/add_discount_provider.dart';
+import '../shop_screens/add_product/add_product_providers/add_product_provider.dart';
+import '../shop_screens/add_product/add_product_screen.dart';
 import 'product_providers/product_provider.dart';
 import 'product_screen_helper.dart';
+import 'product_screen_widgets/delete_product_modal.dart';
 import 'product_screen_widgets/price.dart';
 import 'product_screen_widgets/product_details.dart';
 import 'product_screen_widgets/rating.dart';
@@ -72,6 +76,7 @@ class ProductScreen extends StatelessWidget {
                                       topRight: Radius.circular(8),
                                     ),
                                     child: Image.network(
+                                      // productProvider.product?.image ?? "",
                                       "https://firebasestorage.googleapis.com/v0/b/diplomski-fc1d8.appspot.com/o/images%2Ftatum.jpg?alt=media&token=1711d5da-9eac-4d98-a576-693958a84d0a",
                                       width: 100,
                                       height: 150,
@@ -134,6 +139,23 @@ class ProductScreen extends StatelessWidget {
                               const Gap(8),
                               TextIconButton(
                                 icon: Icons.add,
+                                text: _getPhotoButtonText(null),
+                                onTap: () async {
+                                  File? selectedImage =
+                                      await PhotoUploadHelper.selectFile();
+                                  if (selectedImage != null) {
+                                    bool success =
+                                        await ProductService.uploadProductImage(
+                                            productProvider.id, selectedImage);
+                                    if (success) {
+                                      productProvider.refresh();
+                                      mainProvider.refresh();
+                                    }
+                                  }
+                                },
+                              ),
+                              TextIconButton(
+                                icon: Icons.add,
                                 text: _getDiscountButtonText(
                                     productProvider.product?.productDiscount),
                                 onTap: () {
@@ -179,22 +201,6 @@ class ProductScreen extends StatelessWidget {
                                   });
                                 },
                               ),
-                              // TextIconButton(
-                              //   icon: Icons.edit,
-                              //   text: "Edit product",
-                              //   onTap: () {
-                              //     AgroBottomSheet.showBottomSheet(
-                              //       title: "Edit discount",
-                              //       context: context,
-                              //       child: ChangeNotifierProvider(
-                              //         create: (context) => AddDiscountProvider(
-                              //           productProvider.product!,
-                              //         ),
-                              //         child: const AddDiscountBottomSheet(),
-                              //       ),
-                              //     );
-                              //   },
-                              // ),
                               TextIconButton(
                                 color: Colors.red[500],
                                 icon: Icons.delete,
@@ -220,7 +226,11 @@ class ProductScreen extends StatelessWidget {
     );
   }
 
-  _getDiscountButtonText(ProductDiscountModel? discount) {
+  String _getDiscountButtonText(ProductDiscountModel? discount) {
     return discount != null ? "Edit discount" : "Add discount";
+  }
+
+  String _getPhotoButtonText(bool? isEdit) {
+    return isEdit ?? false ? "Edit photo" : "Add photo";
   }
 }
