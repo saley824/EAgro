@@ -17,10 +17,10 @@ class WelcomeProvider extends ChangeNotifier {
     bool isAccessActive = pair.item1;
     String? token = pair.item2;
 
-    if (token == "") {
+    if (token == "" || token == null) {
       return false;
     }
-    if (isAccessActive && token != null) {
+    if (isAccessActive) {
       var decodedToken = JwtDecoder.decode(token);
       UserModel? userModel =
           await UserService.getUser(id: decodedToken["id"].toString());

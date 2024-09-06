@@ -13,7 +13,7 @@ class ProductDiscountModel {
     required this.percentage,
     required this.from,
     required this.to,
-    required this.hasDiscount,
+    this.hasDiscount = false,
   });
   factory ProductDiscountModel.fromJson(Map<String, dynamic> json) =>
       _$ProductDiscountModelFromJson(json);
