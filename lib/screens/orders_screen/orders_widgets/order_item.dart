@@ -32,9 +32,16 @@ class OrderItem extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   child: Image.network(
+                    errorBuilder: (context, error, stackTrace) {
+                      return const SizedBox(
+                        height: 80,
+                        width: 100,
+                        child: Icon(Icons.photo),
+                      );
+                    },
                     height: 80,
                     width: 100,
-                    "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg",
+                    orderItem.img ?? "",
                     fit: BoxFit.fill,
                   ),
                 ),

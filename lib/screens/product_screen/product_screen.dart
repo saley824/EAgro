@@ -76,8 +76,23 @@ class ProductScreen extends StatelessWidget {
                                       topRight: Radius.circular(8),
                                     ),
                                     child: Image.network(
-                                      // productProvider.product?.image ?? "",
-                                      "https://firebasestorage.googleapis.com/v0/b/diplomski-fc1d8.appspot.com/o/images%2Ftatum.jpg?alt=media&token=1711d5da-9eac-4d98-a576-693958a84d0a",
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return const SizedBox(
+                                          height: 120,
+                                          width: 120,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(Icons.photo),
+                                              Text("No photo"),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                      productProvider.product?.image ?? "",
+                                      // "https://firebasestorage.googleapis.com/v0/b/diplomski-fc1d8.appspot.com/o/images%2Ftatum.jpg?alt=media&token=1711d5da-9eac-4d98-a576-693958a84d0a",
                                       width: 100,
                                       height: 150,
                                       fit: BoxFit.fill,

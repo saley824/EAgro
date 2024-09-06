@@ -87,10 +87,15 @@ class ProductPreview extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
                       child: Image.network(
-                        height: 120,
-                        width: 120,
-                        // product.image ?? "",
-                        "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg",
+                        errorBuilder: (context, error, stackTrace) {
+                          return const SizedBox(
+                            height: 120,
+                            width: 120,
+                            child: Icon(Icons.photo),
+                          );
+                        },
+                        product.image ?? "",
+                        // "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg",
                         fit: BoxFit.fill,
                       ),
                     ),
