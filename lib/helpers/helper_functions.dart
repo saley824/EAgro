@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/shop_screens/add_product/add_product_providers/add_product_provider.dart';
+import '../screens/shop_screens/add_product/add_product_screen.dart';
 import '/helpers/constants/custom_colors.dart';
 import '/helpers/navigator_helper.dart';
 import '/providers/main_provider.dart';
@@ -106,7 +108,38 @@ class HelperFunctions {
                   size: 36,
                 )),
           ),
+
+            mainProvider.isShop() ?
+                  InkWell(
+            onTap: () {
+                 Navigator.of(context)
+                                      .push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        ChangeNotifierProvider(
+                                      create: (context) => AddProductProvider(
+                                          ),
+                                      child: const AddProductScreen(),
+                                    ),
+                                  ))
+                                      .then((value) {
+                                    if (value) {
+                                     //refresh
+                                    }
+                                  });
+              
+            },
+            child: const Padding(
+                padding: EdgeInsets.only(
+                  right: 8,
+                ),
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 36,
+                )),
+          ):
           const CartIcon(),
+
           InkWell(
             onTap: () {
               NavigatorHelper.navigateToProductsList(context);

@@ -64,7 +64,6 @@ class HttpAPI {
         name: "HTTP API CALL",
       );
       var sharedPrefs = await SharedPreferences.getInstance();
-      log(sharedPrefs.getString(SharedPrefsKeys.token)!);
       const timeout = Duration(seconds: 15);
 
       Map<String, String> headers = {

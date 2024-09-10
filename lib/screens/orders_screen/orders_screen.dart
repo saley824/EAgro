@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msan/widgets/no_results.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/helper_functions.dart';
@@ -16,32 +17,36 @@ class OrdersScreen extends StatelessWidget {
       appBar: HelperFunctions.getSubAppBar(context, "Orders"),
       body: Consumer<OrdersProvider>(
         builder: (_, __, ___) => FutureBuilder(
-          future: orderProvider.getOrders(),
-          builder: (context, snapshot) =>
-              snapshot.connectionState == ConnectionState.waiting
-                  ? const AgroLoadingIndicator()
-                  : SingleChildScrollView(
-                      child: Container(
-                        color: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 12),
-                        child: Column(
-                          children: [
-                            ...orderProvider.orders.map(
-                              (order) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 12),
-                                  child: SingleOrder(
-                                    order: order,
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+            future: orderProvider.getOrders(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const AgroLoadingIndicator();
+              } else if (snapshot.data?.isEmpty ?? false) {
+                return const NoResults(text: "There are no orders!");
+              } else {
+                return SingleChildScrollView(
+                  child: Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+                    child: Column(
+                      children: [
+                        ...orderProvider.orders.map(
+                          (order) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: SingleOrder(
+                                order: order,
+                              ),
+                            );
+                          },
                         ),
-                      ),
+                      ],
                     ),
-        ),
+                  ),
+                );
+              }
+            }),
       ),
     );
   }

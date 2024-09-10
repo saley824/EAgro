@@ -20,7 +20,12 @@ enum UnitType {
 class AddProductProvider extends ChangeNotifier {
   final ProductModel? product;
 
-  AddProductProvider(this.product) {
+  AddProductProvider(
+    {
+        this.product
+    } 
+    
+   ) {
     if (product != null) {
       nameController.text = product!.name;
       descriptionController.text = product!.description;

@@ -13,8 +13,9 @@ class OrdersProvider extends ChangeNotifier {
     required this.isShop,
   });
 
-  Future<void> getOrders() async {
+  Future< List<OrderModel>> getOrders() async {
     orders = await OrderService.getOrders(userId, isShop);
+    return orders;
   }
 
   Future<bool> changeOrderStatus(String orderStatus, String orderId) async {

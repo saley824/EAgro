@@ -204,8 +204,8 @@ class ProductScreen extends StatelessWidget {
                                       .push(MaterialPageRoute(
                                     builder: (context) =>
                                         ChangeNotifierProvider(
-                                      create: (context) => AddProductProvider(
-                                          productProvider.product),
+                                      create: (context) => AddProductProvider( product: 
+                                          productProvider.product,),
                                       child: const AddProductScreen(),
                                     ),
                                   ))
