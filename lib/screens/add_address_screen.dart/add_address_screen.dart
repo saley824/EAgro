@@ -20,83 +20,94 @@ class AddAddressScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: HelperFunctions.getSubAppBar(
-          context, isEdit ? "Edit address" : "Add address"),
+       context:   context, title:  isEdit ? "Edit address" : "Add address" , ),
       body: SafeArea(
-        child: Container(
-          color: Colors.white,
-          // color: CustomColors.jadeGreen[50],
-          padding: const EdgeInsets.all(20),
-          child: Consumer<UserInfoProvider>(
-            builder: (_, __, ___) => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Gap(24),
-                AgroInputField(
-                  labelVisible: true,
-                  hintText: "Country",
-                  textEditingController: userInfoProvider.countryController,
-                ),
-                const Gap(20),
-                AgroInputField(
-                  labelVisible: true,
-                  hintText: "City",
-                  textEditingController: userInfoProvider.cityController,
-                ),
-                const Gap(20),
-                AgroInputField(
-                  labelVisible: true,
-                  hintText: "Street",
-                  textEditingController: userInfoProvider.streetNameController,
-                ),
-                const Gap(20),
-                AgroInputField(
-                  labelVisible: true,
-                  hintText: "Street number",
-                  textEditingController:
-                      userInfoProvider.streetNumberController,
-                ),
-                const Gap(20),
-                AgroInputField(
-                  labelVisible: true,
-                  hintText: "Postal code",
-                  textEditingController: userInfoProvider.postalCodeController,
-                ),
-                const Gap(20),
-                const Spacer(),
-                AgroButton(
-                    buttonColor: ButtonColor.jadeGreen,
-                    disabled: false,
-                    text: isEdit ? "Edit address" : "Add address",
-                    onTap: () {
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      bool success = false;
-                      HelperFunctions.callMethodWithLoadingDialog(
-                          context: context,
-                          callback: () async {
-                            success =
-                                await userInfoProvider.addressAction(context);
-                          },
-                          onFinished: () {
-                            if (success) {
+        child: PopScope(
+
+     onPopInvokedWithResult: (didPop, result) => {
+
+      if(didPop){
+         userInfoProvider.loadValue()
+      }
+     },
+          child: Container(
+            color: Colors.white,
+            // color: CustomColors.jadeGreen[50],
+            padding: const EdgeInsets.all(20),
+            child: Consumer<UserInfoProvider>(
+              builder: (_, __, ___) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Gap(24),
+                  AgroInputField(
+                    labelVisible: true,
+                    hintText: "Country",
+                    textEditingController: userInfoProvider.countryController,
+                  ),
+                  const Gap(20),
+                  AgroInputField(
+                    labelVisible: true,
+                    hintText: "City",
+                    textEditingController: userInfoProvider.cityController,
+                  ),
+                  const Gap(20),
+                  AgroInputField(
+                    labelVisible: true,
+                    hintText: "Street",
+                    textEditingController: userInfoProvider.streetNameController,
+                  ),
+                  const Gap(20),
+                  AgroInputField(
+                    labelVisible: true,
+                    hintText: "Street number",
+                    textEditingController:
+                        userInfoProvider.streetNumberController,
+                  ),
+                  const Gap(20),
+                  AgroInputField(
+                    labelVisible: true,
+                    hintText: "Postal code",
+                    textEditingController: userInfoProvider.postalCodeController,
+                  ),
+                  const Gap(20),
+                  const Spacer(),
+                  AgroButton(
+                      buttonColor: ButtonColor.jadeGreen,
+                      disabled: false,
+                      text: isEdit ? "Edit address" : "Add address",
+                      onTap: () {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        bool success = false;
+                        HelperFunctions.callMethodWithLoadingDialog(
+                            context: context,
+                            callback: () async {
+                              success =
+                           isEdit ? 
+                                   await userInfoProvider.updateAddress():
+                                   await userInfoProvider.addAddress();
+                            },
+                            onFinished: () {
+                              if (success) {
+                                SnackBarMessage.showMessage(
+                                    context: context,
+                                    text: userInfoProvider.isEdit
+                                        ? "Successfully changed address"
+                                        : "Successfully added address",
+                                    isError: false);
+          
+                                Navigator.of(context).pop();
+                                userInfoProvider.refresh();
+                                return;
+                              }
                               SnackBarMessage.showMessage(
-                                  context: context,
-                                  text: userInfoProvider.isEdit
-                                      ? "Successfully changed address"
-                                      : "Successfully added address",
-                                  isError: false);
-
-                              Navigator.of(context).pop();
-                              userInfoProvider.refresh();
+                                  context: context, text: "Error", isError: true);
+          
                               return;
-                            }
-                            SnackBarMessage.showMessage(
-                                context: context, text: "Error", isError: true);
-
-                            return;
-                          });
-                    }),
-                const Gap(20),
-              ],
+                            });
+                      }),
+                  const Gap(20),
+                ],
+              ),
             ),
           ),
         ),

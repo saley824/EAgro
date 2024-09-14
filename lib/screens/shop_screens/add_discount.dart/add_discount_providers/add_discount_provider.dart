@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:msan/providers/main_provider.dart';
-import 'package:msan/screens/product_screen/product_providers/product_provider.dart';
+import 'package:eagro/providers/main_provider.dart';
+import 'package:eagro/screens/product_screen/product_providers/product_provider.dart';
 import 'package:provider/provider.dart';
 
 import '/models/products_model/product_discount.dart';

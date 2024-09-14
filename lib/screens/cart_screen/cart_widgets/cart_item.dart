@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/helpers/helper_functions.dart';
+import 'package:eagro/helpers/helper_functions.dart';
 import 'package:provider/provider.dart';
 
 import '/models/cart_model/cart_item_model.dart';

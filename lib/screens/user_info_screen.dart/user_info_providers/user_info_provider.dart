@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:msan/models/address_model.dart';
-import 'package:msan/providers/main_provider.dart';
-import 'package:msan/services/user_service.dart';
+import 'package:eagro/models/address_model.dart';
+import 'package:eagro/providers/main_provider.dart';
+import 'package:eagro/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 class UserInfoProvider extends ChangeNotifier {
@@ -15,12 +15,7 @@ class UserInfoProvider extends ChangeNotifier {
     required this.context,
   }) {
     if (isEdit) {
-      final address = context.read<MainProvider>().user?.address;
-      countryController.text = address?.country ?? "";
-      cityController.text = address?.city ?? "";
-      streetNameController.text = address?.streetName ?? "";
-      streetNumberController.text = address?.streetNumber ?? "";
-      postalCodeController.text = address?.postalCode ?? "";
+    loadValue();
     }
   }
   final countryController = TextEditingController();
@@ -30,7 +25,7 @@ class UserInfoProvider extends ChangeNotifier {
   final postalCodeController = TextEditingController();
 
   Future<bool> addAddress() async {
-    return await UserService.addAddress(
+    bool success = await UserService.addAddress(
         id: userId,
         address: AddressModel(
             country: countryController.text,
@@ -38,28 +33,8 @@ class UserInfoProvider extends ChangeNotifier {
             streetName: streetNameController.text,
             streetNumber: streetNumberController.text,
             postalCode: postalCodeController.text));
-  }
 
-  Future<bool> updateAddress() async {
-    return await UserService.updateAddress(
-        id: userId,
-        address: AddressModel(
-            country: countryController.text,
-            city: cityController.text,
-            streetName: streetNameController.text,
-            streetNumber: streetNumberController.text,
-            postalCode: postalCodeController.text));
-  }
-
-  Future<bool> addressAction(BuildContext context) async {
-    bool success = false;
-    if (isEdit) {
-      success = await updateAddress();
-    } else {
-      success = await addAddress();
-    }
-
-    if (context.mounted) {
+                if (context.mounted) {
       final address = context.read<MainProvider>().user?.address;
       address?.country = countryController.text;
       address?.city = cityController.text;
@@ -71,6 +46,38 @@ class UserInfoProvider extends ChangeNotifier {
     return success;
   }
 
+  Future<bool> updateAddress() async {
+  bool success =   await UserService.updateAddress(
+        id: userId,
+        address: AddressModel(
+            country: countryController.text,
+            city: cityController.text,
+            streetName: streetNameController.text,
+            streetNumber: streetNumberController.text,
+            postalCode: postalCodeController.text));
+
+            
+                if (context.mounted) {
+      final address = context.read<MainProvider>().user?.address;
+      address?.country = countryController.text;
+      address?.city = cityController.text;
+      address?.streetName = streetNameController.text;
+      address?.streetNumber = streetNumberController.text;
+      address?.postalCode = postalCodeController.text;
+    }
+
+    return success;
+  }
+
+
+  loadValue() {
+          final address = context.read<MainProvider>().user?.address;
+        countryController.text = address?.country ?? "";
+      cityController.text = address?.city ?? "";
+      streetNameController.text = address?.streetName ?? "";
+      streetNumberController.text = address?.streetNumber ?? "";
+      postalCodeController.text = address?.postalCode ?? "";
+  }
   void refresh() {
     notifyListeners();
   }

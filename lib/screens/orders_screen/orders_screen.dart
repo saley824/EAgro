@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msan/widgets/no_results.dart';
+import 'package:eagro/widgets/no_results.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/helper_functions.dart';
@@ -14,7 +14,7 @@ class OrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final orderProvider = context.read<OrdersProvider>();
     return Scaffold(
-      appBar: HelperFunctions.getSubAppBar(context, "Orders"),
+      appBar: HelperFunctions.getSubAppBar(context:  context, title:  "Orders"),
       body: Consumer<OrdersProvider>(
         builder: (_, __, ___) => FutureBuilder(
             future: orderProvider.getOrders(),

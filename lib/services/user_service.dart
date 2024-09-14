@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:msan/models/api_response.dart';
+import 'package:eagro/models/api_response.dart';
 
 import '../helpers/http_api.dart';
 import '../models/address_model.dart';

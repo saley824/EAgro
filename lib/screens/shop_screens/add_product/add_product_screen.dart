@@ -18,8 +18,8 @@ class AddProductScreen extends StatelessWidget {
     final addProductProvider = context.read<AddProductProvider>();
     return Scaffold(
       appBar: HelperFunctions.getSubAppBar(
-        context,
-        addProductProvider.product != null ? "Edit product" : "Add new product",
+     context:     context,
+     title:    addProductProvider.product != null ? "Edit product" : "Add new product",
       ),
       body: SafeArea(
         child: SingleChildScrollView(

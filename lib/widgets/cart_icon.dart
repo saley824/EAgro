@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:msan/providers/main_provider.dart';
-import 'package:msan/screens/cart_screen/cart_providers/cart_provider.dart';
-import 'package:msan/screens/cart_screen/cart_screen.dart';
+import 'package:eagro/providers/main_provider.dart';
+import 'package:eagro/screens/cart_screen/cart_providers/cart_provider.dart';
+import 'package:eagro/screens/cart_screen/cart_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../helpers/constants/custom_colors.dart';

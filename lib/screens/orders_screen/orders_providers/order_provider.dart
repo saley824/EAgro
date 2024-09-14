@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msan/screens/orders_screen/orders_providers/orders_service.dart';
+import 'package:eagro/screens/orders_screen/orders_providers/orders_service.dart';
 
 import '../orders_models/order_model.dart';
 

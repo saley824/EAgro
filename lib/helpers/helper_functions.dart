@@ -159,7 +159,16 @@ class HelperFunctions {
     );
   }
 
-  static getSubAppBar(BuildContext context, String title) {
+  static getSubAppBar(
+    {
+      required   BuildContext context,
+      required      String title,
+        final VoidCallback? onTap,
+
+
+    }
+
+ ) {
     final textTheme = Theme.of(context).textTheme;
     return AppBar(
       title: Text(
@@ -169,6 +178,9 @@ class HelperFunctions {
       backgroundColor: CustomColors.jadeGreen[600],
       leading: InkWell(
           onTap: () {
+            if(onTap != null){
+              onTap();
+            }
             Navigator.of(context).pop();
           },
           child: const Icon(

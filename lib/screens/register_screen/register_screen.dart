@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msan/helpers/snack_bar_messages.dart';
+import 'package:eagro/helpers/snack_bar_messages.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/helper_functions.dart';

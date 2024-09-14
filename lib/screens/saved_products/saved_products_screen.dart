@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/providers/main_provider.dart';
+import 'package:eagro/providers/main_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../widgets/products/product_preview/product_preview.dart';
@@ -18,7 +18,7 @@ class SavedProductsScreen extends StatelessWidget {
 
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: HelperFunctions.getSubAppBar(context, "Saved products"),
+      appBar: HelperFunctions.getSubAppBar( context:context, title:  "Saved products"),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msan/services/category_service.dart';
+import 'package:eagro/services/category_service.dart';
 
 import '../../../models/category_model/category_model.dart';
 import '../../../models/products_model/product_filter_model.dart';

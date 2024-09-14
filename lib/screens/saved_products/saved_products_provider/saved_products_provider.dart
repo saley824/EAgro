@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:msan/models/products_model/product_model.dart';
-import 'package:msan/models/saved_products_model/saved_product_model.dart';
-import 'package:msan/services/saved_products_service.dart';
+import 'package:eagro/models/products_model/product_model.dart';
+import 'package:eagro/models/saved_products_model/saved_product_model.dart';
+import 'package:eagro/services/saved_products_service.dart';
 
 import '../../../models/products_model/product_list_model.dart';
 import '../../../services/product_service.dart';

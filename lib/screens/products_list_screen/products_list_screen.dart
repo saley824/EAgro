@@ -35,8 +35,8 @@ class ProductsListScreen extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: HelperFunctions.getSubAppBar(
-        context,
-        "Products",
+        context : context,
+       title:  "Products",
       ),
       body: SafeArea(
         child: Padding(

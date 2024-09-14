@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:msan/models/review_model/review_model.dart';
+import 'package:eagro/models/review_model/review_model.dart';
 
 import '../helpers/http_api.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/helpers/helper_functions.dart';
-import 'package:msan/helpers/snack_bar_messages.dart';
-import 'package:msan/widgets/buttons/agro_button.dart';
+import 'package:eagro/helpers/helper_functions.dart';
+import 'package:eagro/helpers/snack_bar_messages.dart';
+import 'package:eagro/widgets/buttons/agro_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/main_provider.dart';

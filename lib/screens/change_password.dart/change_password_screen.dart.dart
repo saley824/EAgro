@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/screens/login_screen/login_providers/login_service.dart';
+import 'package:eagro/screens/login_screen/login_providers/login_service.dart';
 import 'package:provider/provider.dart';
 
 import '/widgets/buttons/agro_button.dart';
@@ -16,7 +16,7 @@ class ChangePassword extends StatelessWidget {
   Widget build(BuildContext context) {
     final changePasswordProvider = context.read<ChangePasswordProvider>();
     return Scaffold(
-      appBar: HelperFunctions.getSubAppBar(context, "Change password"),
+      appBar: HelperFunctions.getSubAppBar(context: context, title:  "Change password"),
       body: SafeArea(
         child: Container(
           color: Colors.white,

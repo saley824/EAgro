@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:msan/models/address_model.dart';
+import 'package:eagro/models/address_model.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 

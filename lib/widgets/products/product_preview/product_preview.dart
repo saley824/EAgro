@@ -69,7 +69,7 @@ class ProductPreview extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  if (product.productDiscount != null) ...[
+                  if (product.productDiscount != null && product.productDiscount!.hasDiscount) ...[
                     const Gap(4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -153,13 +153,7 @@ class ProductPreview extends StatelessWidget {
               ],
             ),
             const Gap(4),
-            product.productDiscount == null
-                ? Text("${product.price} KM",
-                    style: textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                    ))
-                : Column(
+            product.productDiscount != null && product.productDiscount!.hasDiscount ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("${product.discountedPrice} KM",
@@ -176,7 +170,15 @@ class ProductPreview extends StatelessWidget {
                             color: CustomColors.gray[400],
                           )),
                     ],
-                  )
+                  ) :
+                       Text("${product.price} KM",
+                    style: textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                    ),)
+
+            
+                 
           ],
         ),
       ),

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:msan/screens/orders_screen/orders_models/order_item_model.dart';
+import 'package:eagro/screens/orders_screen/orders_models/order_item_model.dart';
 
 import '../../../helpers/http_api.dart';
 import '../orders_models/order_model.dart';

@@ -23,7 +23,10 @@ class UserInfoScreen extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final user = mainProvider.user;
     return Scaffold(
-      appBar: HelperFunctions.getSubAppBar(context, "User info"),
+      appBar: HelperFunctions.getSubAppBar(
+        
+        context: context,
+        title:  "User info", ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Consumer<UserInfoProvider>(

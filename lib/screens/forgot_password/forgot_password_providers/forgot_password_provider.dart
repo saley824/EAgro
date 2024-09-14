@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:msan/services/user_service.dart';
+
+import '/services/user_service.dart';
 
 class ForgotPasswordProvider extends ChangeNotifier {
   bool isButtonEnabled = false;

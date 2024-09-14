@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:msan/screens/register_screen/register_providers/register_service.dart';
+import 'package:eagro/screens/register_screen/register_providers/register_service.dart';
 
 class RegisterProvider extends ChangeNotifier {
   final firstNameController = TextEditingController(text: "");

@@ -1,4 +1,4 @@
-package com.example.msan
+package com.example.eagro
 
 import io.flutter.embedding.android.FlutterActivity
 

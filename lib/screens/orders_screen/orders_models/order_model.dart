@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:msan/models/user_model.dart';
+import 'package:eagro/models/user_model.dart';
 
 part 'order_model.g.dart';
 

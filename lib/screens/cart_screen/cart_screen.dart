@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/helpers/snack_bar_messages.dart';
-import 'package:msan/widgets/loading_indicator/agro_loading_indicator.dart';
+import 'package:eagro/helpers/snack_bar_messages.dart';
+import 'package:eagro/widgets/loading_indicator/agro_loading_indicator.dart';
 import 'package:provider/provider.dart';
 
 import '../../widgets/no_results.dart';
@@ -19,7 +19,7 @@ class CartScreen extends StatelessWidget {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: HelperFunctions.getSubAppBar(context, "Cart"),
+      appBar: HelperFunctions.getSubAppBar(context:  context, title: "Cart"),
       body: SafeArea(
         child: Consumer<CartProvider>(
           builder: (_, __, ___) => FutureBuilder(

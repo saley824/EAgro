@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/screens/orders_screen/orders_models/order_item_model.dart';
+import 'package:eagro/screens/orders_screen/orders_models/order_item_model.dart';
 
 import '../../../helpers/constants/custom_colors.dart';
 

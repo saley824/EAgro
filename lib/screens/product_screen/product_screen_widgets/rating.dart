@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/providers/main_provider.dart';
+import 'package:eagro/providers/main_provider.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/constants/custom_colors.dart';

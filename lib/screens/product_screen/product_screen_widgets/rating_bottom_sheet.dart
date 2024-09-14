@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/widgets/buttons/agro_button.dart';
+import 'package:eagro/widgets/buttons/agro_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../../helpers/constants/custom_colors.dart';

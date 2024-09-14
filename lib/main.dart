@@ -10,6 +10,8 @@ import 'screens/welcome/welcome_provider.dart';
 import 'screens/welcome/welcome_screen.dart';
 
 void main() {
+  //   WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   runApp(
     ChangeNotifierProvider(
       create: (_) => MainProvider(),
@@ -23,6 +25,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+    
+
+
+
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'EAGRO',

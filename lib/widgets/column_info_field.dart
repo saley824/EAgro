@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:msan/helpers/constants/custom_colors.dart';
+import 'package:eagro/helpers/constants/custom_colors.dart';
 
 class ColumnInfoField extends StatelessWidget {
   final String property;
