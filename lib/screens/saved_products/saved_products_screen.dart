@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:eagro/providers/main_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../widgets/no_results.dart';
 import '../../widgets/products/product_preview/product_preview.dart';
 import '/widgets/loading_indicator/agro_loading_indicator.dart';
 import '../../helpers/helper_functions.dart';
@@ -27,7 +28,9 @@ class SavedProductsScreen extends StatelessWidget {
                 savedProductsProvider.getSavedProducts(mainProvider.user!.id),
             builder: (context, snapshot) => snapshot.connectionState ==
                     ConnectionState.waiting
-                ? const AgroLoadingIndicator()
+                ? const AgroLoadingIndicator() :
+                savedProductsProvider.savedProducts.isEmpty ?
+             const NoResults(text:"There are no saved products!")
                 : SingleChildScrollView(
                     child: Center(
                       child: Column(

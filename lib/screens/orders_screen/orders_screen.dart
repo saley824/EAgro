@@ -1,3 +1,5 @@
+
+import 'package:eagro/providers/main_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:eagro/widgets/no_results.dart';
 import 'package:provider/provider.dart';
@@ -9,10 +11,14 @@ import 'orders_widgets/single_order.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
+  static const route = '/orders';
 
   @override
   Widget build(BuildContext context) {
+    final message = ModalRoute.of(context)!.settings.arguments;
+  
     final orderProvider = context.read<OrdersProvider>();
+    final mainProvider = context.read<MainProvider>();
     return Scaffold(
       appBar: HelperFunctions.getSubAppBar(context:  context, title:  "Orders"),
       body: Consumer<OrdersProvider>(

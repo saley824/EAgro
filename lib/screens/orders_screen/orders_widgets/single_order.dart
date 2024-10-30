@@ -77,8 +77,9 @@ class SingleOrder extends StatelessWidget {
                   ),
                 ],
               ),
-              const Gap(16),
-              Row(
+      
+              if(order.user?.address != null)...[
+                    const Gap(16),     Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -90,12 +91,14 @@ class SingleOrder extends StatelessWidget {
                   const Gap(60),
                   Flexible(
                     child: Text(
-                      order.user?.address.toString() ?? "",
+                      order.user?.address.toString()  ?? "",
                       style: textTheme.bodyLarge,
                     ),
                   ),
                 ],
               ),
+              ]
+          ,
               const Gap(16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,

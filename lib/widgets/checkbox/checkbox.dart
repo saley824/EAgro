@@ -79,7 +79,7 @@ class _AgroCheckboxState extends State<AgroCheckbox> {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   side: !isChecked
-                      ? MaterialStateBorderSide.resolveWith(
+                      ? WidgetStateBorderSide.resolveWith(
                           (states) => BorderSide(
                               width: 1.0, color: CustomColors.gray[400]!),
                         )
@@ -87,9 +87,9 @@ class _AgroCheckboxState extends State<AgroCheckbox> {
                   checkColor: Colors.white,
                   activeColor: CustomColors.jadeGreen[500],
                   fillColor: widget.enableFilledBackground
-                      ? MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.selected)) {
+                      ? WidgetStateProperty.resolveWith<Color>(
+                          (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
                             return CustomColors.jadeGreen[500]!;
                           }
                           return Colors.white;

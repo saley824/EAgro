@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:eagro/helpers/datetime_parser.dart';
+
 import '/helpers/http_api.dart';
 import '/models/products_model/product_discount.dart';
 
@@ -8,18 +10,21 @@ class DiscountService {
     required String productUuid,
     required ProductDiscountModel productDiscount,
   }) async {
-    log('DEV LOG------------------------------------------------------------------');
-    log(productDiscount.from.toString());
-    log('DEV LOG------------------------------------------------------------------');
+   
     bool success = false;
+    log('--------------$productUuid------------DEV LOG--------------------------');
+    log('-------------${DateTimeParser.toDashDate(productDiscount.from)}-------------DEV LOG--------------------------');
+    log('---------${DateTimeParser.toDashDate(productDiscount.to)}-----------------DEV LOG--------------------------');
+    log('--------${productDiscount.percentage}------------------DEV LOG--------------------------');
+    log('--------------------------DEV LOG--------------------------');
     try {
       final res = await HttpAPI.makeAPIcall(
         ApiMethod.put,
         'productDiscount/discount/updateDiscount/$productUuid',
         body: {
           "productId": productUuid,
-          "from": productDiscount.from.toString(),
-          "to": productDiscount.to.toString(),
+         "from": DateTimeParser.toDashDate(productDiscount.from),
+          "to": DateTimeParser.toDashDate(productDiscount.to),
           "percentage": productDiscount.percentage,
         },
       );
@@ -41,8 +46,8 @@ class DiscountService {
         'productDiscount/discount/addDiscount',
         body: {
           "productId": productUuid,
-          "from": productDiscount.from.toString(),
-          "to": productDiscount.to.toString(),
+          "from": DateTimeParser.toDashDate(productDiscount.from),
+          "to": DateTimeParser.toDashDate(productDiscount.to),
           "percentage": productDiscount.percentage,
         },
       );

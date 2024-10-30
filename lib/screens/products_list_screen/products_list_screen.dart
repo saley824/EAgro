@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../widgets/no_results.dart';
 import '/providers/main_provider.dart';
 import '/screens/products_list_screen/filter_bottom_sheet/filter_bottom_sheet.dart';
 import '/screens/products_list_screen/filter_bottom_sheet/filter_providers/filter_provider.dart';
@@ -46,7 +47,7 @@ class ProductsListScreen extends StatelessWidget {
               future: productsListProvider.getInitProducts(),
               builder: (context, snapshot) => snapshot.connectionState ==
                       ConnectionState.waiting
-                  ? const AgroLoadingIndicator()
+                  ? const AgroLoadingIndicator()  
                   : Consumer<ProductsListProvider>(
                       builder: (_, __, ___) => SingleChildScrollView(
                         controller: scrollController,
@@ -140,6 +141,9 @@ class ProductsListScreen extends StatelessWidget {
                                 ),
                               ),
                               const Gap(16),
+                              
+                productsListProvider.products.isEmpty ?
+             const NoResults(text:"There are no products matching your filters and search!") :
                               Wrap(
                                 spacing: 36,
                                 runSpacing: 8,

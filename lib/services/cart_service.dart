@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import '../models/cart_model/cart_count_model.dart';
 import '/models/cart_model/cart_model.dart';
 
 import '../helpers/http_api.dart';
@@ -21,6 +22,23 @@ class CartService {
       log('EXCEPTION: $e  getCartTAG');
     }
     return cartModel;
+  }
+  static Future<CartCountModel?> getCartCount(
+    final String userUuid,
+  ) async {
+    // String filterString = makeFilterString(productFilterModel);
+    late CartCountModel cartCount;
+    try {
+      final res = await HttpAPI.makeAPIcall(
+        ApiMethod.get,
+        'cart/$userUuid',
+      );
+
+      cartCount = CartCountModel.fromJson(res.responseData);
+    } catch (e) {
+      log('EXCEPTION: $e  getCartCountTAG');
+    }
+    return cartCount;
   }
 
   static Future<bool> addToCart({

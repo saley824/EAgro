@@ -1,3 +1,9 @@
+// import 'package:eagro/screens/test_screen.dart';
+import 'dart:developer';
+
+import 'package:eagro/services/notification_service.dart/firebase_api.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -6,12 +12,16 @@ import 'package:provider/provider.dart';
 import '/helpers/styles/custom_themes.dart';
 import 'helpers/http_api.dart';
 import 'providers/main_provider.dart';
+import 'screens/testscreen.dart';
 import 'screens/welcome/welcome_provider.dart';
 import 'screens/welcome/welcome_screen.dart';
 
-void main() {
-  //   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+final navigatorKey = GlobalKey<NavigatorState>();
+
+void main()async {
+    WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+await FirebaseApi().initNotifications();
   runApp(
     ChangeNotifierProvider(
       create: (_) => MainProvider(),
@@ -20,19 +30,35 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+
+class _MyAppState extends State<MyApp> {
+  
+  @override
   Widget build(BuildContext context) {
 
-
-    
-
-
+// final navigator = Navigator.of(context);
+// Stream<RemoteMessage> _stream = FirebaseMessaging.onMessageOpenedApp;
+// _stream.listen((RemoteMessage event) async {
+//   if (event.data != null) {
+//     await navigator.push(route)
+//   }
+// });
 
 
     return MaterialApp(
+      navigatorKey: navigatorKey,
+      routes: {
+        '/test': (context) =>  const TestScreen(),
+
+
+      },
         debugShowCheckedModeBanner: false,
         title: 'EAGRO',
         localizationsDelegates: const [
@@ -78,6 +104,8 @@ class MyApp extends StatelessWidget {
         ),
         builder: (context, home) {
           HttpAPI.context = context;
+          FirebaseApi.context = context;
+   
           return home!;
         });
   }

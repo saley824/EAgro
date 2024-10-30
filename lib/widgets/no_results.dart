@@ -8,9 +8,14 @@ class NoResults extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Center(
-      child: Text(
-        text,
-        style: textTheme.labelLarge,
+      child: SizedBox(
+        width: 250,
+        child: Center(
+          child: Text(
+            text,
+            style: textTheme.labelLarge,
+          ),
+        ),
       ),
     );
   }

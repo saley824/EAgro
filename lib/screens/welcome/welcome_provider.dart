@@ -4,6 +4,7 @@ import 'package:eagro/models/address_model.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
+import '../../services/cart_service.dart';
 import '/models/user_model.dart';
 import '/providers/main_provider.dart';
 import '/screens/login_screen/login_providers/login_service.dart';
@@ -26,8 +27,13 @@ class WelcomeProvider extends ChangeNotifier {
           await UserService.getUser(id: decodedToken["id"].toString());
       AddressModel? address =
           await UserService.getUserAddress(id: decodedToken["id"].toString());
+    final cartCount = await CartService.getCartCount(decodedToken["id"].toString());
+
+
+      
       mainProvider.user = userModel;
       mainProvider.user?.address = address;
+      mainProvider.cartCount.value = cartCount?.count ?? 0;
     }
 
     //---------------------------------SET USER IN MAIN PROVIDER---------------------------------

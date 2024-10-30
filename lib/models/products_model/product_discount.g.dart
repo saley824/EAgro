@@ -12,7 +12,7 @@ ProductDiscountModel _$ProductDiscountModelFromJson(
       percentage: (json['percentage'] as num).toInt(),
       from: DateTime.parse(json['from'] as String),
       to: DateTime.parse(json['to'] as String),
-      hasDiscount: json['hasDiscount'] as bool,
+      hasDiscount: json['hasDiscount'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$ProductDiscountModelToJson(

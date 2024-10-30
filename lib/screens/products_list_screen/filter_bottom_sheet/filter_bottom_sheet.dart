@@ -93,7 +93,7 @@ class FilterBottomSheet extends StatelessWidget {
                                   labelVisible: true,
                                   textEditingController:
                                       filterProvider.fromPriceController,
-                                  numberInputType: true,
+                               inputType: InputType.int,
                                   hintText: "From",
                                   deleteText: false,
                                   width: 150,
@@ -106,7 +106,8 @@ class FilterBottomSheet extends StatelessWidget {
                                   labelVisible: true,
                                   textEditingController:
                                       filterProvider.toPriceController,
-                                  numberInputType: true,
+                                                               inputType: InputType.int,
+
                                   hintText: "To",
                                   deleteText: false,
                                   width: 150,

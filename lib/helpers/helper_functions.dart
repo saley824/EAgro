@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/bottom_bar_provider.dart';
 import '../screens/shop_screens/add_product/add_product_providers/add_product_provider.dart';
 import '../screens/shop_screens/add_product/add_product_screen.dart';
 import '/helpers/constants/custom_colors.dart';
@@ -30,7 +31,7 @@ class HelperFunctions {
         ),
       ),
       backgroundColor: CustomColors.jadeGreen[600],
-      leading: InkWell(
+      leading: mainProvider.isShop()  ? null : InkWell(
         onTap: () {
           final globalAppNavigator = Navigator.of(context);
           globalAppNavigator.push(MaterialPageRoute(
@@ -77,84 +78,88 @@ class HelperFunctions {
 
   static Widget getBottomBar(BuildContext context) {
     final mainProvider = context.read<MainProvider>();
+    return ChangeNotifierProvider(
 
-    return Container(
-      padding: const EdgeInsets.all(4),
-      color: CustomColors.jadeGreen[600],
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          InkWell(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider(
-                    create: (context) => OrdersProvider(
-                      userId: mainProvider.getId(),
-                      isShop: mainProvider.isShop(),
+
+      create: (context) => BottomBarProvider(),
+      child: Container(
+        padding: const EdgeInsets.all(4),
+        color: CustomColors.jadeGreen[600],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ChangeNotifierProvider(
+                      create: (context) => OrdersProvider(
+                        userId: mainProvider.getId(),
+                        isShop: mainProvider.isShop(),
+                      ),
+                      child: const OrdersScreen(),
                     ),
-                    child: const OrdersScreen(),
                   ),
-                ),
-              );
-            },
+                );
+              },
+              child: const Padding(
+                  padding: EdgeInsets.only(
+                    right: 8,
+                  ),
+                  child: Icon(
+                    Icons.receipt_long,
+                    color: Colors.white,
+                    size: 36,
+                  )),
+            ),
+      
+              mainProvider.isShop() ?
+                    InkWell(
+              onTap: () {
+                   Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          ChangeNotifierProvider(
+                                        create: (context) => AddProductProvider(
+                                            ),
+                                        child: const AddProductScreen(),
+                                      ),
+                                    ))
+                                        .then((value) {
+                                      if (value) {
+                                       //refresh
+                                      }
+                                    });
+                
+              },
             child: const Padding(
-                padding: EdgeInsets.only(
-                  right: 8,
-                ),
-                child: Icon(
-                  Icons.receipt_long,
-                  color: Colors.white,
-                  size: 36,
-                )),
-          ),
-
-            mainProvider.isShop() ?
-                  InkWell(
-            onTap: () {
-                 Navigator.of(context)
-                                      .push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        ChangeNotifierProvider(
-                                      create: (context) => AddProductProvider(
-                                          ),
-                                      child: const AddProductScreen(),
-                                    ),
-                                  ))
-                                      .then((value) {
-                                    if (value) {
-                                     //refresh
-                                    }
-                                  });
-              
-            },
-            child: const Padding(
-                padding: EdgeInsets.only(
-                  right: 8,
-                ),
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 36,
-                )),
-          ):
-          const CartIcon(),
-
-          InkWell(
-            onTap: () {
-              NavigatorHelper.navigateToProductsList(context);
-            },
-            child: const Padding(
-                padding: EdgeInsets.only(
-                  right: 8,
-                ),
-                child: Icon(
-                  Icons.shopping_bag,
-                  color: Colors.white,
-                  size: 36,
-                )),
-          ),
-        ],
+                  padding: EdgeInsets.only(
+                    right: 8,
+                  ),
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 36,
+                  )),
+            ):
+            const CartIcon(),
+      
+            InkWell(
+              onTap: () {
+                NavigatorHelper.navigateToProductsList(context);
+              },
+              child: const Padding(
+                  padding: EdgeInsets.only(
+                    right: 8,
+                  ),
+                  child: Icon(
+                    Icons.shopping_bag,
+                    color: Colors.white,
+                    size: 36,
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }

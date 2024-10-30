@@ -59,7 +59,7 @@ class OrderItem extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(orderItem.name),
+                    Text(orderItem.name, style: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),),
                     const Gap(4),
                   ],
                 ),

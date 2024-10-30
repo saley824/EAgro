@@ -2,8 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/products_model/product_list_model.dart';
+import '../../products_list_screen/products_list_providers/products_list_provider.dart';
+import '../../products_list_screen/products_list_screen.dart';
 import '/models/products_model/product_filter_model.dart';
 import '/screens/products_list_screen/products_list_models/sort_model.dart';
 import '/widgets/products/product_preview/product_preview.dart';
@@ -29,7 +32,10 @@ class HomeProductHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     log(productsList.length.toString());
+    
     final textTheme = Theme.of(context).textTheme;
+        final globalAppNavigator = Navigator.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -53,8 +59,18 @@ class HomeProductHorizontal extends StatelessWidget {
             Row(
               children: [
                 ViewMoreButton(
-                  productFilterModel: productFilterModel,
-                  sortModel: sortModel,
+                  onTap: () {
+                        globalAppNavigator.push(MaterialPageRoute(
+          builder: (context) => ChangeNotifierProvider(
+            create: (context) => ProductsListProvider(
+              initProductFilter: productFilterModel,
+              initSortModel: sortModel,
+            ),
+            child: const ProductsListScreen(),
+          ),
+        ),);
+                  },
+                  
                 ),
                 const Gap(12),
               ],

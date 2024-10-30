@@ -30,8 +30,8 @@ class NavigatorHelper {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => ChangeNotifierProvider(
         create: (context) => ProductsListProvider(
-          productFilter: ProductFilterModel(),
-          sortModel: SortModel(sortBy: "createdAt", orderBy: "desc"),
+          initProductFilter: ProductFilterModel(),
+          initSortModel: SortModel(sortBy: "createdAt", orderBy: "desc"),
         ),
         child: const ProductsListScreen(),
       ),

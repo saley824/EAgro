@@ -87,6 +87,7 @@ class ProductPreview extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
                       child: Image.network(
+
                         errorBuilder: (context, error, stackTrace) {
                           return const SizedBox(
                             height: 120,
@@ -94,6 +95,8 @@ class ProductPreview extends StatelessWidget {
                             child: Icon(Icons.photo),
                           );
                         },
+                        height: 120,
+                        width: 120,
                         product.image ?? "",
                         // "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg",
                         fit: BoxFit.fill,
@@ -113,7 +116,7 @@ class ProductPreview extends StatelessWidget {
                     product.name,
                     style: textTheme.bodyMedium!
                         .copyWith(color: CustomColors.gray[500]),
-                    overflow: TextOverflow.ellipsis,
+                    overflow: TextOverflow.visible,
                   ),
                 ),
                 Flexible(

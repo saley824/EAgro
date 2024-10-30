@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/address_model.dart';
 import '../../providers/main_provider.dart';
 import '/widgets/buttons/agro_button.dart';
 import '/widgets/input_fields/agro_input_field.dart';
@@ -20,16 +21,14 @@ class AddAddressScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: HelperFunctions.getSubAppBar(
-       context:   context, title:  isEdit ? "Edit address" : "Add address" , ),
+        context: context,
+        title: isEdit ? "Edit address" : "Add address",
+      ),
       body: SafeArea(
         child: PopScope(
-
-     onPopInvokedWithResult: (didPop, result) => {
-
-      if(didPop){
-         userInfoProvider.loadValue()
-      }
-     },
+          onPopInvokedWithResult: (didPop, result) => {
+            if (didPop) {userInfoProvider.loadValue()}
+          },
           child: Container(
             color: Colors.white,
             // color: CustomColors.jadeGreen[50],
@@ -54,7 +53,8 @@ class AddAddressScreen extends StatelessWidget {
                   AgroInputField(
                     labelVisible: true,
                     hintText: "Street",
-                    textEditingController: userInfoProvider.streetNameController,
+                    textEditingController:
+                        userInfoProvider.streetNameController,
                   ),
                   const Gap(20),
                   AgroInputField(
@@ -67,7 +67,8 @@ class AddAddressScreen extends StatelessWidget {
                   AgroInputField(
                     labelVisible: true,
                     hintText: "Postal code",
-                    textEditingController: userInfoProvider.postalCodeController,
+                    textEditingController:
+                        userInfoProvider.postalCodeController,
                   ),
                   const Gap(20),
                   const Spacer(),
@@ -81,27 +82,61 @@ class AddAddressScreen extends StatelessWidget {
                         HelperFunctions.callMethodWithLoadingDialog(
                             context: context,
                             callback: () async {
-                              success =
-                           isEdit ? 
-                                   await userInfoProvider.updateAddress():
-                                   await userInfoProvider.addAddress();
+                              success = isEdit
+                                  ? await userInfoProvider.updateAddress()
+                                  : await userInfoProvider.addAddress();
                             },
                             onFinished: () {
                               if (success) {
+                                if (isEdit) {
+                                  final address = context
+                                      .read<MainProvider>()
+                                      .user
+                                      ?.address;
+                                  address?.country =
+                                      userInfoProvider.countryController.text;
+                                  address?.city =
+                                      userInfoProvider.cityController.text;
+                                  address?.streetName = userInfoProvider
+                                      .streetNameController.text;
+                                  address?.streetNumber = userInfoProvider
+                                      .streetNumberController.text;
+                                  address?.postalCode = userInfoProvider
+                                      .postalCodeController.text;
+                                }
+                                else{
+                                   context.read<MainProvider>().user?.address =
+                                    AddressModel(
+                                  city: userInfoProvider.cityController.text,
+                                  country:
+                                      userInfoProvider.countryController.text,
+                                  streetName: userInfoProvider
+                                      .streetNameController.text,
+                                  streetNumber: userInfoProvider
+                                      .streetNumberController.text,
+                                  postalCode: userInfoProvider
+                                      .postalCodeController.text,
+                                );
+
+                                }
+                               
                                 SnackBarMessage.showMessage(
-                                    context: context,
-                                    text: userInfoProvider.isEdit
-                                        ? "Successfully changed address"
-                                        : "Successfully added address",
-                                    isError: false);
-          
-                                Navigator.of(context).pop();
+                                  context: context,
+                                  text: userInfoProvider.isEdit
+                                      ? "Successfully changed address"
+                                      : "Successfully added address",
+                                  isError: false,
+                                );
+
                                 userInfoProvider.refresh();
+                                Navigator.of(context).pop();
                                 return;
                               }
                               SnackBarMessage.showMessage(
-                                  context: context, text: "Error", isError: true);
-          
+                                  context: context,
+                                  text: "Error",
+                                  isError: true);
+
                               return;
                             });
                       }),

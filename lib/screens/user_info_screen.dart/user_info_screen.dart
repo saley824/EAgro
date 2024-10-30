@@ -24,9 +24,9 @@ class UserInfoScreen extends StatelessWidget {
     final user = mainProvider.user;
     return Scaffold(
       appBar: HelperFunctions.getSubAppBar(
-        
         context: context,
-        title:  "User info", ),
+        title: "User info",
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Consumer<UserInfoProvider>(
@@ -44,10 +44,13 @@ class UserInfoScreen extends StatelessWidget {
               ColumnInfoField(property: "Email", value: user?.email ?? ""),
               const AgroDivider(margin: EdgeInsets.symmetric(vertical: 12)),
               ColumnInfoField(
-                  property: "Address",
-                  value: user?.address != null
-                      ? user?.address.toString() ?? ""
-                      : ""),
+                property: "Address",
+                value: user?.address != null
+                    ? user?.address.toString() ?? ""
+                    : "Address is not added!",
+                textStyle: textTheme.bodyLarge?.copyWith(
+                    fontStyle: FontStyle.italic, color: CustomColors.gray[500]),
+              ),
               const AgroDivider(margin: EdgeInsets.symmetric(vertical: 12)),
               const Gap(16),
               TextButton(

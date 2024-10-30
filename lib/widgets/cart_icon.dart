@@ -41,6 +41,7 @@ class CartIcon extends StatelessWidget {
 
   _getBadge(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final mainProvider = Provider.of<MainProvider>(context, listen: false);
     return Container(
       width: 18,
       decoration: BoxDecoration(
@@ -51,13 +52,17 @@ class CartIcon extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(999),
       ),
-      child: Text(
-        textAlign: TextAlign.center,
-        "3",
-        style: textTheme.bodySmall!.copyWith(
-          color: CustomColors.jadeGreen[900]!,
-        ),
-      ),
+      child: ValueListenableBuilder(
+          valueListenable: mainProvider.cartCount,
+          builder: (_, cartCount, ___) {
+            return Text(
+              textAlign: TextAlign.center,
+              mainProvider.cartCount.value.toString(),
+              style: textTheme.bodySmall!.copyWith(
+                color: CustomColors.jadeGreen[900]!,
+              ),
+            );
+          }),
     );
   }
 }

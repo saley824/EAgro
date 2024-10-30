@@ -18,8 +18,10 @@ class AddProductScreen extends StatelessWidget {
     final addProductProvider = context.read<AddProductProvider>();
     return Scaffold(
       appBar: HelperFunctions.getSubAppBar(
-     context:     context,
-     title:    addProductProvider.product != null ? "Edit product" : "Add new product",
+        context: context,
+        title: addProductProvider.product != null
+            ? "Edit product"
+            : "Add new product",
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -42,13 +44,17 @@ class AddProductScreen extends StatelessWidget {
                             hintText: "Name",
                             textEditingController:
                                 addProductProvider.nameController,
+                            onInputChanged: addProductProvider.enableButton,
                           ),
                           const Gap(20),
                           AgroInputField(
+                            height: 120,
+                            maxLines: 5,
                             labelVisible: true,
                             hintText: "Description",
                             textEditingController:
                                 addProductProvider.descriptionController,
+                            onInputChanged: addProductProvider.enableButton,
                           ),
                           const Gap(20),
                           AgroDropdown(
@@ -69,6 +75,7 @@ class AddProductScreen extends StatelessWidget {
                             hintText: "Select category",
                             dropDownElements: addProductProvider.subCategories,
                             onSelect: (selected) {
+                              addProductProvider.enableButton();
                               addProductProvider.setSubCategory(selected);
                             },
                             isDisabled:
@@ -80,37 +87,42 @@ class AddProductScreen extends StatelessWidget {
                             hintText: "Select unit",
                             dropDownElements: addProductProvider.unitTypes,
                             onSelect: (selected) {
+                              addProductProvider.enableButton();
+
                               addProductProvider.setUnit(selected);
                             },
                           ),
                           const Gap(20),
                           AgroInputField(
                             labelVisible: true,
-                            numberInputType: true,
+                            inputType: InputType.int,
                             hintText: "Total amount",
                             textEditingController:
                                 addProductProvider.totalAmountController,
+                            onInputChanged: addProductProvider.enableButton,
                           ),
                           const Gap(20),
                           AgroInputField(
                             labelVisible: true,
-                            numberInputType: true,
+                            inputType: InputType.int,
                             hintText: "Quantity",
                             textEditingController:
                                 addProductProvider.quantityController,
+                            onInputChanged: addProductProvider.enableButton,
                           ),
                           const Gap(20),
                           AgroInputField(
                             labelVisible: true,
-                            numberInputType: true,
+                            inputType: InputType.double,
                             hintText: "Price",
                             textEditingController:
                                 addProductProvider.priceController,
+                            onInputChanged: addProductProvider.enableButton,
                           ),
                           const Gap(20),
                           AgroButton(
                               buttonColor: ButtonColor.jadeGreen,
-                              disabled: false,
+                              disabled: !addProductProvider.isButtonEnabled,
                               text: addProductProvider.product != null
                                   ? "Edit product"
                                   : "Add new product",
@@ -135,10 +147,7 @@ class AddProductScreen extends StatelessWidget {
                                             isError: false);
                                         return;
                                       }
-                                      SnackBarMessage.showMessage(
-                                          context: context,
-                                          text: "Error",
-                                          isError: true);
+                            
                                       return;
                                     });
                               }),

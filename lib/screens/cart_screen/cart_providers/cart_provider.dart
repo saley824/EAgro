@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:eagro/screens/orders_screen/orders_providers/orders_service.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/main_provider.dart';
 import '/models/cart_model/cart_model.dart';
 import '/services/cart_service.dart';
 
@@ -24,13 +26,15 @@ class CartProvider extends ChangeNotifier {
 
   void removeCartItem({
     required String productUuid,
+
   }) async {
-    await CartService.removeCartItem(
+    bool success = await CartService.removeCartItem(
       productUuid: productUuid,
       userUuid: userUuid,
     );
-
+   
     notifyListeners();
+    
   }
 
   Future<bool> createOrder() async {
@@ -42,4 +46,5 @@ class CartProvider extends ChangeNotifier {
     cart?.cartItemsDetails.clear();
     notifyListeners();
   }
+
 }

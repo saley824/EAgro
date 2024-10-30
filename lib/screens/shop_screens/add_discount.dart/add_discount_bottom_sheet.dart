@@ -35,7 +35,8 @@ class AddDiscountBottomSheet extends StatelessWidget {
                   Icons.percent_rounded,
                   color: CustomColors.jadeGreen[700],
                 ),
-                numberInputType: true,
+                                               inputType: InputType.int,
+
                 hintText: "Percentage",
                 deleteText: false,
                 width: 150,
@@ -52,6 +53,7 @@ class AddDiscountBottomSheet extends StatelessWidget {
                   const Text("When discount starts"),
                   AgroSelectDate(
                     initValue: addDiscountProvider.from,
+                    firstDate: DateTime.now(),
                     onSelect: (selected) {
                       addDiscountProvider.setFrom(selected);
                       addDiscountProvider.enableButton();

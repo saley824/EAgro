@@ -10,14 +10,27 @@ import '../../../widgets/radio_button_group/radio_button_model.dart';
 import '../products_list_models/sort_model.dart';
 
 class ProductsListProvider extends ChangeNotifier {
-  ProductFilterModel productFilter;
-  SortModel sortModel;
+  final ProductFilterModel initProductFilter;
+  final SortModel initSortModel;
   ProductsListProvider({
-    required this.productFilter,
-    required this.sortModel,
-  });
+    required this.initProductFilter,
+    required this.initSortModel,
+  }) {
+    productFilter =initProductFilter.copyWith(
+      category: initProductFilter.category,
+      fromPrice: initProductFilter.fromPrice,
+      hasDiscount: initProductFilter.hasDiscount,
+      searchTerm: initProductFilter.searchTerm,
+      superCategory: initProductFilter.superCategory,
+      toPrice: initProductFilter.toPrice,
+    
+    );
+    sortModel = initSortModel;
+  }
   Timer? _searchDebounce;
 
+  late ProductFilterModel productFilter;
+  late SortModel sortModel;
   final searchController = TextEditingController();
   bool hasMoreProducts = false;
   bool isLoadingMoreProducts = false;
@@ -50,11 +63,11 @@ class ProductsListProvider extends ChangeNotifier {
 
   void clearData() {
     products.clear();
-    page = 0;
+    page = 1;
   }
 
   Future<void> getInitProducts({bool notify = false}) async {
-    products.clear();
+    clearData();
     final productResponse = await getProductsResponse();
     products = productResponse?.products ?? [];
     hasMoreProducts = productResponse?.hasNext ?? false;
@@ -66,18 +79,17 @@ class ProductsListProvider extends ChangeNotifier {
       productFilterModel: productFilter,
       sortModel: sortModel,
       searchTerm: searchController.text,
-      page: page,
+      page: page++,
     );
   }
 
   void getMoreProducts() async {
     isLoadingMoreProducts = true;
     notifyListeners();
-    page++;
+      await Future.delayed(const Duration(milliseconds: 500));
     final productResponse = await getProductsResponse();
     products.addAll(productResponse?.products ?? []);
     hasMoreProducts = productResponse?.hasNext ?? false;
-
     isLoadingMoreProducts = false;
     notifyListeners();
   }

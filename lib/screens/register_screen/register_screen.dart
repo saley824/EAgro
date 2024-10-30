@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:eagro/helpers/snack_bar_messages.dart';
 import 'package:provider/provider.dart';
 
 import '/helpers/helper_functions.dart';
+import '/helpers/snack_bar_messages.dart';
 import '/screens/login_screen/login_providers/login_provider.dart';
 import '/screens/login_screen/login_screen.dart';
 import '/screens/register_screen/register_providers/register_provider.dart';
@@ -119,10 +119,7 @@ class RegisterScreen extends StatelessWidget {
                                       isError: false);
                                   return;
                                 }
-                                SnackBarMessage.showMessage(
-                                    context: context,
-                                    text: "Errorcina",
-                                    isError: true);
+                           
                                 return;
                               });
                         }),

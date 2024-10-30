@@ -146,6 +146,7 @@ class ProductScreen extends StatelessWidget {
                                 buttonColor: ButtonColor.jadeGreen,
                                 onTap: () {
                                   ProductScreenHelper.onAddToCart(context);
+                            
                                 },
                               ),
                               const Gap(24)

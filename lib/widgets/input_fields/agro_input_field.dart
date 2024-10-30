@@ -1,15 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 
 import '/helpers/constants/custom_colors.dart';
 import '/helpers/styles/custom_themes.dart';
+
+enum InputType {
+  int,
+  double,
+  classic,
+}
 
 class AgroInputField extends StatefulWidget {
   const AgroInputField({
     super.key,
     this.hintText,
-    this.numberInputType = false,
     this.textEditingController,
     this.labelVisible = false,
     this.hasError = false,
@@ -26,6 +30,8 @@ class AgroInputField extends StatefulWidget {
     this.fontSize,
     this.onInputChanged,
     this.deleteText = true,
+    this.inputType = InputType.classic,
+    this.maxLines = 1,
   });
 
   final bool labelVisible;
@@ -42,10 +48,11 @@ class AgroInputField extends StatefulWidget {
   final Color? bgColor;
   final TextEditingController? textEditingController;
   final VoidCallback? onInputChanged;
-  final bool numberInputType;
   final bool enableFocusBorder;
   final bool showBorder;
   final bool deleteText;
+  final InputType inputType;
+  final int maxLines;
 
   @override
   State<AgroInputField> createState() => _AgroInputFieldState();
@@ -84,6 +91,16 @@ class _AgroInputFieldState extends State<AgroInputField> {
     );
   }
 
+  getInputType() {
+    switch (widget.inputType) {
+      case InputType.int:
+        return [FilteringTextInputFormatter.digitsOnly];
+      case InputType.double:
+        return [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))];
+      default:
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Opacity(
@@ -112,6 +129,7 @@ class _AgroInputFieldState extends State<AgroInputField> {
                   ),
                 Expanded(
                   child: TextField(
+                    maxLines: widget.maxLines,
                     key: _formKey,
                     focusNode: fn,
                     obscureText: hideText,
@@ -123,8 +141,11 @@ class _AgroInputFieldState extends State<AgroInputField> {
                         widget.onInputChanged!();
                       }
                     },
-                    keyboardType:
-                        widget.numberInputType ? TextInputType.number : null,
+                    keyboardType: (widget.inputType == InputType.double ||
+                            widget.inputType == InputType.int)
+                        ? TextInputType.number
+                        : null,
+                    inputFormatters: getInputType(),
                     enabled: !widget.disabled,
                     controller: widget.textEditingController,
                     decoration: InputDecoration(

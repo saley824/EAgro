@@ -15,6 +15,7 @@ class LoginService {
   static Future<ApiResponse?> login({
     required String username,
     required String password,
+    required String fcmToken,
   }) async {
     ApiResponse? apiResponse;
     try {
@@ -24,6 +25,8 @@ class LoginService {
         body: {
           "username": username,
           "password": password,
+          "fcmToken":fcmToken,
+          
         },
       );
     } catch (e) {

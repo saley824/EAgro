@@ -6,6 +6,7 @@ import '/helpers/helper_functions.dart';
 import '/models/products_model/product_filter_model.dart';
 import '/providers/main_provider.dart';
 import '/widgets/loading_indicator/agro_loading_indicator.dart';
+import '../products_list_screen/products_list_models/sort_model.dart';
 import 'home_screen_providers/home_screen_provider.dart';
 import 'home_widgets/home_products_horizontal.dart';
 
@@ -36,8 +37,9 @@ class HomeScreen extends StatelessWidget {
                                     title: "Products on discount",
                                     productsList: homeScreenProvider
                                         .productsWithBiggestDiscount,
-                                    productFilterModel: homeScreenProvider
-                                        .biggestDiscountFilter,
+                                    productFilterModel: ProductFilterModel(
+                                      hasDiscount: true,
+                                    ),
                                     sortModel:
                                         homeScreenProvider.biggestDiscountSort,
                                   ),
@@ -46,11 +48,9 @@ class HomeScreen extends StatelessWidget {
                                     title: "New Products",
                                     productsList:
                                         homeScreenProvider.lastAddedProducts,
-                                    productFilterModel: ProductFilterModel(
-                                      superCategory:
-                                          homeScreenProvider.selectedCategory,
-                                    ),
-                                    sortModel: homeScreenProvider.lastAddedSort,
+                                    productFilterModel: ProductFilterModel(),
+                                    sortModel: SortModel(
+                                        sortBy: "createdAt", orderBy: "desc"),
                                   ),
                                   const Gap(16),
                                   HomeProductHorizontal(
@@ -61,7 +61,8 @@ class HomeScreen extends StatelessWidget {
                                       superCategory:
                                           homeScreenProvider.selectedCategory,
                                     ),
-                                    sortModel: homeScreenProvider.lastAddedSort,
+                                    sortModel: SortModel(
+                                        sortBy: "createdAt", orderBy: "desc"),
                                   ),
                                 ],
                               ),

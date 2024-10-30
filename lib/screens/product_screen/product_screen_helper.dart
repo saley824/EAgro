@@ -3,22 +3,30 @@ import 'package:provider/provider.dart';
 
 import '../../helpers/helper_functions.dart';
 import '../../helpers/snack_bar_messages.dart';
+import '../../providers/main_provider.dart';
 import 'product_providers/product_provider.dart';
 
 class ProductScreenHelper {
   static void onAddToCart(BuildContext context) {
+    final mainProvider = Provider.of<MainProvider>(context, listen: false);
+    bool success = false;
     final productProvider =
         Provider.of<ProductProvider>(context, listen: false);
     HelperFunctions.callMethodWithLoadingDialog(
         context: context,
         callback: () async {
-          await productProvider.addToCart();
+         success = await productProvider.addToCart();
         },
         onFinished: () {
-          SnackBarMessage.showMessage(
+            if(success){
+                    mainProvider.incrementCartCount();
+                SnackBarMessage.showMessage(
               context: context,
               text: "Product is added to cart!",
-              isError: false);
+              isError: false,);
+            }
+    
+        
         });
   }
 }

@@ -5,10 +5,12 @@ import 'package:eagro/helpers/constants/custom_colors.dart';
 class ColumnInfoField extends StatelessWidget {
   final String property;
   final String value;
+  final TextStyle? textStyle;
   const ColumnInfoField({
     super.key,
     required this.property,
     required this.value,
+     this.textStyle,
   });
 
   @override
@@ -24,7 +26,8 @@ class ColumnInfoField extends StatelessWidget {
         const Gap(2),
         Text(
           value,
-          style: textTheme.bodyLarge,
+          style: textStyle ?? textTheme.bodyLarge,
+          
         ),
       ],
     );

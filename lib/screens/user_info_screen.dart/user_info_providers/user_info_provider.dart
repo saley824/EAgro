@@ -15,7 +15,7 @@ class UserInfoProvider extends ChangeNotifier {
     required this.context,
   }) {
     if (isEdit) {
-    loadValue();
+      loadValue();
     }
   }
   final countryController = TextEditingController();
@@ -34,20 +34,14 @@ class UserInfoProvider extends ChangeNotifier {
             streetNumber: streetNumberController.text,
             postalCode: postalCodeController.text));
 
-                if (context.mounted) {
-      final address = context.read<MainProvider>().user?.address;
-      address?.country = countryController.text;
-      address?.city = cityController.text;
-      address?.streetName = streetNameController.text;
-      address?.streetNumber = streetNumberController.text;
-      address?.postalCode = postalCodeController.text;
-    }
+     
+    
 
     return success;
   }
 
   Future<bool> updateAddress() async {
-  bool success =   await UserService.updateAddress(
+    bool success = await UserService.updateAddress(
         id: userId,
         address: AddressModel(
             country: countryController.text,
@@ -56,28 +50,19 @@ class UserInfoProvider extends ChangeNotifier {
             streetNumber: streetNumberController.text,
             postalCode: postalCodeController.text));
 
-            
-                if (context.mounted) {
-      final address = context.read<MainProvider>().user?.address;
-      address?.country = countryController.text;
-      address?.city = cityController.text;
-      address?.streetName = streetNameController.text;
-      address?.streetNumber = streetNumberController.text;
-      address?.postalCode = postalCodeController.text;
-    }
 
     return success;
   }
 
-
   loadValue() {
-          final address = context.read<MainProvider>().user?.address;
-        countryController.text = address?.country ?? "";
-      cityController.text = address?.city ?? "";
-      streetNameController.text = address?.streetName ?? "";
-      streetNumberController.text = address?.streetNumber ?? "";
-      postalCodeController.text = address?.postalCode ?? "";
+    final address = context.read<MainProvider>().user?.address;
+    countryController.text = address?.country ?? "";
+    cityController.text = address?.city ?? "";
+    streetNameController.text = address?.streetName ?? "";
+    streetNumberController.text = address?.streetNumber ?? "";
+    postalCodeController.text = address?.postalCode ?? "";
   }
+
   void refresh() {
     notifyListeners();
   }

@@ -19,13 +19,9 @@ enum UnitType {
 
 class AddProductProvider extends ChangeNotifier {
   final ProductModel? product;
+  bool isButtonEnabled = false;
 
-  AddProductProvider(
-    {
-        this.product
-    } 
-    
-   ) {
+  AddProductProvider({this.product}) {
     if (product != null) {
       nameController.text = product!.name;
       descriptionController.text = product!.description;
@@ -155,22 +151,20 @@ class AddProductProvider extends ChangeNotifier {
   refreshData(BuildContext context) {
     context.read<MainProvider>().refresh();
   }
+
+  void enableButton() {
+    isButtonEnabled = nameController.text.isNotEmpty &&
+        descriptionController.text.isNotEmpty &&
+        priceController.text.isNotEmpty &&
+        totalAmountController.text.isNotEmpty &&
+        quantityController.text.isNotEmpty &&
+        selectedSubCategory != null &&
+        selectedUnit != null;
+
+    notifyListeners();
+  }
 }
 
-// void enableButton() {
-//   if (nameController.text.isNotEmpty &&
-//       descriptionController.text.isNotEmpty &&
-//       priceController.text.isNotEmpty &&
-//       quantityController.text.isNotEmpty &&
-//       emailController.text.isNotEmpty &&
-//       arePasswordMatched()) {
-//     isButtonEnabled = true;
-//     notifyListeners();
-//     return;
-//   }
-//   isButtonEnabled = false;
-//   notifyListeners();
-// }
 
 // bool arePasswordMatched() {
 //   return passwordController.text == confirmPasswordController.text;

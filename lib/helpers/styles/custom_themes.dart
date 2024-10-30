@@ -48,8 +48,8 @@ class CustomThemes {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          elevation: MaterialStateProperty.all<double>(0),
-          shape: MaterialStateProperty.all<OutlinedBorder>(
+          elevation: WidgetStateProperty.all<double>(0),
+          shape: WidgetStateProperty.all<OutlinedBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
