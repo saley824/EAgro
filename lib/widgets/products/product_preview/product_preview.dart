@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +70,8 @@ class ProductPreview extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  if (product.productDiscount != null && product.productDiscount!.hasDiscount) ...[
+                  if (product.productDiscount != null &&
+                      product.productDiscount!.hasDiscount) ...[
                     const Gap(4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -86,9 +88,14 @@ class ProductPreview extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(16, 0, 8, 32),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
-                      child: Image.network(
+                      child: CachedNetworkImage(
+                        // todo sasa
+                        imageUrl:
+                            "https://t4.ftcdn.net/jpg/07/23/14/93/360_F_723149335_tA0Fo8zefrHzYlSgXRMYsmBQk7CuWrRd.jpg",
 
-                        errorBuilder: (context, error, stackTrace) {
+                        // product.image ?? "",
+
+                        errorWidget: (context, error, stackTrace) {
                           return const SizedBox(
                             height: 120,
                             width: 120,
@@ -97,7 +104,6 @@ class ProductPreview extends StatelessWidget {
                         },
                         height: 120,
                         width: 120,
-                        product.image ?? "",
                         // "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg",
                         fit: BoxFit.fill,
                       ),
@@ -156,7 +162,9 @@ class ProductPreview extends StatelessWidget {
               ],
             ),
             const Gap(4),
-            product.productDiscount != null && product.productDiscount!.hasDiscount ? Column(
+            product.productDiscount != null &&
+                    product.productDiscount!.hasDiscount
+                ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("${product.discountedPrice} KM",
@@ -173,15 +181,14 @@ class ProductPreview extends StatelessWidget {
                             color: CustomColors.gray[400],
                           )),
                     ],
-                  ) :
-                       Text("${product.price} KM",
+                  )
+                : Text(
+                    "${product.price} KM",
                     style: textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.w500,
                       fontSize: 18,
-                    ),)
-
-            
-                 
+                    ),
+                  )
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:eagro/screens/orders_screen/orders_models/order_item_model.dart';
@@ -31,8 +32,12 @@ class OrderItem extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 0, 8, 32),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  child: Image.network(
-                    errorBuilder: (context, error, stackTrace) {
+                  child: CachedNetworkImage(
+                    //todo sasa
+                    imageUrl:
+                        "https://t4.ftcdn.net/jpg/07/23/14/93/360_F_723149335_tA0Fo8zefrHzYlSgXRMYHmBQk7CuWrRd.jpg",
+                    // orderItem.img ?? "",
+                    errorWidget: (context, error, stackTrace) {
                       return const SizedBox(
                         height: 80,
                         width: 100,
@@ -41,7 +46,6 @@ class OrderItem extends StatelessWidget {
                     },
                     height: 80,
                     width: 100,
-                    orderItem.img ?? "",
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -59,7 +63,11 @@ class OrderItem extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(orderItem.name, style: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),),
+                    Text(
+                      orderItem.name,
+                      style: textTheme.labelLarge
+                          ?.copyWith(fontWeight: FontWeight.w600),
+                    ),
                     const Gap(4),
                   ],
                 ),

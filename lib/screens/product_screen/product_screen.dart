@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
@@ -59,14 +60,18 @@ class ProductScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Image.network(
-                              errorBuilder: (context, error, stackTrace) {
+                            CachedNetworkImage(
+                              imageUrl:
+                                  "https://t4.ftcdn.net/jpg/07/23/14s/93/360_F_723149335_tA0Fo8zefrHzYlSgXRMYHmBQk7CuWrRd.jpg",
+                              //todo sasa
+                              // productProvider.product?.image ?? "",
+
+                              errorWidget: (context, error, stackTrace) {
                                 return const SizedBox(
                                   height: 120,
                                   width: 120,
                                   child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(Icons.photo),
                                       Text("Nema slike"),
@@ -74,7 +79,6 @@ class ProductScreen extends StatelessWidget {
                                   ),
                                 );
                               },
-                              productProvider.product?.image ?? "",
                               // "https://firebasestorage.googleapis.com/v0/b/diplomski-fc1d8.appspot.com/o/images%2Ftatum.jpg?alt=media&token=1711d5da-9eac-4d98-a576-693958a84d0a",
                               height: 300,
                               width: double.infinity,
