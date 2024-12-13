@@ -22,7 +22,7 @@ class AddAddressScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: HelperFunctions.getSubAppBar(
         context: context,
-        title: isEdit ? "Edit address" : "Add address",
+        title: isEdit ? "Izmjena adrese" : "Dodavanje adrese",
       ),
       body: SafeArea(
         child: PopScope(
@@ -40,33 +40,33 @@ class AddAddressScreen extends StatelessWidget {
                   const Gap(24),
                   AgroInputField(
                     labelVisible: true,
-                    hintText: "Country",
+                    hintText: "Država",
                     textEditingController: userInfoProvider.countryController,
                   ),
                   const Gap(20),
                   AgroInputField(
                     labelVisible: true,
-                    hintText: "City",
+                    hintText: "Grad",
                     textEditingController: userInfoProvider.cityController,
                   ),
                   const Gap(20),
                   AgroInputField(
                     labelVisible: true,
-                    hintText: "Street",
+                    hintText: "Ulica",
                     textEditingController:
                         userInfoProvider.streetNameController,
                   ),
                   const Gap(20),
                   AgroInputField(
                     labelVisible: true,
-                    hintText: "Street number",
+                    hintText: "Kućni broj",
                     textEditingController:
                         userInfoProvider.streetNumberController,
                   ),
                   const Gap(20),
                   AgroInputField(
                     labelVisible: true,
-                    hintText: "Postal code",
+                    hintText: "Poštanski kod",
                     textEditingController:
                         userInfoProvider.postalCodeController,
                   ),
@@ -75,7 +75,7 @@ class AddAddressScreen extends StatelessWidget {
                   AgroButton(
                       buttonColor: ButtonColor.jadeGreen,
                       disabled: false,
-                      text: isEdit ? "Edit address" : "Add address",
+                      text: isEdit ? "Promijeni adresu" : "Dodaj adresu",
                       onTap: () {
                         FocusManager.instance.primaryFocus?.unfocus();
                         bool success = false;
@@ -123,8 +123,8 @@ class AddAddressScreen extends StatelessWidget {
                                 SnackBarMessage.showMessage(
                                   context: context,
                                   text: userInfoProvider.isEdit
-                                      ? "Successfully changed address"
-                                      : "Successfully added address",
+                                      ? "Adresa je uspješno izmjenjena.."
+                                      : "Adresa je uspješno dodana.",
                                   isError: false,
                                 );
 
@@ -134,7 +134,7 @@ class AddAddressScreen extends StatelessWidget {
                               }
                               SnackBarMessage.showMessage(
                                   context: context,
-                                  text: "Error",
+                                  text: "Greška",
                                   isError: true);
 
                               return;

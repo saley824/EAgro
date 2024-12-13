@@ -40,7 +40,8 @@ class ProductScreen extends StatelessWidget {
 
     return Scaffold(
       bottomNavigationBar: HelperFunctions.getBottomBar(context),
-      appBar: HelperFunctions.getAppBar(context),
+      appBar: HelperFunctions.getSubAppBar(
+          context: context, title: "Pregled proizvoda"),
       body: SafeArea(
         child: Consumer<ProductProvider>(
           builder: (_, __, ___) => FutureBuilder(
@@ -53,53 +54,31 @@ class ProductScreen extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0x3600000F),
-                              offset: Offset(0, 2),
-                            )
-                          ],
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(0),
-                                      bottomRight: Radius.circular(0),
-                                      topLeft: Radius.circular(8),
-                                      topRight: Radius.circular(8),
-                                    ),
-                                    child: Image.network(
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return const SizedBox(
-                                          height: 120,
-                                          width: 120,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(Icons.photo),
-                                              Text("No photo"),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                      productProvider.product?.image ?? "",
-                                      // "https://firebasestorage.googleapis.com/v0/b/diplomski-fc1d8.appspot.com/o/images%2Ftatum.jpg?alt=media&token=1711d5da-9eac-4d98-a576-693958a84d0a",
-                                      width: 100,
-                                      height: 150,
-                                      fit: BoxFit.fill,
-                                    ),
+                            Image.network(
+                              errorBuilder: (context, error, stackTrace) {
+                                return const SizedBox(
+                                  height: 120,
+                                  width: 120,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.photo),
+                                      Text("Nema slike"),
+                                    ],
                                   ),
-                                ),
-                              ],
+                                );
+                              },
+                              productProvider.product?.image ?? "",
+                              // "https://firebasestorage.googleapis.com/v0/b/diplomski-fc1d8.appspot.com/o/images%2Ftatum.jpg?alt=media&token=1711d5da-9eac-4d98-a576-693958a84d0a",
+                              height: 300,
+                              width: double.infinity,
+                              fit: BoxFit.fill,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,14 +95,17 @@ class ProductScreen extends StatelessWidget {
                                     children: [
                                       Row(
                                         children: [
-                                          Text(
-                                            productProvider.product!.name
-                                                .toString(),
-                                            style: textTheme.headlineSmall,
+                                          Expanded(
+                                            child: Text(
+                                              productProvider.product!.name
+                                                  .toString(),
+                                              style: textTheme.headlineSmall,
+                                            ),
                                           ),
                                           const Gap(8),
                                           const Rating(),
-                                          const Spacer(),
+                                          const Gap(8),
+                                          // const Spacer(),
                                           if (!isShop) const SaveIcon(),
                                         ],
                                       ),
@@ -142,11 +124,10 @@ class ProductScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 12,
                                 ),
-                                text: "Add to cart",
+                                text: "Dodaj u korpu",
                                 buttonColor: ButtonColor.jadeGreen,
                                 onTap: () {
                                   ProductScreenHelper.onAddToCart(context);
-                            
                                 },
                               ),
                               const Gap(24)
@@ -199,14 +180,15 @@ class ProductScreen extends StatelessWidget {
                               ),
                               TextIconButton(
                                 icon: Icons.edit,
-                                text: "Edit product",
+                                text: "Izmijeni proizvod",
                                 onTap: () {
                                   Navigator.of(context)
                                       .push(MaterialPageRoute(
                                     builder: (context) =>
                                         ChangeNotifierProvider(
-                                      create: (context) => AddProductProvider( product: 
-                                          productProvider.product,),
+                                      create: (context) => AddProductProvider(
+                                        product: productProvider.product,
+                                      ),
                                       child: const AddProductScreen(),
                                     ),
                                   ))
@@ -220,7 +202,7 @@ class ProductScreen extends StatelessWidget {
                               TextIconButton(
                                 color: Colors.red[500],
                                 icon: Icons.delete,
-                                text: "Delete product",
+                                text: "Obriši proizvod",
                                 onTap: () {
                                   AgroModal.showECommDialog(
                                     child: DeleteProductModal(
@@ -243,10 +225,10 @@ class ProductScreen extends StatelessWidget {
   }
 
   String _getDiscountButtonText(ProductDiscountModel? discount) {
-    return discount != null ? "Edit discount" : "Add discount";
+    return discount != null ? "Izmijeni sniženje" : "Dodaj sniženje";
   }
 
   String _getPhotoButtonText(bool? isEdit) {
-    return isEdit ?? false ? "Edit photo" : "Add photo";
+    return isEdit ?? false ? "Izmijeni sliku" : "Dodaj sliku";
   }
 }

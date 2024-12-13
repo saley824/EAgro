@@ -17,7 +17,7 @@ class PriceHistory extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "History of price changes",
+            "Istorija promjene cijene",
             style: textTheme.labelLarge,
           ),
           const Gap(24),
@@ -25,11 +25,11 @@ class PriceHistory extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Date",
+                "Datum",
                 style: textTheme.labelMedium,
               ),
               Text(
-                "Price",
+                "Cijena",
                 style: textTheme.labelMedium,
               ),
             ],

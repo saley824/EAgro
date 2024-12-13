@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/bottom_bar_provider.dart';
-import '../screens/shop_screens/add_product/add_product_providers/add_product_provider.dart';
-import '../screens/shop_screens/add_product/add_product_screen.dart';
 import '/helpers/constants/custom_colors.dart';
 import '/helpers/navigator_helper.dart';
 import '/providers/main_provider.dart';
 import '/screens/saved_products/saved_products_provider/saved_products_provider.dart';
 import '/screens/user_info_screen.dart/user_info_providers/user_info_provider.dart';
 import '/screens/user_info_screen.dart/user_info_screen.dart';
+import '../providers/bottom_bar_provider.dart';
 import '../screens/orders_screen/orders_providers/order_provider.dart';
 import '../screens/orders_screen/orders_screen.dart';
 import '../screens/saved_products/saved_products_screen.dart';
+import '../screens/shop_screens/add_product/add_product_providers/add_product_provider.dart';
+import '../screens/shop_screens/add_product/add_product_screen.dart';
 import '../widgets/cart_icon.dart';
+import 'snack_bar_messages.dart';
 
 class HelperFunctions {
   static getAppBar(BuildContext context) {
@@ -31,21 +32,23 @@ class HelperFunctions {
         ),
       ),
       backgroundColor: CustomColors.jadeGreen[600],
-      leading: mainProvider.isShop()  ? null : InkWell(
-        onTap: () {
-          final globalAppNavigator = Navigator.of(context);
-          globalAppNavigator.push(MaterialPageRoute(
-              builder: (context) => ChangeNotifierProvider(
-                    create: (context) => SavedProductsProvider(),
-                    child: const SavedProductsScreen(),
-                  )));
-        },
-        child: const Icon(
-          Icons.favorite,
-          color: Colors.white,
-          size: 32,
-        ),
-      ),
+      leading: mainProvider.isShop()
+          ? null
+          : InkWell(
+              onTap: () {
+                final globalAppNavigator = Navigator.of(context);
+                globalAppNavigator.push(MaterialPageRoute(
+                    builder: (context) => ChangeNotifierProvider(
+                          create: (context) => SavedProductsProvider(),
+                          child: const SavedProductsScreen(),
+                        )));
+              },
+              child: const Icon(
+                Icons.favorite,
+                color: Colors.white,
+                size: 32,
+              ),
+            ),
       actions: [
         InkWell(
           onTap: () {
@@ -79,8 +82,6 @@ class HelperFunctions {
   static Widget getBottomBar(BuildContext context) {
     final mainProvider = context.read<MainProvider>();
     return ChangeNotifierProvider(
-
-
       create: (context) => BottomBarProvider(),
       child: Container(
         padding: const EdgeInsets.all(4),
@@ -112,38 +113,33 @@ class HelperFunctions {
                     size: 36,
                   )),
             ),
-      
-              mainProvider.isShop() ?
-                    InkWell(
-              onTap: () {
-                   Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          ChangeNotifierProvider(
-                                        create: (context) => AddProductProvider(
-                                            ),
-                                        child: const AddProductScreen(),
-                                      ),
-                                    ))
-                                        .then((value) {
-                                      if (value) {
-                                       //refresh
-                                      }
-                                    });
-                
-              },
-            child: const Padding(
-                  padding: EdgeInsets.only(
-                    right: 8,
-                  ),
-                  child: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 36,
-                  )),
-            ):
-            const CartIcon(),
-      
+            mainProvider.isShop()
+                ? InkWell(
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(
+                        builder: (context) => ChangeNotifierProvider(
+                          create: (context) => AddProductProvider(),
+                          child: const AddProductScreen(),
+                        ),
+                      ))
+                          .then((value) {
+                        if (value) {
+                          //refresh
+                        }
+                      });
+                    },
+                    child: const Padding(
+                        padding: EdgeInsets.only(
+                          right: 8,
+                        ),
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 36,
+                        )),
+                  )
+                : const CartIcon(),
             InkWell(
               onTap: () {
                 NavigatorHelper.navigateToProductsList(context);
@@ -164,16 +160,11 @@ class HelperFunctions {
     );
   }
 
-  static getSubAppBar(
-    {
-      required   BuildContext context,
-      required      String title,
-        final VoidCallback? onTap,
-
-
-    }
-
- ) {
+  static getSubAppBar({
+    required BuildContext context,
+    required String title,
+    final VoidCallback? onTap,
+  }) {
     final textTheme = Theme.of(context).textTheme;
     return AppBar(
       title: Text(
@@ -183,7 +174,7 @@ class HelperFunctions {
       backgroundColor: CustomColors.jadeGreen[600],
       leading: InkWell(
           onTap: () {
-            if(onTap != null){
+            if (onTap != null) {
               onTap();
             }
             Navigator.of(context).pop();
@@ -257,5 +248,13 @@ class HelperFunctions {
     if (onFinished != null) {
       onFinished();
     }
+  }
+
+  static void getErrorSnackBar(BuildContext context) {
+    SnackBarMessage.showMessage(
+      context: context,
+      text: "Desila se greška!",
+      isError: true,
+    );
   }
 }

@@ -95,7 +95,7 @@ class OrderItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Cart item price:",
+                      "Cijena stavke:",
                       style: textTheme.bodyMedium,
                     ),
                     Text(
@@ -108,7 +108,7 @@ class OrderItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Quantity",
+                      "Količina",
                       style: textTheme.bodyMedium,
                     ),
                     Text(

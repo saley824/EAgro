@@ -31,18 +31,18 @@ class RegisterScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Welcome to",
+                    "Dobrodošli na",
                     style:
                         textTheme.headlineMedium!.copyWith(color: Colors.black),
                   ),
                   Text(
-                    "Agro Shop",
+                    "EAgro Shop",
                     style:
                         textTheme.headlineLarge!.copyWith(color: Colors.black),
                   ),
                   const SizedBox(height: 20),
                   AgroInputField(
-                    hintText: "First name",
+                    hintText: "Ime",
                     labelVisible: true,
                     textEditingController: registerProvider.firstNameController,
                     onInputChanged: registerProvider.enableButton,
@@ -51,7 +51,7 @@ class RegisterScreen extends StatelessWidget {
                     height: 20,
                   ),
                   AgroInputField(
-                    hintText: "Last name",
+                    hintText: "Prezime",
                     labelVisible: true,
                     textEditingController: registerProvider.lastNameController,
                     onInputChanged: registerProvider.enableButton,
@@ -69,7 +69,7 @@ class RegisterScreen extends StatelessWidget {
                     height: 20,
                   ),
                   AgroInputField(
-                    hintText: "Username",
+                    hintText: "Korisničko ime",
                     labelVisible: true,
                     textEditingController: registerProvider.usernameController,
                     onInputChanged: registerProvider.enableButton,
@@ -78,7 +78,7 @@ class RegisterScreen extends StatelessWidget {
                     height: 20,
                   ),
                   AgroInputField(
-                    hintText: "Password",
+                    hintText: "Šifra",
                     labelVisible: true,
                     passwordField: true,
                     textEditingController: registerProvider.passwordController,
@@ -88,7 +88,7 @@ class RegisterScreen extends StatelessWidget {
                     height: 20,
                   ),
                   AgroInputField(
-                    hintText: "Confirm password",
+                    hintText: "Potvrdi šifru",
                     labelVisible: true,
                     passwordField: true,
                     textEditingController:
@@ -101,7 +101,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   Consumer<RegisterProvider>(
                     builder: (_, __, ___) => AgroButton(
-                        text: "Create account",
+                        text: "Kreiraj nalog",
                         disabled: !registerProvider.isButtonEnabled,
                         onTap: () {
                           FocusManager.instance.primaryFocus?.unfocus();
@@ -115,7 +115,7 @@ class RegisterScreen extends StatelessWidget {
                                 if (success) {
                                   SnackBarMessage.showMessage(
                                       context: context,
-                                      text: "Successfully registered",
+                                      text: "Nalog uspješno kreiran",
                                       isError: false);
                                   return;
                                 }
@@ -129,7 +129,7 @@ class RegisterScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already have an account?",
+                        "Već imate nalog?",
                         style: textTheme.bodyLarge,
                       ),
                       TextButton(
@@ -146,7 +146,7 @@ class RegisterScreen extends StatelessWidget {
                         style: TextButton.styleFrom(
                             foregroundColor: Colors.black,
                             padding: const EdgeInsets.all(4)),
-                        child: const Text("Login"),
+                        child: const Text("Prijavi se"),
                       ),
                     ],
                   )

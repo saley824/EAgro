@@ -6,7 +6,7 @@ import '../models/category_model/category_model.dart';
 class CategoryService {
   static Future<List<CategoryModel>> getSuperCategories() async {
     List<CategoryModel> superCategories = [];
-    try {
+  try {
       final res = await HttpAPI.makeAPIcall(
         ApiMethod.get,
         'categories/superCategories/all',
@@ -36,5 +36,21 @@ class CategoryService {
       log('EXCEPTION: $e  getSubCategoriesTAG');
     }
     return subCategories;
+  }
+
+  static Future<CategoryModel?> getCategoryById(String categoryId) async {
+     CategoryModel? category;
+log('--------------------------DEV LOG-------------1-------------');
+    try {
+      final res = await HttpAPI.makeAPIcall(
+        ApiMethod.get,
+        'categories/$categoryId',
+      );
+
+      category = CategoryModel.fromJson(res.responseData);
+    } catch (e) {
+      log('EXCEPTION: $e  getCategoryByIdTAG');
+    }
+    return category;
   }
 }

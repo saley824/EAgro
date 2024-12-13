@@ -54,7 +54,6 @@ class ProductsListProvider extends ChangeNotifier {
     if (_searchDebounce?.isActive ?? false) _searchDebounce!.cancel();
     _searchDebounce = Timer(const Duration(milliseconds: 700), () async {
       clearData();
-      page++;
       final productResponse = await getProductsResponse();
       products.addAll(productResponse?.products ?? []);
       notifyListeners();
@@ -101,7 +100,7 @@ class ProductsListProvider extends ChangeNotifier {
         sortBy: "price",
         orderBy: "asc",
       ),
-      text: "Price ascending",
+      text: "Rastuća cijena",
       icon: Icons.arrow_upward,
     ),
     RadioButtonModel(
@@ -110,29 +109,29 @@ class ProductsListProvider extends ChangeNotifier {
         sortBy: "price",
         orderBy: "desc",
       ),
-      text: "Price descending",
+      text: "Opadajuća cijena",
       icon: Icons.arrow_downward,
     ),
     RadioButtonModel(
       id: "createdAsc",
       value: SortModel(sortBy: "createdAt", orderBy: "asc"),
-      text: "Date ascending",
+      text: "Najstarije",
       icon: Icons.arrow_upward,
     ),
     RadioButtonModel(
         id: "createdDesc",
         value: SortModel(sortBy: "createdAt", orderBy: "desc"),
-        text: "Date descending",
+        text: "Najnovije",
         icon: Icons.arrow_downward),
     RadioButtonModel(
         id: "discountAsc",
         value: SortModel(sortBy: "discount", orderBy: "asc"),
-        text: "Discount ascending",
+        text: "Sniženje rastuće",
         icon: Icons.arrow_upward),
     RadioButtonModel(
         id: "discountDesc",
         value: SortModel(sortBy: "discount", orderBy: "desc"),
-        text: "Discount descending",
+        text: "Sniženje opadajuće",
         icon: Icons.arrow_downward),
   ];
 }

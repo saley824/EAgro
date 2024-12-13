@@ -37,7 +37,7 @@ class AddDiscountBottomSheet extends StatelessWidget {
                 ),
                                                inputType: InputType.int,
 
-                hintText: "Percentage",
+                hintText: "Procenat",
                 deleteText: false,
                 width: 150,
                 onInputChanged: addDiscountProvider.enableButton,
@@ -50,7 +50,7 @@ class AddDiscountBottomSheet extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  const Text("When discount starts"),
+                  const Text("Kada sniženje počinje"),
                   AgroSelectDate(
                     initValue: addDiscountProvider.from,
                     firstDate: DateTime.now(),
@@ -63,7 +63,7 @@ class AddDiscountBottomSheet extends StatelessWidget {
               ),
               Column(
                 children: [
-                  const Text("When discount ends"),
+                  const Text("Kada se sniženje završava"),
                   AgroSelectDate(
                       initValue: addDiscountProvider.to,
                       firstDate: addDiscountProvider.from,
@@ -79,7 +79,7 @@ class AddDiscountBottomSheet extends StatelessWidget {
           const Gap(12),
           AgroButton(
             buttonColor: ButtonColor.jadeGreen,
-            text: "Finish",
+            text: "Postavi",
             onTap: () {
               bool success = false;
               HelperFunctions.callMethodWithLoadingDialog(
@@ -95,8 +95,8 @@ class AddDiscountBottomSheet extends StatelessWidget {
                         context: context,
                         text:
                             addDiscountProvider.product.productDiscount != null
-                                ? "Discount is successfully edited"
-                                : "Discount is successfully added",
+                                ? "Sniženje je uspješno izmjenjeno!"
+                                : "Sniženje je uspješno dodano!",
                         isError: false,
                       );
                     }
@@ -109,7 +109,7 @@ class AddDiscountBottomSheet extends StatelessWidget {
             child: TextIconButton(
               color: Colors.red[500],
               icon: Icons.delete_rounded,
-              text: "Remove discount",
+              text: "Ukloni sniženje!",
               onTap: () {
                 AgroModal.showECommDialog(
                   child: DeleteDiscountModal(
@@ -129,7 +129,7 @@ class AddDiscountBottomSheet extends StatelessWidget {
                               SnackBarMessage.showMessage(
                                   context: context,
                                   text:
-                                      "${addDiscountProvider.product.name} discount is successfully deleted",
+                                      "Sniženje na ${addDiscountProvider.product.name} je uklonjeno!",
                                   isError: false);
 
                               addDiscountProvider.refreshData(context);

@@ -25,7 +25,7 @@ class UserInfoScreen extends StatelessWidget {
     return Scaffold(
       appBar: HelperFunctions.getSubAppBar(
         context: context,
-        title: "User info",
+        title: "Osnovni podaci",
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -33,26 +33,28 @@ class UserInfoScreen extends StatelessWidget {
           builder: (context, value, child) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ColumnInfoField(property: "Name", value: user?.name ?? ""),
+              if(!mainProvider.isShop())...[    ColumnInfoField(property: "Ime", value: user?.name ?? ""),
               const AgroDivider(margin: EdgeInsets.symmetric(vertical: 12)),
               ColumnInfoField(
-                  property: "Last name", value: user?.lastName ?? ""),
-              const AgroDivider(margin: EdgeInsets.symmetric(vertical: 12)),
+                  property: "Prezime", value: user?.lastName ?? ""),
+              const AgroDivider(margin: EdgeInsets.symmetric(vertical: 12)),],
+          
               ColumnInfoField(
-                  property: "Username", value: user?.username ?? ""),
+                  property: "Korisničko ime", value: user?.username ?? ""),
               const AgroDivider(margin: EdgeInsets.symmetric(vertical: 12)),
               ColumnInfoField(property: "Email", value: user?.email ?? ""),
               const AgroDivider(margin: EdgeInsets.symmetric(vertical: 12)),
-              ColumnInfoField(
-                property: "Address",
+                if(!mainProvider.isShop())...[        ColumnInfoField(
+                property: "Adresa",
                 value: user?.address != null
                     ? user?.address.toString() ?? ""
-                    : "Address is not added!",
+                    : "Adresa nije dodana!",
                 textStyle: textTheme.bodyLarge?.copyWith(
                     fontStyle: FontStyle.italic, color: CustomColors.gray[500]),
               ),
-              const AgroDivider(margin: EdgeInsets.symmetric(vertical: 12)),
-              const Gap(16),
+              const AgroDivider(margin: EdgeInsets.symmetric(vertical: 12)),],
+      
+           
               TextButton(
                 onPressed: () {
                   Navigator.of(context).push(
@@ -68,8 +70,9 @@ class UserInfoScreen extends StatelessWidget {
                 style: TextButton.styleFrom(
                     foregroundColor: CustomColors.jadeGreen[600],
                     padding: const EdgeInsets.fromLTRB(0, 8, 8, 8)),
-                child: const Text("Change password"),
+                child: const Text("Promijeni šifru"),
               ),
+              if(!mainProvider.isShop())
               TextButton(
                 onPressed: () {
                   Navigator.of(context).push(
@@ -85,7 +88,7 @@ class UserInfoScreen extends StatelessWidget {
                     foregroundColor: CustomColors.jadeGreen[600],
                     padding: const EdgeInsets.fromLTRB(0, 8, 8, 8)),
                 child: Text(
-                    user?.address != null ? "Change address" : "Add address"),
+                    user?.address != null ? "Promijeni adresu" : "Dodaj adresu"),
               ),
               const Spacer(),
               InkWell(
@@ -104,7 +107,7 @@ class UserInfoScreen extends StatelessWidget {
                       ),
                       const Gap(4),
                       Text(
-                        "Log out",
+                        "Odjavi se",
                         style: textTheme.headlineSmall
                             ?.copyWith(color: Colors.red[600]),
                       ),

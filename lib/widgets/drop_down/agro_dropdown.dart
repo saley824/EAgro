@@ -59,7 +59,7 @@ class _ShopRolesDropdownState extends State<AgroDropdown> {
           child: DropdownButton2<AgroDropdownModel>(
             disabledHint: Text(
               textAlign: TextAlign.center,
-              widget.disabledText ?? "DISABLED",
+              widget.disabledText ?? "Onemogućen",
               style:
                   textTheme.bodyMedium!.copyWith(color: CustomColors.gray[500]),
             ),

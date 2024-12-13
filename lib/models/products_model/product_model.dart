@@ -17,9 +17,9 @@ class ProductModel {
   final DateTime createdAt;
   final CategoryModel category;
   final int totalAmount;
-  final int? quantity; //nije
+  final int? quantity; 
   final String? unit;
-  final String? image; //nije
+  final String? image; 
   final ProductDiscountModel? productDiscount;
   final List<ProductPriceHistory>? productPriceHistory;
   final double? avgReview;

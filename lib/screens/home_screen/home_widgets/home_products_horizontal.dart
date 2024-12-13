@@ -47,14 +47,18 @@ class HomeProductHorizontal extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                const Gap(12),
-                Text(
-                  title,
-                  style: textTheme.titleMedium!.copyWith(fontSize: 18),
-                ),
-              ],
+            Flexible(
+              child: Row(
+                children: [
+                  const Gap(12),
+                  Flexible(
+                    child: Text(
+                      title,
+                      style: textTheme.titleMedium!.copyWith(fontSize: 18),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Row(
               children: [
@@ -89,18 +93,7 @@ class HomeProductHorizontal extends StatelessWidget {
                     ));
               })
             ]
-                // productsList
-                //     .expand((product) => [
-                //           if (productsList.first == product) const Gap(16),
-                //           Padding(
-                //             padding: EdgeInsets.only(
-                //               right: productsList.last != product ? 0 : 16,
-                //             ),
-                //             child: EcommProduct(data: product),
-                //           ),
-                //           if (productsList.last != product) const Gap(16),
-                //         ])
-                //     .toList(),
+
                 ))
       ],
     );

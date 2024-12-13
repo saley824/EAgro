@@ -35,12 +35,12 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Welcome too",
+                      "Dobrodošli na",
                       style: textTheme.headlineMedium!
                           .copyWith(color: Colors.black),
                     ),
                     Text(
-                      "Agro Shop",
+                      "EAgro Shop",
                       style: textTheme.headlineLarge!
                           .copyWith(color: Colors.black),
                     ),
@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                     AgroInputField(
                       onInputChanged: loginProvider.enableButton,
                       height: 48,
-                      hintText: "Username",
+                      hintText: "Korisničko ime",
                       labelVisible: true,
                       textEditingController: loginProvider.usernameController,
                     ),
@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                     AgroInputField(
                       onInputChanged: loginProvider.enableButton,
                       height: 48,
-                      hintText: "Password",
+                      hintText: "Šifra",
                       labelVisible: true,
                       passwordField: true,
                       textEditingController: loginProvider.passwordController,
@@ -70,7 +70,7 @@ class LoginScreen extends StatelessWidget {
                     Consumer<LoginProvider>(
                       builder: (_, __, ___) => AgroButton(
                         disabled: !loginProvider.isButtonEnabled,
-                        text: "Login",
+                        text: "Prijavi se",
                         onTap: () {
                           FocusManager.instance.primaryFocus?.unfocus();
                           bool success = false;
@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                                 if (success) {
                                   SnackBarMessage.showMessage(
                                       context: context,
-                                      text: "Successfully login",
+                                      text: "Uspješno ste prijavljeni!",
                                       isError: false);
 
                                   NavigatorHelper.navigateToHome(context);
@@ -92,7 +92,7 @@ class LoginScreen extends StatelessWidget {
                                 }
                                 SnackBarMessage.showMessage(
                                     context: context,
-                                    text: "Invalid username or password",
+                                    text: "Pogrešno korisničko ime ili šifra!",
                                     isError: true);
                                 return;
                               });
@@ -114,7 +114,7 @@ class LoginScreen extends StatelessWidget {
                           style: TextButton.styleFrom(
                             foregroundColor: Colors.black,
                           ),
-                          child: const Text("Forgot password?"),
+                          child: const Text("Zaboravili ste šifru?"),
                         ),
                       ],
                     ),
@@ -122,7 +122,7 @@ class LoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an account?",
+                          "Nemate nalog?",
                           style: textTheme.bodyLarge,
                         ),
                         TextButton(
@@ -139,7 +139,7 @@ class LoginScreen extends StatelessWidget {
                           style: TextButton.styleFrom(
                               foregroundColor: Colors.black,
                               padding: const EdgeInsets.all(4)),
-                          child: const Text("Create account"),
+                          child: const Text("Kreirajte nalog"),
                         ),
                       ],
                     ),

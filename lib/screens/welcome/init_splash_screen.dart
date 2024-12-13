@@ -68,7 +68,7 @@ class _InitSplashScreenState extends State<InitSplashScreen>
               ),
             ),
             const SizedBox(height: 8),
-            const Text("Loading..."),
+            const Text("Učitavanje..."),
           ],
         ),
       ),

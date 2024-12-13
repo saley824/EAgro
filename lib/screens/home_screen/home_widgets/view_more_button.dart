@@ -27,7 +27,7 @@ class ViewMoreButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            "View more",
+            "Vidi više",
             style:
                 textTheme.bodyMedium!.copyWith(color: CustomColors.gray[700]),
           ),

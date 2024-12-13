@@ -20,7 +20,7 @@ class Description extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Description",
+            "Opis",
             style: textTheme.labelMedium,
           ),
           const Gap(4),

@@ -18,7 +18,7 @@ class OrdersProvider extends ChangeNotifier {
     return orders;
   }
 
-  Future<bool> changeOrderStatus(String orderStatus, String orderId) async {
+  Future<bool> changeOrderStatus(String orderStatus, int orderId) async {
     bool success = await OrderService.changeOrderStatus(
         orderId: orderId, orderStatus: orderStatus);
     notifyListeners();

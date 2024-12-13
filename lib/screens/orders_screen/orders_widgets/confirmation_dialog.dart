@@ -26,14 +26,14 @@ class ConfirmationDialog extends StatelessWidget {
       children: [
         Text(
           textAlign: TextAlign.center,
-          "Change order status",
+          "Promijeni stanje narudžbe",
           style: textTheme.headlineSmall,
         ),
         const Gap(16),
         Text(
           isShop
-              ? "What do you want to do with the new order?"
-              : "Do you want to mark the order as finished?",
+              ? "Šta želite da uradite sa narudžbom?"
+              : "Da li želite da označite narudžbu kao dostavljenu?",
           style: textTheme.bodyLarge,
         ),
         const Gap(16),
@@ -54,14 +54,14 @@ class ConfirmationDialog extends StatelessWidget {
                           if (success) {
                             SnackBarMessage.showMessage(
                               context: context,
-                              text: "Order is sent!",
+                              text: "Narudžba je poslana!",
                               isError: false,
                             );
                             Navigator.of(context).pop();
                           }
                         });
                   },
-                  text: "Send",
+                  text: "Označi kao poslanu",
                   buttonColor: ButtonColor.yellow,
                 ),
               ),
@@ -80,14 +80,14 @@ class ConfirmationDialog extends StatelessWidget {
                           if (success) {
                             SnackBarMessage.showMessage(
                               context: context,
-                              text: "Order is rejected!",
+                              text: "Narudžba je odbijena!",
                               isError: false,
                             );
                             Navigator.of(context).pop();
                           }
                         });
                   },
-                  text: "Reject",
+                  text: "Odbij",
                   buttonColor: ButtonColor.red,
                 ),
               ),
@@ -106,14 +106,14 @@ class ConfirmationDialog extends StatelessWidget {
                           if (success) {
                             SnackBarMessage.showMessage(
                               context: context,
-                              text: "Order is finished!",
+                              text: "Narudžba je dostavljena!",
                               isError: false,
                             );
                             Navigator.of(context).pop();
                           }
                         });
                   },
-                  text: "Finish",
+                  text: "Označi kao dostavljenu",
                   buttonColor: ButtonColor.blue,
                 ),
               ),

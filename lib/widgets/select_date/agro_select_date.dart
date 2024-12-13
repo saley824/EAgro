@@ -51,8 +51,8 @@ class _AgroSelectDateState extends State<AgroSelectDate> {
           ? null
           : () {
               showDatePicker(
-                  confirmText: "Confirm",
-                  cancelText: "Cancel",
+                  confirmText: "Potvrdi",
+                  cancelText: "Otkaži",
                   context: context,
                   initialDate: selectedValue,
                   firstDate:

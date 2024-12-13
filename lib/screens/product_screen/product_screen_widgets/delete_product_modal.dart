@@ -18,7 +18,7 @@ class DeleteProductModal extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Are you sure you want to delete ${product?.name}?",
+          "Jeste li sigurni da želite obrisati ${product?.name}?",
           style: textTheme.labelLarge,
         ),
         const Gap(16),
@@ -36,14 +36,14 @@ class DeleteProductModal extends StatelessWidget {
                   if (success) {
                     SnackBarMessage.showMessage(
                         context: context,
-                        text: "${product?.name} is successfully deleted",
+                        text: "Proizvod ${product?.name} je uspješno obrisan",
                         isError: false);
 
                     NavigatorHelper.navigateToHome(context);
                   }
                 });
           },
-          text: "Delete",
+          text: "Obriši",
           buttonColor: ButtonColor.red,
         ),
       ],

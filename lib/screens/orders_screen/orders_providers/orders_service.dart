@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:eagro/models/category_model/category_model.dart';
 import 'package:eagro/screens/orders_screen/orders_models/order_item_model.dart';
 
 import '../../../helpers/http_api.dart';
+import '../orders_models/most_used_category_model.dart';
 import '../orders_models/order_model.dart';
 
 class OrderService {
@@ -31,7 +33,7 @@ class OrderService {
   }
 
   static Future<bool> changeOrderStatus({
-    required final String orderId,
+    required final int orderId,
     required final String orderStatus,
   }) async {
     bool success = false;
@@ -51,7 +53,7 @@ class OrderService {
     return success;
   }
 
-  static Future<List<OrderItemModel>> getOrderItems(String orderId) async {
+  static Future<List<OrderItemModel>> getOrderItems(int orderId) async {
     List<OrderItemModel> orders = [];
     try {
       final res = await HttpAPI.makeAPIcall(
@@ -84,5 +86,21 @@ class OrderService {
       log('EXCEPTION: $e  createOrderTAG');
     }
     return success;
+  }
+
+    static Future<CategoryModel?> getMostUsedCategory(String userId) async {
+     CategoryModel? category;
+
+    try {
+      final res = await HttpAPI.makeAPIcall(
+        ApiMethod.get,
+        'orders/mostUsedCategory/$userId',
+      );
+
+      category = CategoryModel.fromJson(res.responseData);
+    } catch (e) {
+      log('EXCEPTION: $e  getMostUsedCategory');
+    }
+    return category;
   }
 }

@@ -33,7 +33,7 @@ class TestScreen extends StatelessWidget {
                           .copyWith(color: Colors.black),
                     ),
                     Text(
-                      "Agro Shop",
+                      "EAgro Shop",
                       style: textTheme.headlineLarge!
                           .copyWith(color: Colors.black),
                     ),

@@ -1,9 +1,14 @@
+import 'dart:developer';
+
+import 'package:eagro/screens/orders_screen/orders_providers/orders_service.dart';
 import 'package:flutter/material.dart';
 import 'package:eagro/services/category_service.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/category_model/category_model.dart';
 import '../../../models/products_model/product_filter_model.dart';
 import '../../../models/products_model/product_list_model.dart';
+import '../../../providers/main_provider.dart';
 import '../../../services/product_service.dart';
 import '../../products_list_screen/products_list_models/sort_model.dart';
 
@@ -11,7 +16,8 @@ class HomeScreenProvider extends ChangeNotifier {
   List<ProductListModel> lastAddedProducts = [];
   SortModel lastAddedSort = SortModel(sortBy: "createdAt", orderBy: "desc");
 
-  List<ProductListModel> byRandomCategory = [];
+  List<ProductListModel> productsByRecommendedCategory = [];
+  CategoryModel? recommendedCategory;
 
   List<ProductListModel> productsWithBiggestDiscount = [];
   SortModel biggestDiscountSort =
@@ -23,20 +29,28 @@ class HomeScreenProvider extends ChangeNotifier {
   List<CategoryModel> superCategories = [];
   CategoryModel? selectedCategory;
 
-  getAll() async {
-    await getByRandomCategory();
+  getAll(BuildContext context) async {
+    await getRecommendedCategory(context);
     await getLastAddedProducts();
     await getProductsWithBiggestDiscount();
   }
 
-  getByRandomCategory() async {
-    superCategories = await CategoryService.getSuperCategories();
-    selectedCategory = superCategories[0];
-    final productsResponse = await ProductService.getProducts(
-      productFilterModel: ProductFilterModel(superCategory: selectedCategory),
-      sortModel: SortModel(sortBy: "createdAt", orderBy: "desc"),
-    );
-    byRandomCategory = productsResponse?.products ?? [];
+  getRecommendedCategory(BuildContext context) async {
+    final mainProvider = Provider.of<MainProvider>(context, listen: false);
+    recommendedCategory =
+        await OrderService.getMostUsedCategory(mainProvider.user?.id ?? "");
+
+    if (recommendedCategory != null) {
+      final recommendedParentCategory = await CategoryService.getCategoryById(
+          recommendedCategory!.superCategory!.id);
+      final productsResponse = await ProductService.getProducts(
+        productFilterModel: ProductFilterModel(
+            superCategory: recommendedParentCategory,
+            category: recommendedCategory),
+        sortModel: SortModel(sortBy: "createdAt", orderBy: "desc"),
+      );
+      productsByRecommendedCategory = productsResponse?.products ?? [];
+    }
   }
 
   getLastAddedProducts() async {

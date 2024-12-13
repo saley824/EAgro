@@ -22,7 +22,7 @@ class ProductScreenHelper {
                     mainProvider.incrementCartCount();
                 SnackBarMessage.showMessage(
               context: context,
-              text: "Product is added to cart!",
+              text: "Proizvod je dodan u korpu!",
               isError: false,);
             }
     

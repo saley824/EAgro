@@ -41,7 +41,7 @@ class FilterBottomSheet extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Category",
+                                "Kategorija",
                                 style: textTheme.labelLarge,
                               ),
                               TextButton(
@@ -53,7 +53,7 @@ class FilterBottomSheet extends StatelessWidget {
                                 style: TextButton.styleFrom(
                                   foregroundColor: CustomColors.jadeGreen[600],
                                 ),
-                                child: const Text("Reset"),
+                                child: const Text("Resetuj"),
                               ),
                             ],
                           ),
@@ -61,7 +61,7 @@ class FilterBottomSheet extends StatelessWidget {
                           AgroDropdown(
                             initValue: filterProvider.selectedSuperCategory,
                             key: UniqueKey(),
-                            hintText: "Select super category",
+                            hintText: "Izaberi kategoriju",
                             dropDownElements: filterProvider.superCategories,
                             onSelect: (selected) {
                               filterProvider.setSuperCategory(selected);
@@ -71,7 +71,7 @@ class FilterBottomSheet extends StatelessWidget {
                           AgroDropdown(
                             initValue: filterProvider.selectedSubCategory,
                             key: UniqueKey(),
-                            hintText: "Select category",
+                            hintText: "Izaberi potkategoriju",
                             dropDownElements: filterProvider.subCategories,
                             onSelect: (selected) {
                               filterProvider.setSubCategory(selected);
@@ -81,7 +81,7 @@ class FilterBottomSheet extends StatelessWidget {
                             margin: EdgeInsets.symmetric(vertical: 24),
                           ),
                           Text(
-                            "Price",
+                            "Cijena",
                             style: textTheme.labelLarge,
                           ),
                           const Gap(16),
@@ -94,7 +94,7 @@ class FilterBottomSheet extends StatelessWidget {
                                   textEditingController:
                                       filterProvider.fromPriceController,
                                inputType: InputType.int,
-                                  hintText: "From",
+                                  hintText: "Od",
                                   deleteText: false,
                                   width: 150,
                                   onInputChanged: filterProvider.enableButton,
@@ -108,7 +108,7 @@ class FilterBottomSheet extends StatelessWidget {
                                       filterProvider.toPriceController,
                                                                inputType: InputType.int,
 
-                                  hintText: "To",
+                                  hintText: "Do",
                                   deleteText: false,
                                   width: 150,
                                   onInputChanged: filterProvider.enableButton,
@@ -120,7 +120,7 @@ class FilterBottomSheet extends StatelessWidget {
                             margin: EdgeInsets.symmetric(vertical: 24),
                           ),
                           Text(
-                            "Discount",
+                            "Sniženje",
                             style: textTheme.labelLarge,
                           ),
                           const Gap(16),
@@ -130,7 +130,7 @@ class FilterBottomSheet extends StatelessWidget {
                             onChanged: (s) {
                               filterProvider.setHasDiscount(s);
                             },
-                            text: "Only with discount",
+                            text: "Samo proizvodi koji su sniženi",
                             enableFilledBackground: true,
                             icon: Icon(
                               Icons.percent_rounded,
@@ -142,7 +142,7 @@ class FilterBottomSheet extends StatelessWidget {
                       const Gap(12),
                       AgroButton(
                         buttonColor: ButtonColor.jadeGreen,
-                        text: "Apply",
+                        text: "Primjeni",
                         onTap: () {
                           filterProvider.setFilter();
                           onSelect(filterProvider.productFilter);

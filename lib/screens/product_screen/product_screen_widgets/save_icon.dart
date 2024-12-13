@@ -28,7 +28,7 @@ class SaveIcon extends StatelessWidget {
                     if (success) {
                       SnackBarMessage.showMessage(
                           context: context,
-                          text: "Product is removed from saved list!",
+                          text: "Proizvod je uklonjen iz liste sačuvanih proizvoda!",
                           isError: false);
                     }
                   });
@@ -51,7 +51,7 @@ class SaveIcon extends StatelessWidget {
                     if (success) {
                       SnackBarMessage.showMessage(
                           context: context,
-                          text: "Product is saved!",
+                          text: "Proizvod je sačuvan!",
                           isError: false);
                     }
                   });

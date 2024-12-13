@@ -20,8 +20,8 @@ class AddProductScreen extends StatelessWidget {
       appBar: HelperFunctions.getSubAppBar(
         context: context,
         title: addProductProvider.product != null
-            ? "Edit product"
-            : "Add new product",
+            ? "Izmijeni proizvod"
+            : "Dodaj novi proizvod",
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -41,7 +41,7 @@ class AddProductScreen extends StatelessWidget {
                           const Gap(24),
                           AgroInputField(
                             labelVisible: true,
-                            hintText: "Name",
+                            hintText: "Ime",
                             textEditingController:
                                 addProductProvider.nameController,
                             onInputChanged: addProductProvider.enableButton,
@@ -51,7 +51,7 @@ class AddProductScreen extends StatelessWidget {
                             height: 120,
                             maxLines: 5,
                             labelVisible: true,
-                            hintText: "Description",
+                            hintText: "Opis",
                             textEditingController:
                                 addProductProvider.descriptionController,
                             onInputChanged: addProductProvider.enableButton,
@@ -60,7 +60,7 @@ class AddProductScreen extends StatelessWidget {
                           AgroDropdown(
                             initValue: addProductProvider.selectedSuperCategory,
                             key: UniqueKey(),
-                            hintText: "Select super category",
+                            hintText: "Izaberi kategoriju",
                             dropDownElements:
                                 addProductProvider.superCategories,
                             onSelect: (selected) {
@@ -72,7 +72,7 @@ class AddProductScreen extends StatelessWidget {
                           AgroDropdown(
                             initValue: addProductProvider.selectedSubCategory,
                             key: UniqueKey(),
-                            hintText: "Select category",
+                            hintText: "Izaberi potkategoriju",
                             dropDownElements: addProductProvider.subCategories,
                             onSelect: (selected) {
                               addProductProvider.enableButton();
@@ -80,11 +80,12 @@ class AddProductScreen extends StatelessWidget {
                             },
                             isDisabled:
                                 addProductProvider.subCategories == null,
+                                disabledText: "Prvo izaberite kategoriju",
                           ),
                           const Gap(20),
                           AgroDropdown(
                             initValue: addProductProvider.selectedUnit,
-                            hintText: "Select unit",
+                            hintText: "Odaberi jedinicu",
                             dropDownElements: addProductProvider.unitTypes,
                             onSelect: (selected) {
                               addProductProvider.enableButton();
@@ -96,7 +97,7 @@ class AddProductScreen extends StatelessWidget {
                           AgroInputField(
                             labelVisible: true,
                             inputType: InputType.int,
-                            hintText: "Total amount",
+                            hintText: "Ukupna količina",
                             textEditingController:
                                 addProductProvider.totalAmountController,
                             onInputChanged: addProductProvider.enableButton,
@@ -105,7 +106,7 @@ class AddProductScreen extends StatelessWidget {
                           AgroInputField(
                             labelVisible: true,
                             inputType: InputType.int,
-                            hintText: "Quantity",
+                            hintText: "Količina",
                             textEditingController:
                                 addProductProvider.quantityController,
                             onInputChanged: addProductProvider.enableButton,
@@ -114,7 +115,7 @@ class AddProductScreen extends StatelessWidget {
                           AgroInputField(
                             labelVisible: true,
                             inputType: InputType.double,
-                            hintText: "Price",
+                            hintText: "Cijena",
                             textEditingController:
                                 addProductProvider.priceController,
                             onInputChanged: addProductProvider.enableButton,
@@ -124,8 +125,8 @@ class AddProductScreen extends StatelessWidget {
                               buttonColor: ButtonColor.jadeGreen,
                               disabled: !addProductProvider.isButtonEnabled,
                               text: addProductProvider.product != null
-                                  ? "Edit product"
-                                  : "Add new product",
+                                  ? "Izmijeni"
+                                  : "Dodaj",
                               onTap: () {
                                 FocusManager.instance.primaryFocus?.unfocus();
                                 bool success = false;
@@ -142,8 +143,8 @@ class AddProductScreen extends StatelessWidget {
                                             context: context,
                                             text: addProductProvider.product !=
                                                     null
-                                                ? "Successfully edited product"
-                                                : "Successfully added product",
+                                                ? "Uspješno izmjenjen proizvod!"
+                                                : "Uspješno dodan proizvod!",
                                             isError: false);
                                         return;
                                       }

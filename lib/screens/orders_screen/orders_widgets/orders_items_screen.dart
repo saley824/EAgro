@@ -21,7 +21,7 @@ class OrderItemsScreen extends StatelessWidget {
         Provider.of<OrderItemsProvider>(context, listen: false);
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: HelperFunctions.getSubAppBar(context:context, title: "Order"),
+      appBar: HelperFunctions.getSubAppBar(context:context, title: "Narudžba"),
       body: FutureBuilder(
         future: orderItemsProvider.getOrderItems(order.id),
         builder: (context, snapshot) => snapshot.connectionState ==
@@ -56,7 +56,7 @@ class OrderItemsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Total price:",
+                          "Ukupna cijena:",
                           style: textTheme.bodyLarge,
                         ),
                         Text(
@@ -70,7 +70,7 @@ class OrderItemsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Date",
+                          "Datum",
                           style: textTheme.bodyLarge,
                         ),
                         Text(

@@ -16,7 +16,7 @@ class AgroModal {
         barrierDismissible: dismissible,
         context: context,
         builder: (BuildContext context) {
-          double height = MediaQuery.of(context).size.height;
+          double height = MediaQuery.sizeOf(context).height ;
           return Dialog(
             clipBehavior: Clip.antiAlias,
             backgroundColor: CustomColors.jadeGreen[600],

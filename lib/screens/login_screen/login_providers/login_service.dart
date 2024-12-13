@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:eagro/helpers/helper_functions.dart';
+import 'package:eagro/helpers/snack_bar_messages.dart';
+import 'package:eagro/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../../helpers/http_api.dart';
+import '../../../providers/main_provider.dart';
 import '../login_screen.dart';
 import '/models/api_response.dart';
 import 'login_provider.dart';
@@ -25,8 +29,7 @@ class LoginService {
         body: {
           "username": username,
           "password": password,
-          "fcmToken":fcmToken,
-          
+          "fcmToken": fcmToken,
         },
       );
     } catch (e) {
@@ -59,16 +62,26 @@ class LoginService {
   }
 
   static void logOut(BuildContext context) async {
-    final sharedPrefs = await SharedPreferences.getInstance();
-    sharedPrefs.setString("access_token", "");
-    if (context.mounted) {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => ChangeNotifierProvider(
-                    create: (BuildContext context) => LoginProvider(),
-                    child: const LoginScreen(),
-                  )),
-          (Route<dynamic> route) => false);
-    }
+    final mainProvider = Provider.of<MainProvider>(context, listen: false);
+    HelperFunctions.callMethodWithLoadingDialog(
+        context: context,
+        callback: () async {
+          final sharedPrefs = await SharedPreferences.getInstance();
+          await UserService.logOut(id: mainProvider.getId());
+          sharedPrefs.setString("access_token", "");
+        },
+        onFinished: () {
+          if (context.mounted) {
+            SnackBarMessage.showMessage(context: context, text: "Uspješno ste se odjavili!", isError: false);
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) => ChangeNotifierProvider(
+                          create: (BuildContext context) => LoginProvider(),
+                          child: const LoginScreen(),
+                        )),
+                (Route<dynamic> route) => false);
+          }
+        });
+
   }
 }

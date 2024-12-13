@@ -23,53 +23,59 @@ class HomeScreen extends StatelessWidget {
         appBar: HelperFunctions.getAppBar(context),
         body: Consumer<MainProvider>(
           builder: (_, __, ___) => FutureBuilder(
-            future: homeScreenProvider.getAll(),
+            future: homeScreenProvider.getAll(context),
             builder: (context, snapshot) =>
                 snapshot.connectionState == ConnectionState.waiting
                     ? const AgroLoadingIndicator()
-                    : Column(
-                        children: [
-                          Expanded(
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  HomeProductHorizontal(
-                                    title: "Products on discount",
-                                    productsList: homeScreenProvider
-                                        .productsWithBiggestDiscount,
-                                    productFilterModel: ProductFilterModel(
-                                      hasDiscount: true,
+                    : Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Column(
+                          children: [
+                            Expanded(
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    HomeProductHorizontal(
+                                      title: "Proizvodi na sniženju",
+                                      productsList: homeScreenProvider
+                                          .productsWithBiggestDiscount,
+                                      productFilterModel: ProductFilterModel(
+                                        hasDiscount: true,
+                                      ),
+                                      sortModel:
+                                          homeScreenProvider.biggestDiscountSort,
                                     ),
-                                    sortModel:
-                                        homeScreenProvider.biggestDiscountSort,
-                                  ),
-                                  const Gap(16),
-                                  HomeProductHorizontal(
-                                    title: "New Products",
-                                    productsList:
-                                        homeScreenProvider.lastAddedProducts,
-                                    productFilterModel: ProductFilterModel(),
-                                    sortModel: SortModel(
-                                        sortBy: "createdAt", orderBy: "desc"),
-                                  ),
-                                  const Gap(16),
-                                  HomeProductHorizontal(
-                                    title: "Some category",
-                                    productsList:
-                                        homeScreenProvider.byRandomCategory,
-                                    productFilterModel: ProductFilterModel(
-                                      superCategory:
-                                          homeScreenProvider.selectedCategory,
+                                    const Gap(16),
+                                    HomeProductHorizontal(
+                                      title: "Novi proizvodi",
+                                      productsList:
+                                          homeScreenProvider.lastAddedProducts,
+                                      productFilterModel: ProductFilterModel(),
+                                      sortModel: SortModel(
+                                          sortBy: "createdAt", orderBy: "desc"),
                                     ),
-                                    sortModel: SortModel(
-                                        sortBy: "createdAt", orderBy: "desc"),
-                                  ),
-                                ],
+                                    const Gap(16),
+                      
+                                    if(homeScreenProvider.recommendedCategory!= null)
+                                    HomeProductHorizontal(
+                                      title: "Preporučena kategorija: ${homeScreenProvider.recommendedCategory?.name}",
+                                      productsList:
+                                          homeScreenProvider.productsByRecommendedCategory,
+                                      productFilterModel: ProductFilterModel(
+                                        superCategory:
+                                            homeScreenProvider.recommendedCategory!.superCategory,
+                                            category:     homeScreenProvider.recommendedCategory,
+                                      ),
+                                      sortModel: SortModel(
+                                          sortBy: "createdAt", orderBy: "desc"),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
-                        ],
-                      ),
+                            )
+                          ],
+                        ),
+                    ),
           ),
         ));
   }

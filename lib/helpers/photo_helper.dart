@@ -7,6 +7,7 @@ class PhotoUploadHelper {
   static Future<File?> selectFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
+      
     );
     File? image;
     if (result != null) {

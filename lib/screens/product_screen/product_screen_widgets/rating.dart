@@ -22,7 +22,7 @@ class Rating extends StatelessWidget {
       onTap: () {
         if (!mainProvider.isShop()) {
           AgroBottomSheet.showBottomSheet(
-              title: "Review",
+              title: "Ocijeni proizvod",
               context: context,
               child: ChangeNotifierProvider.value(
                   value: productProvider,

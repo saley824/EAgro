@@ -57,7 +57,7 @@ class ProductPreview extends StatelessWidget {
               );
       },
       child: SizedBox(
-        width: 152,
+        width: 140,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

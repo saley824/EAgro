@@ -34,13 +34,8 @@ class ResetPasswordScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Welcome to",
+                      "Resetovanje šifre",
                       style: textTheme.headlineMedium!
-                          .copyWith(color: Colors.black),
-                    ),
-                    Text(
-                      "Agro Shop",
-                      style: textTheme.headlineLarge!
                           .copyWith(color: Colors.black),
                     ),
                     const Gap(120),
@@ -56,7 +51,7 @@ class ResetPasswordScreen extends StatelessWidget {
                     AgroInputField(
                       onInputChanged: resetPasswordProvider.enableButton,
                       height: 48,
-                      hintText: "Password",
+                      hintText: "Šifra",
                       labelVisible: true,
                       textEditingController:
                           resetPasswordProvider.passwordController,
@@ -66,7 +61,7 @@ class ResetPasswordScreen extends StatelessWidget {
                     AgroInputField(
                       onInputChanged: resetPasswordProvider.enableButton,
                       height: 48,
-                      hintText: "Confirm password",
+                      hintText: "Potvrdi šifru",
                       labelVisible: true,
                       textEditingController:
                           resetPasswordProvider.confirmPasswordController,
@@ -76,7 +71,7 @@ class ResetPasswordScreen extends StatelessWidget {
                     Consumer<ResetPasswordProvider>(
                       builder: (_, __, ___) => AgroButton(
                         disabled: !resetPasswordProvider.isButtonEnabled,
-                        text: "Reset password",
+                        text: "Resetuj šifru",
                         onTap: () {
                           FocusManager.instance.primaryFocus?.unfocus();
                           bool success = false;
@@ -90,7 +85,7 @@ class ResetPasswordScreen extends StatelessWidget {
                                 if (success) {
                                   SnackBarMessage.showMessage(
                                     context: context,
-                                    text: "Password is successfully reset!",
+                                    text: "Šifra je uspješno promijenjena!",
                                     isError: false,
                                   );
                                   Navigator.of(context).pushReplacement(
@@ -106,7 +101,7 @@ class ResetPasswordScreen extends StatelessWidget {
                                 }
                                 SnackBarMessage.showMessage(
                                   context: context,
-                                  text: "Something went wrong",
+                                  text: "Desila se greška",
                                   isError: true,
                                 );
 
@@ -123,7 +118,7 @@ class ResetPasswordScreen extends StatelessWidget {
                       style: TextButton.styleFrom(
                           foregroundColor: Colors.black,
                           padding: const EdgeInsets.all(4)),
-                      child: const Text("Back to forgot password"),
+                      child: const Text("Vrati se nazad"),
                     ),
                   ],
                 ),

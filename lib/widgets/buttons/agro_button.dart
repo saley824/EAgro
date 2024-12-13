@@ -16,7 +16,7 @@ class AgroButton extends StatelessWidget {
   final ButtonColor buttonColor;
   final EdgeInsetsGeometry? padding;
 
-  const AgroButton({
+  const  AgroButton({
     super.key,
     required this.text,
     this.disabled = false,
@@ -44,7 +44,9 @@ class AgroButton extends StatelessWidget {
               backgroundColor: !disabled ? colorBtn : colorBtn.withOpacity(0.5),
               foregroundColor: textColor,
               textStyle: textTheme.bodyLarge!),
-          child: Text(text),
+          child: Text(
+            textAlign: TextAlign.center,
+            text),
         ),
       ),
     );

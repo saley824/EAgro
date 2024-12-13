@@ -5,6 +5,8 @@ import '../constants/custom_colors.dart';
 class CustomThemes {
   static const textFont = 'Inter';
   static ThemeData mainTheme = ThemeData(
+    scaffoldBackgroundColor: Colors.white,
+    dialogBackgroundColor:Colors.white ,
       primarySwatch: CustomColors.red,
       appBarTheme: const AppBarTheme(
         backgroundColor: CustomColors.backgroundColor,

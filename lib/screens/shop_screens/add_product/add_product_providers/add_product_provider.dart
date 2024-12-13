@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +16,20 @@ import '../../../../widgets/drop_down/drop_down_model/agro_dropdown_model.dart';
 enum UnitType {
   LITER,
   KG,
-  PIECE,
+  PIECE;
+
+  String getText() {
+  switch (this) {
+    case UnitType.KG:
+    return "KG";
+    case UnitType.LITER:
+    return "Litar";
+    case UnitType.PIECE:
+    return "Komad";
+    
+  }
+ 
+}
 }
 
 class AddProductProvider extends ChangeNotifier {
@@ -33,15 +48,18 @@ class AddProductProvider extends ChangeNotifier {
 
   List<AgroDropdownModel> unitTypes = [
     AgroDropdownModel(
-        id: UnitType.KG.name, text: UnitType.KG.name, value: UnitType.KG.name),
+      id: UnitType.KG.name,
+      value: UnitType.KG.name,
+      text: UnitType.KG.getText(),
+    ),
     AgroDropdownModel(
         id: UnitType.LITER.name,
-        text: UnitType.LITER.name,
-        value: UnitType.LITER.name),
+        value: UnitType.LITER.name,
+        text: UnitType.LITER.getText()),
     AgroDropdownModel(
       id: UnitType.PIECE.name,
-      text: UnitType.PIECE.name,
       value: UnitType.PIECE.name,
+      text: UnitType.PIECE.getText(),
     )
   ];
 

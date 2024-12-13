@@ -59,13 +59,28 @@ class SingleOrder extends StatelessWidget {
         ),
         child: Column(
           children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "ID narudžbe",
+                  style: textTheme.labelLarge,
+                ),
+                Text(
+                "#${order.id}",
+                  style: textTheme.bodyLarge,
+                ),
+              ],
+            ),
+            const Gap(16),
             if (isShop) ...[
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Buyer name",
+                    "Ime",
                     style: textTheme.labelLarge,
                   ),
                   const Gap(8),
@@ -77,35 +92,34 @@ class SingleOrder extends StatelessWidget {
                   ),
                 ],
               ),
-      
-              if(order.user?.address != null)...[
-                    const Gap(16),     Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    textAlign: TextAlign.right,
-                    "Buyer address",
-                    style: textTheme.labelLarge,
-                  ),
-                  const Gap(60),
-                  Flexible(
-                    child: Text(
-                      order.user?.address.toString()  ?? "",
-                      style: textTheme.bodyLarge,
+              if (order.user?.address != null) ...[
+                const Gap(16),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      textAlign: TextAlign.right,
+                      "Adresa",
+                      style: textTheme.labelLarge,
                     ),
-                  ),
-                ],
-              ),
-              ]
-          ,
+                    const Gap(60),
+                    Flexible(
+                      child: Text(
+                        order.user?.address.toString() ?? "",
+                        style: textTheme.bodyLarge,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
               const Gap(16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Buyer email",
+                    "Email",
                     style: textTheme.labelLarge,
                   ),
                   const Gap(8),
@@ -123,7 +137,7 @@ class SingleOrder extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Total price",
+                  "Ukupna cijena",
                   style: textTheme.labelLarge,
                 ),
                 const Gap(8),
@@ -210,16 +224,16 @@ class SingleOrder extends StatelessWidget {
     String? desc;
     switch (order.status) {
       case "NEW":
-        desc = "Create date";
+        desc = "Datum kreiranja";
         break;
       case "SENT":
-        desc = "Sent date";
+        desc = "Datum slanja";
         break;
       case "FINISHED":
-        desc = "Finished date";
+        desc = "Datum dostave";
         break;
       case "REJECTED":
-        desc = "Rejected date";
+        desc = "Datum odbijanja";
         break;
       default:
     }

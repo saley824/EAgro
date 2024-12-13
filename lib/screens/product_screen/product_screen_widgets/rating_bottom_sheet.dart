@@ -25,7 +25,7 @@ class RatingBottomSheet extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "Rate products on a scale of 1 to 5 stars to provide a quick summary of your experience.",
+            "Ocenite proizvod na skali od 1 do 5 zvjezdica da biste nam pokazali koliko ste zadovoljni ovim proizvodom.",
             style: textTheme.bodyLarge,
           ),
           const Gap(8),
@@ -54,7 +54,7 @@ class RatingBottomSheet extends StatelessWidget {
           if (productProvider.rating != null) ...[
             const Gap(16),
             Text(
-              "You already made review",
+              "Već ste ostavili ocjenu.",
               style: textTheme.bodyLarge,
             )
           ],
@@ -63,7 +63,7 @@ class RatingBottomSheet extends StatelessWidget {
           Consumer<ProductProvider>(
             builder: (_, __, ___) => AgroButton(
               disabled: !productProvider.isButtonEnabled,
-              text: "Make review",
+              text: "Ocijeni",
               onTap: () {
                 productProvider.makeReview();
                 Navigator.of(context).pop();

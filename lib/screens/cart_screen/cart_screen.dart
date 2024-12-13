@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:eagro/helpers/snack_bar_messages.dart';
-import 'package:eagro/widgets/loading_indicator/agro_loading_indicator.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/main_provider.dart';
-import '../../widgets/no_results.dart';
 import '/helpers/helper_functions.dart';
+import '/helpers/snack_bar_messages.dart';
 import '/screens/cart_screen/cart_widgets/cart_item.dart';
 import '/widgets/buttons/agro_button.dart';
 import '/widgets/divider/divider.dart';
+import '/widgets/loading_indicator/agro_loading_indicator.dart';
+import '../../providers/main_provider.dart';
+import '../../widgets/no_results.dart';
 import 'cart_providers/cart_provider.dart';
 
 class CartScreen extends StatelessWidget {
@@ -27,7 +27,7 @@ class CartScreen extends StatelessWidget {
       }
      },
       child: Scaffold(
-        appBar: HelperFunctions.getSubAppBar(context:  context, title: "Cart", onTap: () {
+        appBar: HelperFunctions.getSubAppBar(context:  context, title: "Korpa", onTap: () {
           mainProvider.getCountCart();
         },),
         body: SafeArea(
@@ -40,7 +40,7 @@ class CartScreen extends StatelessWidget {
                   : cartProvider.cart != null &&
                           cartProvider.cart!.cartItemsDetails.isEmpty
                       ? const NoResults(
-                          text: "Cart is empty",
+                          text: "Korpa je prazna",
                         )
                       : Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
@@ -58,7 +58,7 @@ class CartScreen extends StatelessWidget {
                                         ...cartProvider.cart!.cartItemsDetails
                                             .map(
                                           (e) => Padding(
-                                            padding: const EdgeInsets.all(8),
+                                            padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
                                             child: CartItem(
                                               cartItemModel: e,
                                             ),
@@ -74,7 +74,7 @@ class CartScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Total price:",
+                                      "Ukupna cijena:",
                                       style: textTheme.bodyMedium,
                                     ),
                                     Text(
@@ -90,7 +90,7 @@ class CartScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Number of items:",
+                                      "Broj stavki:",
                                       style: textTheme.bodyMedium,
                                     ),
                                     Text(
@@ -102,7 +102,7 @@ class CartScreen extends StatelessWidget {
                                 const AgroDivider(
                                     margin: EdgeInsets.symmetric(vertical: 16)),
                                 AgroButton(
-                                  text: "Finish",
+                                  text: "Završi",
                                   onTap: () {
                                     bool success = false;
                                     HelperFunctions.callMethodWithLoadingDialog(
@@ -116,7 +116,7 @@ class CartScreen extends StatelessWidget {
                                             cartProvider.clear();
                                             SnackBarMessage.showMessage(
                                               context: context,
-                                              text: "Order is created!",
+                                              text: "Narudžba je kreirana!",
                                               isError: false,
                                             );
                                           }

@@ -20,13 +20,13 @@ class DeleteDiscountModal extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Are you sure you want to delete ${product?.name} discount?",
+          "Jeste li sigurni da želite obrisati sniženje na ${product?.name}?",
           style: textTheme.labelLarge,
         ),
         const Gap(16),
         AgroButton(
           onTap: onTap,
-          text: "Delete discount",
+          text: "Ukloni sniženje",
           buttonColor: ButtonColor.red,
         ),
       ],

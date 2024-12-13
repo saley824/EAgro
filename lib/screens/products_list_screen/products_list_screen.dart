@@ -37,7 +37,7 @@ class ProductsListScreen extends StatelessWidget {
     return Scaffold(
       appBar: HelperFunctions.getSubAppBar(
         context : context,
-       title:  "Products",
+       title:  "Proizvodi",
       ),
       body: SafeArea(
         child: Padding(
@@ -58,7 +58,7 @@ class ProductsListScreen extends StatelessWidget {
                                 textEditingController:
                                     productsListProvider.searchController,
                                 prefixIcon: const Icon(Icons.search),
-                                hintText: "Search",
+                                hintText: "Pretraga",
                                 onInputChanged: () {
                                   productsListProvider.searchProducts();
                                 },
@@ -105,7 +105,7 @@ class ProductsListScreen extends StatelessWidget {
                                     InkWell(
                                       onTap: () {
                                         AgroBottomSheet.showBottomSheet(
-                                          title: "Filter products",
+                                          title: "Filter",
                                           context: context,
                                           child: ChangeNotifierProvider(
                                             create: (context) => FilterProvider(
@@ -143,7 +143,7 @@ class ProductsListScreen extends StatelessWidget {
                               const Gap(16),
                               
                 productsListProvider.products.isEmpty ?
-             const NoResults(text:"There are no products matching your filters and search!") :
+             const NoResults(text:"Trenutno nema proizvoda koji odgovaraju vašoj pretrazi i filterima!") :
                               Wrap(
                                 spacing: 36,
                                 runSpacing: 8,

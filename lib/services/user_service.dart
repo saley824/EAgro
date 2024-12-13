@@ -180,4 +180,24 @@ class UserService {
 
     return res?.success ?? false;
   }
+
+    static Future<bool> logOut({
+    required String id,
+  }) async {
+
+    bool success = false;
+    try {
+      final res = await HttpAPI.makeAPIcall(
+        ApiMethod.get,
+        'users/logOut',
+        body: {
+          "userId": id,
+        },
+      );
+      success = res.success == true;
+    } catch (e) {
+      log("EXCEPTION getUserTAG : $e");
+    }
+    return success;
+  }
 }

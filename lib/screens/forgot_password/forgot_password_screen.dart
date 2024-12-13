@@ -33,16 +33,23 @@ class ForgotPasswordScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Welcome to",
+                      "Resetovanje šifre",
                       style: textTheme.headlineMedium!
                           .copyWith(color: Colors.black),
                     ),
-                    Text(
-                      "Agro Shop",
-                      style: textTheme.headlineLarge!
-                          .copyWith(color: Colors.black),
-                    ),
+
                     const SizedBox(height: 120),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                          "Unesite vaš email",
+                          style: textTheme.bodyLarge!
+                              .copyWith(color: Colors.black),
+                                              ),
+                        ],
+                      ),
+                      const Gap(8),
                     AgroInputField(
                       onInputChanged: forgotPassword.enableButton,
                       height: 48,
@@ -54,7 +61,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     Consumer<ForgotPasswordProvider>(
                       builder: (_, __, ___) => AgroButton(
                         disabled: !forgotPassword.isButtonEnabled,
-                        text: "Send",
+                        text: "Pošalji",
                         onTap: () {
                           FocusManager.instance.primaryFocus?.unfocus();
                           bool success = false;
@@ -68,7 +75,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                   SnackBarMessage.showMessage(
                                     context: context,
                                     text:
-                                        "Token is successfully sent to email!",
+                                        "Token je usješno poslan na Email!",
                                     isError: false,
                                   );
 
@@ -76,11 +83,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                       context);
                                   return;
                                 }
-                                SnackBarMessage.showMessage(
-                                  context: context,
-                                  text: "Something went wrong",
-                                  isError: true,
-                                );
+                                HelperFunctions.getErrorSnackBar(context);
                                 return;
                               });
                         },
@@ -94,7 +97,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       style: TextButton.styleFrom(
                           foregroundColor: Colors.black,
                           padding: const EdgeInsets.all(4)),
-                      child: const Text("Back to Login screen"),
+                      child: const Text("Nazad na ekran za prijavu!"),
                     ),
                   ],
                 ),

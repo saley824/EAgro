@@ -6,7 +6,7 @@ import '../orders_models/order_item_model.dart';
 
 class OrderItemsProvider extends ChangeNotifier {
   List<OrderItemModel> orderItems = [];
-  Future<void> getOrderItems(String orderId) async {
+  Future<void> getOrderItems(int orderId) async {
     orderItems = await OrderService.getOrderItems(orderId);
   }
 

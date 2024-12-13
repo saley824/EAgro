@@ -8,8 +8,28 @@ enum OrderStatus {
   NEW,
   SENT,
   FINISHED,
-  REJECTED,
+  REJECTED;
+
+
+String getText() {
+  switch (this) {
+    case OrderStatus.NEW:
+    return "NOVA";
+    case OrderStatus.SENT:
+    return "POSLANA";
+    case OrderStatus.FINISHED:
+    return "DOSTAVLJENA";
+    case OrderStatus.REJECTED:
+    return "ODBIJENA";
+    
+  }
+ 
 }
+
+   
+}
+
+
 
 class OrderStatusBadge extends StatelessWidget {
   final OrderStatus orderStatus;
@@ -42,7 +62,7 @@ class OrderStatusBadge extends StatelessWidget {
       ),
       child: Text(
         textAlign: TextAlign.center,
-        orderStatus.name,
+        orderStatus.getText(),
         style: textTheme.labelLarge!.copyWith(color: Colors.white),
       ),
     );
