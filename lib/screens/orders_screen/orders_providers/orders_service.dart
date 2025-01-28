@@ -4,7 +4,6 @@ import 'package:eagro/models/category_model/category_model.dart';
 import 'package:eagro/screens/orders_screen/orders_models/order_item_model.dart';
 
 import '../../../helpers/http_api.dart';
-import '../orders_models/most_used_category_model.dart';
 import '../orders_models/order_model.dart';
 
 class OrderService {
@@ -88,8 +87,8 @@ class OrderService {
     return success;
   }
 
-    static Future<CategoryModel?> getMostUsedCategory(String userId) async {
-     CategoryModel? category;
+  static Future<CategoryModel?> getMostUsedCategory(String userId) async {
+    CategoryModel? category;
 
     try {
       final res = await HttpAPI.makeAPIcall(

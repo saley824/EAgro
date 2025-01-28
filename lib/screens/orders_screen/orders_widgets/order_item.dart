@@ -35,8 +35,8 @@ class OrderItem extends StatelessWidget {
                   child: CachedNetworkImage(
                     //todo sasa
                     imageUrl:
-                        "https://t4.ftcdn.net/jpg/07/23/14/93/360_F_723149335_tA0Fo8zefrHzYlSgXRMYHmBQk7CuWrRd.jpg",
-                    // orderItem.img ?? "",
+                        // "https://t4.ftcdn.net/jpg/07/23/14/93/360_F_723149335_tA0Fo8zefrHzYlSgXRMYHmBQk7CuWrRd.jpg",
+                        orderItem.img ?? "",
                     errorWidget: (context, error, stackTrace) {
                       return const SizedBox(
                         height: 80,

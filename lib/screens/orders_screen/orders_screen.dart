@@ -1,4 +1,3 @@
-
 import 'package:eagro/providers/main_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:eagro/widgets/no_results.dart';
@@ -16,11 +15,11 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final message = ModalRoute.of(context)!.settings.arguments;
-  
+
     final orderProvider = context.read<OrdersProvider>();
     final mainProvider = context.read<MainProvider>();
     return Scaffold(
-      appBar: HelperFunctions.getSubAppBar(context:  context, title:  "Narudžbe"),
+      appBar: HelperFunctions.getSubAppBar(context: context, title: "Narudžbe"),
       body: Consumer<OrdersProvider>(
         builder: (_, __, ___) => FutureBuilder(
             future: orderProvider.getOrders(),
@@ -28,7 +27,8 @@ class OrdersScreen extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const AgroLoadingIndicator();
               } else if (snapshot.data?.isEmpty ?? false) {
-                return const NoResults(text: "Trenutno nema narudžbi");
+                return Center(
+                    child: const NoResults(text: "Trenutno nema narudžbi"));
               } else {
                 return SingleChildScrollView(
                   child: Container(

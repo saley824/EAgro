@@ -170,6 +170,7 @@ class HelperFunctions {
       title: Text(
         title,
         style: textTheme.headlineLarge!.copyWith(color: Colors.white),
+        overflow: TextOverflow.clip,
       ),
       backgroundColor: CustomColors.jadeGreen[600],
       leading: InkWell(

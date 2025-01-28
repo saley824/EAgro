@@ -36,8 +36,8 @@ class ProductsListScreen extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: HelperFunctions.getSubAppBar(
-        context : context,
-       title:  "Proizvodi",
+        context: context,
+        title: "Proizvodi",
       ),
       body: SafeArea(
         child: Padding(
@@ -47,7 +47,7 @@ class ProductsListScreen extends StatelessWidget {
               future: productsListProvider.getInitProducts(),
               builder: (context, snapshot) => snapshot.connectionState ==
                       ConnectionState.waiting
-                  ? const AgroLoadingIndicator()  
+                  ? const AgroLoadingIndicator()
                   : Consumer<ProductsListProvider>(
                       builder: (_, __, ___) => SingleChildScrollView(
                         controller: scrollController,
@@ -96,7 +96,7 @@ class ProductsListScreen extends StatelessWidget {
                                           ),
                                           const Gap(4),
                                           Text(
-                                            "Sort",
+                                            "Sortiraj",
                                             style: textTheme.bodyLarge,
                                           ),
                                         ],
@@ -105,7 +105,7 @@ class ProductsListScreen extends StatelessWidget {
                                     InkWell(
                                       onTap: () {
                                         AgroBottomSheet.showBottomSheet(
-                                          title: "Filter",
+                                          title: "Filteri",
                                           context: context,
                                           child: ChangeNotifierProvider(
                                             create: (context) => FilterProvider(
@@ -141,17 +141,19 @@ class ProductsListScreen extends StatelessWidget {
                                 ),
                               ),
                               const Gap(16),
-                              
-                productsListProvider.products.isEmpty ?
-             const NoResults(text:"Trenutno nema proizvoda koji odgovaraju vašoj pretrazi i filterima!") :
-                              Wrap(
-                                spacing: 36,
-                                runSpacing: 8,
-                                children: [
-                                  ...productsListProvider.products.map(
-                                      (data) => ProductPreview(product: data))
-                                ],
-                              ),
+                              productsListProvider.products.isEmpty
+                                  ? const NoResults(
+                                      text:
+                                          "Trenutno nema proizvoda koji odgovaraju vašoj pretrazi i filterima!")
+                                  : Wrap(
+                                      spacing: 36,
+                                      runSpacing: 8,
+                                      children: [
+                                        ...productsListProvider.products.map(
+                                            (data) =>
+                                                ProductPreview(product: data))
+                                      ],
+                                    ),
                               if (productsListProvider.isLoadingMoreProducts)
                                 const Positioned(
                                   bottom: 20,

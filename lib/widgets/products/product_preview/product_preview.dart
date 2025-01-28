@@ -91,9 +91,9 @@ class ProductPreview extends StatelessWidget {
                       child: CachedNetworkImage(
                         // todo sasa
                         imageUrl:
-                            "https://t4.ftcdn.net/jpg/07/23/14/93/360_F_723149335_tA0Fo8zefrHzYlSgXRMYsmBQk7CuWrRd.jpg",
+                            // "https://t4.ftcdn.net/jpg/07/23/14/93/360_F_723149335_tA0Fo8zefrHzYlSgXRMYsmBQk7CuWrRd.jpg",
 
-                        // product.image ?? "",
+                            product.image ?? "",
 
                         errorWidget: (context, error, stackTrace) {
                           return const SizedBox(

@@ -16,7 +16,9 @@ class ChangePassword extends StatelessWidget {
   Widget build(BuildContext context) {
     final changePasswordProvider = context.read<ChangePasswordProvider>();
     return Scaffold(
-      appBar: HelperFunctions.getSubAppBar(context: context, title:  "Promijeni šifru"),
+      resizeToAvoidBottomInset: false,
+      appBar: HelperFunctions.getSubAppBar(
+          context: context, title: "Promijeni šifru"),
       body: SafeArea(
         child: Container(
           color: Colors.white,
@@ -77,7 +79,9 @@ class ChangePassword extends StatelessWidget {
                               return;
                             }
                             SnackBarMessage.showMessage(
-                                context: context, text: "Desila se greška!", isError: true);
+                                context: context,
+                                text: "Desila se greška!",
+                                isError: true);
 
                             return;
                           });

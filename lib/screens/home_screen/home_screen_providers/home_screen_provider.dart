@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:eagro/screens/orders_screen/orders_providers/orders_service.dart';
-import 'package:flutter/material.dart';
 import 'package:eagro/services/category_service.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/category_model/category_model.dart';

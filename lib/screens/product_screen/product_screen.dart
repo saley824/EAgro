@@ -62,9 +62,9 @@ class ProductScreen extends StatelessWidget {
                           children: [
                             CachedNetworkImage(
                               imageUrl:
-                                  "https://t4.ftcdn.net/jpg/07/23/14s/93/360_F_723149335_tA0Fo8zefrHzYlSgXRMYHmBQk7CuWrRd.jpg",
-                              //todo sasa
-                              // productProvider.product?.image ?? "",
+                                  // "https://t4.ftcdn.net/jpg/07/23/14s/93/360_F_723149335_tA0Fo8zefrHzYlSgXRMYHmBQk7CuWrRd.jpg",
+                                  //todo sasa
+                                  productProvider.product?.image ?? "",
 
                               errorWidget: (context, error, stackTrace) {
                                 return const SizedBox(

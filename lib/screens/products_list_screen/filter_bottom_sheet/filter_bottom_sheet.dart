@@ -41,7 +41,7 @@ class FilterBottomSheet extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Kategorija",
+                                "",
                                 style: textTheme.labelLarge,
                               ),
                               TextButton(
@@ -57,7 +57,7 @@ class FilterBottomSheet extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const Gap(16),
+                          const Gap(8),
                           AgroDropdown(
                             initValue: filterProvider.selectedSuperCategory,
                             key: UniqueKey(),
@@ -69,6 +69,7 @@ class FilterBottomSheet extends StatelessWidget {
                           ),
                           const Gap(20),
                           AgroDropdown(
+                            disabledText: "Prvo izaberite kategoriju",
                             initValue: filterProvider.selectedSubCategory,
                             key: UniqueKey(),
                             hintText: "Izaberi potkategoriju",
@@ -93,7 +94,7 @@ class FilterBottomSheet extends StatelessWidget {
                                   labelVisible: true,
                                   textEditingController:
                                       filterProvider.fromPriceController,
-                               inputType: InputType.int,
+                                  inputType: InputType.int,
                                   hintText: "Od",
                                   deleteText: false,
                                   width: 150,
@@ -106,8 +107,7 @@ class FilterBottomSheet extends StatelessWidget {
                                   labelVisible: true,
                                   textEditingController:
                                       filterProvider.toPriceController,
-                                                               inputType: InputType.int,
-
+                                  inputType: InputType.int,
                                   hintText: "Do",
                                   deleteText: false,
                                   width: 150,

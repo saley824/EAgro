@@ -1,18 +1,18 @@
 import 'dart:developer';
 
-import 'package:eagro/helpers/helper_functions.dart';
-import 'package:eagro/helpers/snack_bar_messages.dart';
-import 'package:eagro/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuple/tuple.dart';
 
+import '/helpers/helper_functions.dart';
+import '/helpers/snack_bar_messages.dart';
+import '/models/api_response.dart';
+import '/services/user_service.dart';
 import '../../../helpers/http_api.dart';
 import '../../../providers/main_provider.dart';
 import '../login_screen.dart';
-import '/models/api_response.dart';
 import 'login_provider.dart';
 
 class LoginService {
@@ -72,7 +72,10 @@ class LoginService {
         },
         onFinished: () {
           if (context.mounted) {
-            SnackBarMessage.showMessage(context: context, text: "Uspješno ste se odjavili!", isError: false);
+            SnackBarMessage.showMessage(
+                context: context,
+                text: "Uspješno ste se odjavili!",
+                isError: false);
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
                     builder: (context) => ChangeNotifierProvider(
@@ -82,6 +85,5 @@ class LoginService {
                 (Route<dynamic> route) => false);
           }
         });
-
   }
 }

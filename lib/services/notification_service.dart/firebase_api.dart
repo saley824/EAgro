@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:eagro/main.dart';
-import 'package:eagro/screens/testscreen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -11,7 +10,6 @@ import 'package:provider/provider.dart';
 import '../../providers/main_provider.dart';
 import '../../screens/orders_screen/orders_providers/order_provider.dart';
 import '../../screens/orders_screen/orders_screen.dart';
-
 
 class FirebaseApi {
   static BuildContext? context;
@@ -42,7 +40,7 @@ class FirebaseApi {
   }
 
   Future<void> handleMessage1(RemoteMessage? message) async {
-   log('------------------11111111111--------DEV LOG---------------SASA--1111111---------');
+    log('------------------11111111111--------DEV LOG---------------SASA--1111111---------');
     log('------${navigatorKey.currentState}-------------11111111------DEV LOG--111111----------------SASA--------');
 
     if (message == null) return;
@@ -50,8 +48,9 @@ class FirebaseApi {
     log(message.notification?.title ?? "");
     log(message.notification?.body ?? "");
   }
+
   Future<void> handleMessage2(RemoteMessage? message) async {
-   log('--------------22222222222222222------------DEV LOG---------------SASA-----------');
+    log('--------------22222222222222222------------DEV LOG---------------SASA-----------');
     log('------${navigatorKey.currentState}------------2222222--------DEV LOG------222222222------------SASA--------');
 
     if (message == null) return;
@@ -59,21 +58,22 @@ class FirebaseApi {
     log(message.notification?.title ?? "");
     log(message.notification?.body ?? "");
   }
-   handleMessage3(RemoteMessage? message)  {
-final mainProvider = Provider.of<MainProvider>(context!, listen: false);
- Navigator.of(context!).push(
-                  MaterialPageRoute(
-                    builder: (context) => ChangeNotifierProvider(
-                      create: (context) => OrdersProvider(
-                        userId: mainProvider.getId(),
-                        isShop: mainProvider.isShop(),
-                      ),
-                      child: const OrdersScreen(),
-                    ),
-                  ),
-                );
 
-   log('--------------3333333333------------DEV LOG---------333333333------SASA-----------');
+  handleMessage3(RemoteMessage? message) {
+    final mainProvider = Provider.of<MainProvider>(context!, listen: false);
+    Navigator.of(context!).push(
+      MaterialPageRoute(
+        builder: (context) => ChangeNotifierProvider(
+          create: (context) => OrdersProvider(
+            userId: mainProvider.getId(),
+            isShop: mainProvider.isShop(),
+          ),
+          child: const OrdersScreen(),
+        ),
+      ),
+    );
+
+    log('--------------3333333333------------DEV LOG---------333333333------SASA-----------');
     log('------${navigatorKey.currentState}-----------3333333---------DEV LOG----33333333--------------SASA--------');
 
     if (message == null) return;
@@ -109,8 +109,6 @@ final mainProvider = Provider.of<MainProvider>(context!, listen: false);
       sound: true,
     );
 
-
-    
     FirebaseMessaging.instance.getInitialMessage().then(handleMessage2);
     FirebaseMessaging.onMessageOpenedApp.listen(handleMessage3);
     FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
@@ -127,7 +125,7 @@ final mainProvider = Provider.of<MainProvider>(context!, listen: false);
                 _androidChannel.id,
                 _androidChannel.name,
                 channelDescription: _androidChannel.description,
-                icon: '@drawable/ic_launcher',
+                icon: '@drawable/grocery_store',
               ),
             ),
             payload: jsonEncode(message.toMap()));

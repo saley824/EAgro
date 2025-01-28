@@ -19,7 +19,8 @@ class SavedProductsScreen extends StatelessWidget {
 
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: HelperFunctions.getSubAppBar( context:context, title:  "Sačuvani proizvodi"),
+      appBar: HelperFunctions.getSubAppBar(
+          context: context, title: "Sačuvani proizvodi"),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
@@ -28,31 +29,31 @@ class SavedProductsScreen extends StatelessWidget {
                 savedProductsProvider.getSavedProducts(mainProvider.user!.id),
             builder: (context, snapshot) => snapshot.connectionState ==
                     ConnectionState.waiting
-                ? const AgroLoadingIndicator() :
-                savedProductsProvider.savedProducts.isEmpty ?
-             const NoResults(text:"Trenutno nemate sačuvanih proizvoda!")
-                : SingleChildScrollView(
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Text(
-                            "Pogledajte proizvode koje ste sačuvali!",
-                            style: textTheme.headlineSmall,
-                          ),
-                          const Gap(16),
-                          Wrap(
-                            spacing: 36,
-                            runSpacing: 8,
-
+                ? const AgroLoadingIndicator()
+                : savedProductsProvider.savedProducts.isEmpty
+                    ? const NoResults(
+                        text: "Trenutno nemate sačuvanih proizvoda!")
+                    : SingleChildScrollView(
+                        child: Center(
+                          child: Column(
                             children: [
-                              ...savedProductsProvider.savedProducts
-                                  .map((data) => ProductPreview(product: data))
+                              Text(
+                                "Pogledajte proizvode koje ste sačuvali!",
+                                style: textTheme.headlineSmall,
+                              ),
+                              const Gap(16),
+                              Wrap(
+                                spacing: 18,
+                                runSpacing: 8,
+                                children: [
+                                  ...savedProductsProvider.savedProducts.map(
+                                      (data) => ProductPreview(product: data))
+                                ],
+                              ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
           ),
         ),
       ),

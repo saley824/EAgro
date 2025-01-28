@@ -68,8 +68,8 @@ class SingleOrder extends StatelessWidget {
                   style: textTheme.labelLarge,
                 ),
                 Text(
-                "#${order.id}",
-                  style: textTheme.bodyLarge,
+                  "#${order.id}",
+                  style: textTheme.titleMedium,
                 ),
               ],
             ),
@@ -87,7 +87,7 @@ class SingleOrder extends StatelessWidget {
                   Flexible(
                     child: Text(
                       "${order.user?.name ?? ""} ${order.user?.lastName ?? ""}",
-                      style: textTheme.bodyLarge,
+                      style: textTheme.titleMedium,
                     ),
                   ),
                 ],
@@ -103,11 +103,11 @@ class SingleOrder extends StatelessWidget {
                       "Adresa",
                       style: textTheme.labelLarge,
                     ),
-                    const Gap(60),
+                    const Gap(20),
                     Flexible(
                       child: Text(
                         order.user?.address.toString() ?? "",
-                        style: textTheme.bodyLarge,
+                        style: textTheme.titleMedium,
                       ),
                     ),
                   ],
@@ -122,11 +122,11 @@ class SingleOrder extends StatelessWidget {
                     "Email",
                     style: textTheme.labelLarge,
                   ),
-                  const Gap(8),
+                  const Gap(20),
                   Flexible(
                     child: Text(
                       order.user?.email.toString() ?? "",
-                      style: textTheme.bodyLarge,
+                      style: textTheme.titleMedium,
                     ),
                   ),
                 ],
@@ -143,7 +143,7 @@ class SingleOrder extends StatelessWidget {
                 const Gap(8),
                 Text(
                   order.totalPrice.toString(),
-                  style: textTheme.bodyLarge,
+                  style: textTheme.titleMedium,
                 ),
               ],
             ),
@@ -158,7 +158,7 @@ class SingleOrder extends StatelessWidget {
                 const Gap(8),
                 Text(
                   DateTimeParser.toClassicDate(_getDate(order)),
-                  style: textTheme.bodyLarge,
+                  style: textTheme.titleMedium,
                 ),
               ],
             ),

@@ -1,17 +1,15 @@
 // ignore_for_file: constant_identifier_names
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/main_provider.dart';
-import '../add_product_models/product_body_dto.dart';
 import '/models/category_model/category_model.dart';
 import '/screens/shop_screens/add_product/add_product_providers/add_product_service.dart';
 import '/services/category_service.dart';
 import '../../../../models/products_model/product_model.dart';
+import '../../../../providers/main_provider.dart';
 import '../../../../widgets/drop_down/drop_down_model/agro_dropdown_model.dart';
+import '../add_product_models/product_body_dto.dart';
 
 enum UnitType {
   LITER,
@@ -19,17 +17,15 @@ enum UnitType {
   PIECE;
 
   String getText() {
-  switch (this) {
-    case UnitType.KG:
-    return "KG";
-    case UnitType.LITER:
-    return "Litar";
-    case UnitType.PIECE:
-    return "Komad";
-    
+    switch (this) {
+      case UnitType.KG:
+        return "KG";
+      case UnitType.LITER:
+        return "Litar";
+      case UnitType.PIECE:
+        return "Komad";
+    }
   }
- 
-}
 }
 
 class AddProductProvider extends ChangeNotifier {
