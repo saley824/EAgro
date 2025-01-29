@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
-import '/screens/product_screen/product_screen_widgets/description.dart';
-import '/screens/product_screen/product_screen_widgets/save_icon.dart';
+import 'product_widgets/description.dart';
+import 'product_widgets/save_icon.dart';
 import '/services/product_service.dart';
 import '/widgets/buttons/agro_button.dart';
 import '/widgets/loading_indicator/agro_loading_indicator.dart';
@@ -22,11 +22,11 @@ import '../shop_screens/add_discount.dart/add_discount_providers/add_discount_pr
 import '../shop_screens/add_product/add_product_providers/add_product_provider.dart';
 import '../shop_screens/add_product/add_product_screen.dart';
 import 'product_providers/product_provider.dart';
-import 'product_screen_helper.dart';
-import 'product_screen_widgets/delete_product_modal.dart';
-import 'product_screen_widgets/price.dart';
-import 'product_screen_widgets/product_details.dart';
-import 'product_screen_widgets/rating.dart';
+import 'product_helper.dart';
+import 'product_widgets/delete_product_modal.dart';
+import 'product_widgets/price.dart';
+import 'product_widgets/product_details.dart';
+import 'product_widgets/rating.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({super.key});

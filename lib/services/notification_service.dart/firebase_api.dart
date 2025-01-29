@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:eagro/main.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -27,8 +26,6 @@ class FirebaseApi {
   Future<void> initNotifications() async {
     await firebaseMessaging.requestPermission();
     final fCMToken = await firebaseMessaging.getToken();
-    log('--------------------------DEV LOG--------------------------');
-    log('--------------------------$fCMToken--------------------------');
     await initPushNotifications();
     // await initLocalNotifications();
   }
@@ -40,9 +37,6 @@ class FirebaseApi {
   }
 
   Future<void> handleMessage1(RemoteMessage? message) async {
-    log('------------------11111111111--------DEV LOG---------------SASA--1111111---------');
-    log('------${navigatorKey.currentState}-------------11111111------DEV LOG--111111----------------SASA--------');
-
     if (message == null) return;
 
     log(message.notification?.title ?? "");
@@ -50,9 +44,6 @@ class FirebaseApi {
   }
 
   Future<void> handleMessage2(RemoteMessage? message) async {
-    log('--------------22222222222222222------------DEV LOG---------------SASA-----------');
-    log('------${navigatorKey.currentState}------------2222222--------DEV LOG------222222222------------SASA--------');
-
     if (message == null) return;
 
     log(message.notification?.title ?? "");
@@ -73,13 +64,7 @@ class FirebaseApi {
       ),
     );
 
-    log('--------------3333333333------------DEV LOG---------333333333------SASA-----------');
-    log('------${navigatorKey.currentState}-----------3333333---------DEV LOG----33333333--------------SASA--------');
-
     if (message == null) return;
-
-    log(message.notification?.title ?? "");
-    log(message.notification?.body ?? "");
   }
 
   Future initLocalNotifications() async {
